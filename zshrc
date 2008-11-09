@@ -121,12 +121,6 @@ bindkey -d
 bindkey -e
 bindkey ' ' magic-space
 
-#bindkey -M vicmd '' redo
-#bindkey -M vicmd 'u' undo
-#bindkey -M vicmd 'ga' what-cursor-position
-
-#bindkey -M viins '' history-incremental-search-backward
-#bindkey -M viins '' history-incremental-search-forward
 case $TERM in
 	xterm*)
 		bindkey '^[[H' beginning-of-line
