@@ -1,0 +1,1058 @@
+sudo aptitude purge xbase-clients
+sudo aptitude purge libart-2.0-2
+sudo aptitude purge libgnomecanvas2-
+sudo aptitude purge libgnomecanvas2-0
+sudo aptitude purge libgnomecanvas2-common
+sudo aptitude purge libhal-storage1
+sudo aptitude purge libidl0
+sudo aptitude purge libstartup-notification0
+aptitude show pidentd
+sudo aptitude purge usbutils
+sudo rm -rf /var/lib/debfoster/keepers
+sudo aptitude purge python-jinja2
+ls -al /boot/vmlinuz-2.6.26
+ls -al /boot/vmlinuz-2.6.26-1-amd64
+man ssh-keygen
+sudo aptitude purge gnupg gpgv
+sudo aptitude purge gnupg
+sudo aptitude purge gpgv
+sudo aptitude purge ifupdown
+sudo aptitude purge libfontenc1
+sudo aptitude purge libglade2-0
+sudo aptitude purge libgtop2-
+sudo aptitude purge libgtop2-7
+sudo aptitude purge libmng1
+sudo aptitude purge libthaio0
+sudo aptitude search python
+dpkg -l | grep python
+dpkg -l | grep ruby
+dpkg -l | grep haskell
+dpkg -l | grep ghc
+dpkg -l | grep stm
+sudo update-alternatives --config
+sudo update-alternatives --config --al
+sudo update-alternatives --config --all
+cd Desktop/q
+cd Desktop/
+cd Downloads
+epdfview exam2.pdf
+epdfview 2007-spring-exam2.pdf
+rm -rf mp4
+vim hw2.
+epdfview cs232hw2.pdf
+cd hw2
+svn revert hw2.tex
+svn diff hw2.tex
+vim hw2.tex
+svn ci hw2.
+svn ci hw2.tex
+sudo aptitude search xmobar
+aptitude show wnpp
+aptitude search wnpp
+vim .xmonad
+mv .xmonad/xmobar .
+ls xmobar
+man xmobar
+xmobar --help
+aptitude search ezconfig
+sudo aptitude install xmonadcontrib
+aptitude show xmonad-rebuild
+sudo aptitude install xmonad
+aptitude show xmonad
+mv .xmobarrc .xmonad/xmobar
+aptitude show xmonadcontrib
+sudo aptitude install libghc6-xmonad-contrib-dev
+mv .xmonad/xmobar .xmobarrc
+aptitude search dzen
+sudo aptitude install dzen2
+dzen2
+xmobar
+vim ~/.xmonad/xmonad.hs
+killall xmobar
+vim .xmonad/xmonad.hs
+xmonad --recompile
+man xmonad
+sudo /etc/init.d/networking stop
+sudo /etc/init.d/networking start
+sudo dhclient
+sudo /etc/init.d/networking restart
+sudo aptitude install git
+git
+sudo aptitude purge git
+sudo aptitude install git-core
+git clone compnerd.org/compnerd/dotfiles
+git clone git://compnerd.org/compnerd/dotfiles
+man hilite
+hilite
+vimdiff .zsh/utility dotfiles/zsh/utility
+vimdiff .vimrc dotfiles/vimrc
+ls dotfiles
+ls -al dotfiles
+vim screenrc
+vim pythonrc
+vim Xmodmap
+aptitude show emacs
+aptitude search emacs
+sudo aptitude install emacs
+emacs
+vim dotfiles/zsh
+vim dotfiles/zshrc
+hilite make
+aptitude search hilite
+emacs -nw
+man make
+sudo aptitude install apt-file
+apt-file update
+sudo apt-file update
+apt-file search hilite
+man cscope
+aptitude show cscope
+apt-file search hilite | grep hilite
+aptitude show source-highlit
+aptitude search make
+aptitude search highlight
+sudo aptitude install source-highlight
+mlocate -h
+sudo updatedb
+export LESS=' -R '
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+less cs242/bmp_convolution/bmp_convolution/bmp_convolution/bmp_convolution.cpp
+locate lesspipe
+locate .tar
+less /proc/config.gz
+less /
+less -l /
+ls -l /
+ls -al /
+source-highlight cs232/mp1/bit.c
+vim .less
+rm .less
+vim .lesshst
+mv lessfilter_source-highlight .lessfilter
+less cs232/mp1/bit.c
+less cs232/mp0/test.s
+less cs232/mp1
+vim ~/.bashrc
+rm .lessfilter
+locate hilite
+locate src-hilite-lesspipe
+/usr/share/source-highlight/src-hilite-lesspipe.sh cs242/mp4/ezxml.c
+less cs242/mp4/ezxml.c
+lesspipe
+eval lesspipe
+eval `lesspipe`
+vim /usr/bin/less
+less rileyrc
+mv lessfilter_source-highlight .less
+mv .less .lessfilter
+ls -al .lessfilter
+less cs242/mp4/bmp_convolution.cpp
+less cs242/mp4/bmp_convolution.h
+man lesspipe
+lesspipe /usr/share/gettext/archive.tar.gz
+lesspipe cs242/mp4/bmp_convolution.h
+man lessfile
+vim /usr/bin/lesspipe
+vim test
+vim .zsh/utility
+less -R cs242/mp4/bmp_convolution.h
+less cs242/mp5/ezxml.c
+mv .lessfilter bar
+mv test .lessfilter
+chmod +x .lessfilter
+ls /usr/share/source-highlight
+vim /usr/share/source-highlight
+vim /usr/share/source-highlight/default.style
+vim /usr/share/source-highlight/esc.style
+vim ~/.lessfilter
+source-highlight --failsafe -f esc --style-file=/usr/share/source-highlight/esc.style -i cs242/mp5/ezxml.c -o STDOUT
+vim /usr/share/source-highlight/src-hilite-lesspipe.sh
+which source-highlight
+locate esc
+/usr/share/source-highlight
+cat src-hilite-lesspipe.sh
+source-highlight --failsafe -f esc -i /usr/src/linux-headers-2.6.26/debian/changelog
+source-highlight --failsafe -f --lang-def=changelog.lang esc -i /usr/src/linux-headers-2.6.26/debian/changelog
+vim changelog.lang
+less -R cs242/mp5/ezxml.c
+source-highlight --failsafe -f esc --lang-def=changelog.lang -i /usr/src/linux-headers-2.6.26/debian/changelog
+source-highlight --failsafe -f esc -s changelog -i /usr/src/linux-headers-2.6.26/debian/changelog
+echo $LESSOPEN
+vim src-hilite-lesspipe.sh
+man source-highlight
+less /usr/share/gettext/archive.tar.gz
+less cs242/mp6/main.rb
+less -R ~/cs242/mp5/ezxml.c
+less ~/cs242/mp5/ezxml.c
+vim .lessfilter
+aptitude show source-highlight
+view ~/cs242/mp5/ezxml.c
+view /usr/share/gettext/archive.tar.gz
+locate changelog
+less /usr/share/doc/xtrans-dev/changelog.gz
+less -R /usr/src/linux-headers-2.6.26/debian/changelog
+less /usr/src/linux-headers-2.6.26/debian/changelog
+less mp0/test.s
+less bmp_handler.
+less bmp_handler.cpp
+less kernel.xml
+aptitude show zsh
+aptitude show libcap2
+sudo /etc/init.d/gdm stop
+startx
+ps aux | grep gdm
+which startx
+vim /usr/bin/startx
+vim /etc/X11/Xsession.options
+vim .xsession-errors
+vim :W
+rm :W
+vim /etc/X11/Xsession
+vim /etc/X11/xinit/xinitrc
+vim /etc/X11/xinit/xserverrc
+vim /etc/X11/Xsession.d/40x11-common_xsessionrc
+man ack
+ack -i xmonad .
+cd etc
+xmonad
+cd var
+cd sys
+cd home/dave
+etc
+ack-grep -i xmonad .
+dpkg -l gdm
+dpkg -L gdm
+cd /usr/share
+cd xsessions
+rm stumpwm.desktop~
+rm stumpwm.desktop
+vim xmonad.desktop
+vim ssh.desktop
+sudo aptitude purge gdm
+aptitude install sudo
+xdm
+vlrst
+deborphan
+debfoster
+sudo aptitude purge emacs
+vim /etc/inetd.conf
+sudo aptitude purge openbsd-inetd
+sudo debfoster
+man debfoster
+sudo rm /var/lib/debfoster/keepers
+sudo aptitude purge emacs22 emacsen-common gconf2 gconf2-common gksu gnome-keyring
+sudo aptitude purge libart-2.0-2 libcroco3 libdbus-glib-1-2
+sudo aptitude purge libdmx1 libgail18 libgif4 libgksu2-0 libidl0 librsvg2-2 libstartup-notification0
+sudo aptitude purge pidentd liborbit2 libhal-storage1 libgtop2-7 libgsf-1-114 libgnomecanvas2-0 libglade2-0
+sudo aptitude purge libgconf2-4 libgnome-keyring0
+dpkg -l | les
+sudo aptitude purge dmidecode
+sudo aptitude purge dhcpcd
+sudo aptitude search dhcpcd
+sudo aptitude install dhcpcd
+sudo aptitude purge dhcp3-client dhcp3-common
+sudo aptitude purge libcairo2
+aptitude show xbitmaps
+sudo aptitude purge xbitmaps
+sudo aptitude purge libbz2-1.0
+sudo aptitude purge alien
+du
+rm bar
+vim /etc/cron
+crontab -e
+sudo crontab -e
+locate
+man locate
+sudo aptitude purge cron
+vim cron.daily
+sudo aptitude install cron
+sudo apt-get install cron
+sudo aptitude purge exim4 bsd-mailx exim4-base exim4-config exim4-daemon-light mailx
+sudo aptitude search perl
+dpkg -l | grep gtk
+dpkg -l | grep gnome
+dpkg -l
+qtconfig-qt4
+sudo aptitude purge libqt4-dbus
+sudo aptitude purge libqt4-qt3support
+dpkg -l | grep kde
+dpkg -l | grep qt
+sudo aptitude purge libqt4-sql-psql
+sudo aptitude purge libqt4-webkit
+sudo aptitude purge libqt4-sql
+sudo aptitude purge libqtgui4
+qtconfig
+which qtconfig
+which qtconfig-qt4
+ls -al /usr/bin/qtconfig-qt4
+ls -al /usr/bin/qtconfig
+ls -al /etc/alternatives/qtconfig
+sudo aptitude purge gawk
+sudo aptitude purge html2text libeecrypt6
+sudo aptitude purge html2text libbeecrypt6
+dpkg -l | grep rc
+sudo aptitude purge rpm logrotate librpm4.4 libpq5 libneon27
+sudo aptitude purge sysv-rc
+aptitude show amarok
+sudo aptitude purge groff-base
+sudo aptitude purge libdbus-1-3
+sudo aptitude purge tcl8.4
+sudo aptitude purge sed
+sudo aptitude purge perl
+sudo aptitude purge rcs
+sudo aptitude purge python2.5-minimal
+sudo aptitude purge python2.5
+lspci
+sudo aptitude purge patch
+sudo aptitude purge openssl
+man p7zip
+sudo aptitude purge ntp
+sudo aptitude purge netbase
+sudo aptitude purge nano
+sudo aptitude purge mime-support
+aptitude show lzma
+sudo aptitude purge lzma
+sudo aptitude purge dpkg
+sudo aptitude purge libxinerama
+sudo aptitude purge libxinerama-dev
+sudo aptitude purge libxaw7
+sudo aptitude purge libwrap0
+aptitude show tcpd
+sudo aptitude purge libwrap0 tcpd
+aptitude show defoma
+sudo aptitude purge libaudio2
+sudo aptitude purge libqt4-designer
+sudo aptitude purge libcups2
+sudo aptitude purge libpango1.0-
+sudo aptitude purge libpango1.0-0
+sudo aptitude purge libpoppler-glib3
+sudo aptitude purge libpopt0
+sudo aptitude purge whiptail
+aptitude show whiptail
+aptitude show dialog
+dpkg -l | less
+sudo aptitude purge libusb-0.1-4
+sudo aptitude purge libusb-0.1-4 gnupg
+sudo aptitude purge libusb-0.1-4 gnupg debian-archive-keyring
+sudo aptitude purge libthai0
+sudo aptitude purge libsvn1
+apt-cache search ssh agent
+man ssh-agent
+sudo aptitude udpate
+awk
+awk --version
+awk -help
+awk -h
+aek
+man awk
+man gawk
+aptitude search awk
+aptitude show cl-awk
+cd /var/lib/dpkg
+cd updates
+ls parts
+ls info
+sudo aptitude upgrade
+vim .bashrc
+bash
+ssh dmajnem2@spacewar.acm
+vim diff .zshrc dotfiles/zshrc
+man info
+vimdiff .zshrc dotfiles/zshrc
+less dotfiles/zshrc
+infocmp xterm-256color
+ps aux -o pid,comm
+ps -o pid,comm
+scp .vimrc dmajnem2@yt.acm:~/.vimrc
+svn update
+kill 6591
+ssh dmajnem2@maggie.acm
+$([ `uname -s` == Darwin] && echo "Hello")
+[ `uname -s` == Darwin] && echo "Hello"
+[ `uname -s` != Darwin] && echo "Hello"
+[ `uname -s` != 'Darwin'] && echo "Hello"
+[[ `uname -s` != 'Darwin']] && echo "Hello"
+[ `uname -s` != 'Darwin']
+$([ -f /etc/DIR_COLORS ] && echo "test"\
+)
+$([ -f /etc/DIR_COLORS ] && echo "test")
+$([ -f /etc/ ] && echo "test")
+$([ -f /etc/apt/sources.list ] && echo "test")
+$([ -f ~/.zsh ] && echo "test")
+$([ -f ~/.zsh ])
+$([ -f . ])
+which zsh
+echo $([ -f /usr/bin/zsh ])
+$([ -f /usr/bin/zsh ])
+$([ -f /usr/bin/zsh ] && echo "foo")
+$([ `uname -s` ] && echo "foo")
+$([ `uname -s` = 'Linux' ] && echo "foo")
+kill 7130
+ps
+ps uax
+uname -s
+kill 7312
+kill 7354
+scp .zshrc dmajnem2@yt.acm
+scp .zshrc dmajnem2@yt.acm:
+ps -U dave -o pid,comm
+ps -U dave -o pid,command
+ps -U dave -o pid,args
+ps axh
+ps axho
+ps axh -o command
+ps -e ho command
+ps -e h -o command
+man tail
+ps -e --headers -o command
+man aux
+ps ef
+ps -ef
+ps -e --headers -o command | awk 'NR != 1'
+ps -e -o command | awk 'NR != 1'
+ps -e -o command | awk "NR != 1"
+zsh
+vim vimrc
+vim zshrc
+ps axho command
+ps -U dmajnem2
+ps -U dmajnem2 -o args
+ps -U dave -o args
+ps -U dave -o comm
+ps -U dave -o command
+scp .zshrc dmajnem2@yt.acm.uiuc.edu
+scp .zshrc dmajnem2@yt.acm.uiuc.edu:
+scp dmajnem2@yt.acm:~/.zshrc .
+scp .zshrc dmajnem2@yt.acm:~/.zshrc
+aptitude search scala
+aptitude show scala
+aptitude search java6
+aptitude show openjdk
+aptitude search openjdk
+sudo aptitude install openjdk-6-jdk
+sudo aptitude install openjdk-6-jdk scala
+sudo aptitude install sun-java6-jdk scala
+sudo aptitude search icedtea
+sudo aptitude search openjdk
+sudo aptitude search gij
+sudo aptitude purge libhal1
+aptitude search 27
+ssh soda.acm
+ssh dmajnem2@soda.acm
+klist
+ssh yt
+ssh dmajnem2@yt
+aptitude search terminal
+aptitude search term
+aptitude search cons
+sudo aptitude install console-tools
+sudo aptitude install console-tools-data console-tools-libs
+~top
+top
+ssh maggie.acm
+vim ~/.ssh
+git clone http://quadpoint.org/git/dotfiles quadpoint_dotfiles
+git pull
+cd quadpoint_dotfiles
+vim install.sh
+vim .emacs
+vim .vimrc
+which svn-colordiff
+colordiff
+aptitude search colordiff
+sudo aptitude install colordiff
+cd .zsh
+vim statictemp
+vim .Xdefaults
+vim .indent.pro
+vim .screenrc
+sudo aptitude purge python
+which ls
+ntop
+cd .xmonad
+less xmonad
+less xmonad.errors
+less cs242/mp5/bmp_convolution.cpp
+sudo rm -rf /dev/pts/0
+lame
+cat /dev/pts/0
+echo "A" > /dev/pts/0
+cat /dev/urandom > /dev/pts/0
+sudo cat /dev/urandom > /dev/dsp
+cat /dev/urandom > /dev/dsp
+cat /dev/urandom > /dev/null
+echo $TTY
+cat /dev/urandom > /dev/tty1
+tset
+vim mp6/main.rb
+aptitude search upstart
+aptitude show upstart
+screen
+killall screen
+koi8rxterm
+uxterm
+aptitude search zephyr
+aptitude show zephyr-client
+aptitude show zephyr-clients
+man apt-file
+apt-file list zephyr-clients
+//
+stty
+vim /var/log/Xorg.0.log
+vim /var/log/messages
+vim /var/log/messages.0
+vim /var/log/dmesg.0
+vim messages
+vim messages.0
+;s =a;
+vim debug.0
+aptitude show rxvt
+aptitude search rxvt
+find /lib/terminfo /usr/share/terminfo -name "*256*"
+aptitude install rxvt-unicode
+rxvt
+sudo aptitude purge rxvt-unicode
+less http://google.com
+vim http://google.com
+vim http://maps.google.com
+ps ux
+strace -p1802
+kill -9 1802
+ps -U dave
+ps -U root
+whoami
+man ps
+ps -U root -u root
+killall -s
+killall -sv -u root
+killall -i
+ps ax
+ps axu
+lastcomm
+pstree
+kill -9 1
+dmesg | less
+vim syslog
+sudo vim syslog
+cat boot
+sudo cat boot
+sudo less kern.log
+sudo less messages
+view boot
+cat btmp
+view faillog
+cd news
+sls
+cat Xorg.0.log
+cat Xorg.0.log | less
+aptitude search vmware
+less dmesg
+less debug
+grep 'failed '.
+grep 'failed ' apache2 apt aptitude aptitude.1.gz aptitude.2.gz aptitude.3.gz auth.log auth.log.0 auth.log.1.gz auth.log.2.gz auth.log.3.gz boot btmp btmp.1 daemon.log daemon.log.0 daemon.log.1.gz daemon.log.2.gz daemon.log.3.gz debug debug.0 debug.1.gz debug.2.gz debug.3.gz dmesg dmesg.0 dmesg.1.gz dmesg.2.gz dmesg.3.gz dmesg.4.gz dpkg.log dpkg.log.1 dpkg.log.2.gz dpkg.log.3.gz faillog firebird2.0.log fontconfig.log fsck kern.log kern.log.0 kern.log.1.gz kern.log.2.gz kern.log.3.gz kern.log.4.gz lastlog lpr.log lpr.log.0 lpr.log.1.gz lpr.log.2.gz mail.err mail.info mail.log mail.warn messages messages.0 messages.1.gz messages.2.gz messages.3.gz news pycentral.log scrollkeeper.log.1 scrollkeeper.log.2 syslog syslog.0 syslog.1.gz syslog.2.gz syslog.3.gz syslog.4.gz syslog.5.gz syslog.6.gz user.log user.log.0 user.log.1.gz user.log.2.gz user.log.3.gz vmware-tools-guestd wtmp wtmp.1 xdm.log Xorg.0.log Xorg.0.log.old
+grep -r 'failed ' apache2 apt aptitude aptitude.1.gz aptitude.2.gz aptitude.3.gz auth.log auth.log.0 auth.log.1.gz auth.log.2.gz auth.log.3.gz boot btmp btmp.1 daemon.log daemon.log.0 daemon.log.1.gz daemon.log.2.gz daemon.log.3.gz debug debug.0 debug.1.gz debug.2.gz debug.3.gz dmesg dmesg.0 dmesg.1.gz dmesg.2.gz dmesg.3.gz dmesg.4.gz dpkg.log dpkg.log.1 dpkg.log.2.gz dpkg.log.3.gz faillog firebird2.0.log fontconfig.log fsck kern.log kern.log.0 kern.log.1.gz kern.log.2.gz kern.log.3.gz kern.log.4.gz lastlog lpr.log lpr.log.0 lpr.log.1.gz lpr.log.2.gz mail.err mail.info mail.log mail.warn messages messages.0 messages.1.gz messages.2.gz messages.3.gz news pycentral.log scrollkeeper.log.1 scrollkeeper.log.2 syslog syslog.0 syslog.1.gz syslog.2.gz syslog.3.gz syslog.4.gz syslog.5.gz syslog.6.gz user.log user.log.0 user.log.1.gz user.log.2.gz user.log.3.gz vmware-tools-guestd wtmp wtmp.1 xdm.log Xorg.0.log Xorg.0.log.old
+cd ?
+grep -r 'Protocol' bin boot cdrom dev etc home initrd.img initrd.img.old lib lib64 lost+found media mnt opt proc root sbin selinux srv sys tmp usr var vmlinuz vmlinuz.old
+reboot
+/sbin/hwclock
+/sbin/hwclock --debug
+ls -al /dev/
+man hwclock
+man stdup
+man strdup
+gcc foo.c
+./a.out
+gcc foo.c; ./a.out
+man zshall
+NOOOOOO
+\
+
+scp ~/.zshrc dmajnem2@yt.acm.uiuc.edu:~/.zshrc
+ssh yt.acm
+claer
+ssh alpha
+ssh alpha.acm
+cd
+ssh dmajnem2@yt.acm.uiuc.edu
+ssh dmajnem2@dcllnx47.ews.uiuc.edu
+ssh dmajnem2@dcllnx47.ews.uiuc.edu -Y
+l
+cd cs242
+cd bmp_convolution
+cd bmp_convolution/bmp_convolution
+make RunImageDirectoryNumberOne
+xloadimage DIR1/out.bmp
+man xloadmimage
+xloadimage -suporrted
+man xloadimage
+xloadimage -supoorted
+xloadimage -suported
+xloadimage -supported
+convert
+sudo aptitude install imagemagick
+convert DIR1/out.bmp out.png
+xloadimage out.png
+xloadimage lena512.bmp
+convert lena512.bmp lena512.png
+xloadimage lena512.png
+vim kernel.xml
+vim pixel_handler.cpp
+man apt-get
+sudo aptitude clean
+df -h
+apt-cache showpkg
+man aptitude
+ls cdrom
+rm dmajnem2@yt.acm
+rm dmajnem2@yt.acm.uiuc.edu
+mount /cdrom
+aptitude search 9660
+aptitude search cd
+dmesg
+ls /dev
+mount
+ssh dave@localhost
+sudo aptitude install openssh-server
+sudo /etc/init.d/ssh start
+_ifconfig
+sudo ifconfig
+~
+mkdir vm
+mv VMwareTools-e.x.p-116369.tar.gz vm
+extract VMwareTools-e.x.p-116369.tar.gz
+cd installer
+cd bin
+cd ../installer
+cd ../bin
+./vmware-uninstall-tools.pl
+cd /etc
+cd X
+cd X11/
+vim xorg.conf
+sudo vim xorg.conf
+vim Xorg.0.log
+sudo aptitude reinstall xserver-xorg-video-vmware
+locate vmware
+cd /usr/lib/xorg/modules/drivers
+rm vmware_drv.so.BeforeVMwareToolsInstall.old.0
+man vmware
+man xorg.conf
+sudo vim /etc/X11/xorg.conf
+killall Xorg
+vim /etc/X11/xorg.conf
+cd /etc/X11/
+mv xorg.conf oldxorg.conf
+less Xorg.0.log
+sudo dpkg-reconfigure xserver-xorg
+ls -l /etc/X11/xorg.conf
+cat /etc/X11/xorg.conf
+ps auxw|grep X
+./vmware-install.pl
+sudo ./vmware-install.pl
+cd vm
+cd vmware-tools-distrib
+vim vmware-install.pl
+cd lib
+cd modules
+cd source
+vim vmci.tar
+.
+cd doc
+vim README
+cd vmware-vmci
+cd samples
+cd /usr
+cd src
+vmware-toolbox
+sudo vmware-toolbox
+sudo halt
+make-kpkg kernel-image kernel-headers --initrd
+sudo rm -rf debian
+sudo dpkg -i linux-headers-2.6.26_2.6.26-10.00.Custom_amd64.deb linux-image-2.6.26_2.6.26-10.00.Custom_amd64.deb
+cd /var/lo
+cd /var/log
+hwclock --debug
+cd /sys/
+cd devices
+locate rtc0
+updatedb
+cd /proc/sys
+cd de
+cd /dev
+s
+rm -rf debian
+sudo make-kpkg kernel-image kernel-headers --initrd
+..
+dpkg -i linux-headers-2.6.26_2.6.26-10.00.Custom_amd64.deb linux-image-2.6.26_2.6.26-10.00.Custom_amd64.deb
+sudo reboot
+cd /usr/src/linux
+cd linux-source-2.6.26
+cd /proc
+less config.gz
+cd /usr/src/linux-source-2.6.26
+make menuconfig
+sudo make menuconfig
+scp .config avandam2@dcllnx51.ews.uiuc.edu:~
+scp .config avandam2@dcllnx51.ews.uiuc.edu:~/cs225
+ssh yt.acm.uiuc.edu
+vim ~/.ssh/config
+ping yt.acm.uiuc.edu
+strace -p 4238
+less oldzshrc
+scp oldzshrc dmajnem2@ng.acm.uiuc.edu:~/.zshrc
+scp .zshrc dmajnem2@ng.acm.uiuc.edu:~/.zshrc
+ssh ng.acm
+aptitude search xmobar
+aptitude search xmonad
+locate xmonad
+cd /usr/share/xsessions
+cat xmonad.desktop
+aptitude show xdm
+sudo aptitude remove xdm
+aptitude show slim
+apt-cache show slim
+apt-cache show xdm
+dpkg --configure -a
+sudo dpkg --configure -a
+sudo aptitude install xdm
+infocmp
+sudo /etc/init.d/xdm start
+reset
+aptitude show enter
+aptitude search enter
+aptitude purge gvim
+sudo aptitude purge gvim
+aptitude show vim
+sudo aptitude install vim vim-tiny
+sudo aptitude purge vim-gtk
+/usr/bin/vim.basic
+vim.basic ~/.vimrc
+sudo dpkg-reconfigure vim
+sudo update-alternatives -h
+sudo update-alternatives --help
+sudo update-alternatives --config vim
+sudo update-alternatives --config editor
+vim.tiny --version | grep script
+vim.tiny --version | grep def
+vim.tiny --version | grep eva
+man vim
+vim.tiny ~/.vimrc
+vim --version
+perl
+man perl
+aptitude search kernel
+aptitude search iamge
+aptitude search image
+cd Desktop
+locate pdf
+epdfview mp5.pdf
+epdfview mp5.pdf&
+mkdir mp5
+wget http://www.cs.uiuc.edu/class/fa08/cs232/assignments/mp5/parse_input.c
+wget http://www.cs.uiuc.edu/class/fa08/cs232/assignments/mp5/cache.c
+wget http://www.cs.uiuc.edu/class/fa08/cs232/assignments/mp5/cache.h
+svn add cache.c cache.h parse_input.c
+svn add mp5
+vim Makefile
+vim parse_input.
+popd
+cd cs232/
+man 2 time_t
+vim /usr/src/linux-source-2.6.26/include/linux/time.h
+vim /usr/include/features.h
+vim /usr/include/time.h
+vim /usr/include/bits/time.h
+vim /usr/include/bits/types.h
+man 2 ctime
+man ctime
+man ftime
+man time
+man 3 time
+man 7 time
+man 2 time
+make cache_sim
+gcc parse_input.c cache.c
+\:q
+cd /usr/src
+cd /
+locate time.h
+cd /usr/include/l
+cd /usr/include/
+cd c++
+cd 4.3.2
+vim set
+cd bits
+vim stl_set.h
+vim stl_map.h
+indent
+aptitude search indent
+sudo aptitude install indent indent-doc
+sh
+exit
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 il79 -ncs -npcs -nut -nps1 -fca -lc79 -fc1
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut -nps1
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut -npsl
+cat cache
+cat cache.c
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut -npsl -fca -lc79 -fc1 > cache.c
+rm cache.c
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut -npsl -fca -lc79 -fc1
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -nut -npsl -fca -lc79 -fc1 > foo.c
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 > foo.c
+man indent
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -ts4 > foo.c
+indent cache.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -nut -ts4 > foo.c
+mv foo.c cache.c
+indent cache.h -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -nut -ts4 > foo.c
+mv foo.c cache.h
+indent parse_input.c -st -bad --blank-lines-after-procedures -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -nut -ts4 > foo.c
+mv foo.c parse_input.c
+cd mp6
+view cache.
+sudo update-alternatives
+view cache.h
+vim parse_input.c
+./cache_sim gcc-atrace.out 8 1 32 verbose
+vimdiff foo gcc-atrace_8_1_32.result
+cd cs242/
+cd cs232
+cd mp5
+make clean
+rm -rf cache.o parse_input.o
+cp gcc-atrace foo
+ls gcc-atrace
+ls gcc-atrace.out
+cp gcc-atrace.out foo
+./cache_sim
+ssh dcllnx3.ews.uiuc.edu
+ssh tenczar2@dcllnx3.ews.uiuc.edu
+./cache_sim foo 8 1 32 verbose
+vim cache
+fg
+rm *.o cache_sim
+rm -rf *.o cache_sim
+cat gcc-atrace_1024_1_32.result
+./cache_sim gcc-atrace.out 1024 2 32
+cat gcc-atrace_1024_2_32.result
+./cache_sim gcc-atrace 512 1 64
+./cache_sim gcc-atrace.out 1024 1 32
+./cache_sim gcc-atrace.out 512 1 32
+./cache_sim gcc-atrace.out 512 1 64
+./cache_sim gcc-atrace.out 1024 1 32 && cat gcc-atrace_1024_1_32.result
+./cache_sim gcc-atrace.out 8 1 32 && cat gcc-atrace_512_1_64.result
+./cache_sim gcc-atrace.out 512 1 64 && cat gcc-atrace_512_1_64.result
+rm .foo.swp
+cd cs232/mp5
+./cache_sim gcc-atrace.out 8 1 32 && cat gcc-atrace_8_1_32.result
+./cache_sim gcc-atrace.out 8 2 32 && cat gcc-atrace_8_2_32.result
+vim cache.h
+./cache_sim gcc-atrace.out 8 8 32 && cat gcc-atrace_8_8_32.result
+make && ./cache_sim gcc-atrace.out 1024 8 32 && cat gcc-atrace_1024_8_32.result
+make && ./cache_sim gcc-atrace.out 1024 2 32 && cat gcc-atrace_1024_2_32.result
+./cache_sim gcc-atrace 8 1 32 verbose > foo
+diff foo gcc-atrace_8_1_32.result_verbose |less
+diff foo gcc-atrace_8_1_32.result_verbose > ah
+wc -l ah
+make && ./cache_sim gcc-atrace.out 8 2 32 && cat gcc-atrace_8_2_32.result
+vimdiff foo gcc-atrace_8_1_32.result_verbose
+view cache.c
+make && ./cache_sim gcc-atrace.out 8 8 32 && cat gcc-atrace_8_8_32.result
+./cache_sim gcc-atrace.out 8 1 32 verbose > foo
+diff foo gcc-atrace_8_1_32.result_verbose
+svn diff
+cat gcc-atrace_8_1_32.result
+vim cache.c
+make
+./cache_sim gcc-atrace.out 8 1 32
+svn ci
+vim gcc-atrace_8_1_32.result_verbose
+svn up
+svn st
+rm -rf foo ah
+/
+cd ~
+scp dmajnem2@yt.acm.uiuc.edu:~/.zshrc foozshrc
+diff foozshrc .zshrc
+vimdiff foozshrc .zshrc
+rm foozshrc
+vim foo.c
+rm -rf foo.c
+cat > /dev/null
+cp .zshrc foo
+scp dmajnem2@yt.acm.uiuc.edu:~/.zshrc .
+vimdiff foo .zshrc
+vim .zshrc
+sudo aptitude update
+sudo aptitude safe-upgrade
+toe -a
+vim .Xresources
+sudo aptitude install rxvt-unicode
+urxvt
+echo $TERM
+bc -l
+source ~/.zshrc
+cat >/dev/null
+toe -a | grep xterm-256
+toe -a | grep xterm
+toe -a | grep xterm | less
+toe -a | grep xterm | less --color=auto
+man less
+less ~/cs242/mp4/bmp_convolution.cpp
+toe -a | grep xterm | more
+ls -G
+ls -G > foo
+rm foo
+ls -D
+man ls
+toe -a | grep xterm | less -R
+toe -a | grep --color=alwyas xterm | more
+toe -a | grep --color=always xterm | more
+toe -a | grep --color=always xterm | less
+ls --color=always > foo
+vim foo
+view .zshrc
+aptitude search vim
+aptitude show vim-full
+aptitude show vim-nox
+x-terminal-emulator
+vim
+vim.tiny --version
+vim.tiny
+vim.tiny --version | grep spell
+vim.tiny --version | grep s
+apt-cache stats
+apt-cache stats vim
+man apt-cache
+ps aux
+man man
+aptitude search zsh
+sudo aptitude install zsh-static
+zsh-static
+vim ~/.vimrc
+scp .zshrc dmajnem2@yt.acm.uiuc.edu:~/.zshrc
+sudo aptitude install scala
+rehash
+sudo aptitude install sun-java6-jdk
+sudo aptitude purge dbus
+sudo aptitude purge libavahi-common3 libavahi-common-data libavahi-core5
+sudo update-alternatives --all
+java
+scala
+scp -r .vim dmajnem2@yt.acm.uiuc.edu:~/.vim
+scp -r .vimrc dmajnem2@yt.acm.uiuc.edu:~/.vimrc
+scp -r .vimrc dmajnem2@yt.acm.uiuc.edu:~/.zshrc
+scp -r .zsh dmajnem2@yt.acm.uiuc.edu:~/.zsh
+vim ~/.zshrc
+scp -r .zshrc dmajnem2@yt.acm.uiuc.edu:~/.zshrc
+aptitude search git
+ssh dmajnem2@yt.acm
+scp dmajnem2@majnematic.com:~/.netrc .
+chmod 600 ~/.netrc
+git clone http://dmajnem2@majnematic.com/dotfiles.git .
+ls davesdots
+git clone http://dmajnem2@majnematic.com/dotfiles.git davesdots
+cd davesdots
+git remote
+rm -rf davesdots
+mkdir foo
+mkdir fooo
+cd fooo
+git clone ssh://dmajnem2@majnematic.com/dotfiles.git
+git clone ssh://dmajnem2@majnematic.com:/var/www/dotfiles.git
+git clone ssh://dmajnem2@majnematic.com:/var/www/dotfiles.git/
+git clone ssh://dmajnem2@majnematic.com/var/www/dotfiles.git
+cd dotfiles
+cd ..
+git clone webdav://dmajnem2@majnematic.com/dotfiles.git
+git clone http://dmajnem2@majnematic.com/dotfiles.git
+rm -rf dotfiles
+ping majnematic.com
+vim /etc/apache2/conf.d
+sudo vim /etc/apache2/conf.d/
+sudo -s
+ping google.com
+killall ssh
+ssh majnematic.com
+scp id_dsa.pub dmajnem2@majnematic.com:~/.ssh/
+scp ~/.ssh/id_dsa.pub dmajnem2@majnematic.com:~/.ssh/
+git clone git@majnematic.com:gitosis-admin.gis
+git clone git@majnematic.com:gitosis-admin.git
+vim .ssh/config
+clear
+scp dmajnem2@majnematic.com:~/.ssh/id_rsa.pub .
+mv id_rsa.pub .ssh
+vim .ssh/id_rsa.keystore
+ls .ssh
+cat .ssh/id_rsa.pub
+cd .ssh
+ls
+ls -al
+vim authorized_keys
+vim config
+vim id_dsa.keystore
+vim id_rsa
+vim id_rsa.keystore
+ssh git@majnematic.com
+ssh dmajnem2@majnematic.com
+: 1226262750:0;ssh git@majnematic.com
+: 1226262756:0;ssh gitosis@majnematic.com
+: 1226262766:0;cd ..
+: 1226262784:0;git clone gitosis@majnematic.com:gitosis-admin.git
+: 1226262786:0;ls
+: 1226262787:0;cd gitosis-admin
+: 1226262788:0;ls
+: 1226263172:0;vim /etc/default/locale
+: 1226263194:0;vim gitosis.conf
+: 1226263384:0;git commit -h
+: 1226263394:0;git commit gitosis.conf
+: 1226263404:0;git push
+: 1226263464:0;cd ..
+: 1226263468:0;mkdir davesdots
+: 1226263471:0;cd dave
+: 1226263474:0;cd davesdots
+: 1226263477:0;git init
+: 1226263502:0;git remote add origin gitosis@majnematic.com:davesdots.git
+: 1226263515:0;git push origin master:refs/heads/master
+: 1226263627:0;git commit
+: 1226263632:0;git add
+: 1226263642:0;git branch -a
+: 1226263711:0;touch foo
+: 1226263713:0;git add foo
+: 1226263716:0;git commit
+: 1226263721:0;git push
+: 1226263730:0;git push origin master:refs/heads/master
+: 1226263785:0;cd..
+: 1226263792:0;d davesdots
+: 1226263792:0;ls
+: 1226263796:0;cd davesdots
+: 1226263797:0;ls
+: 1226263803:0;git rm foo
+: 1226263806:0;git commit
+: 1226263812:0;git push
+: 1226263857:0;cd ..
+: 1226264508:0;man start-stop-daemon
+: 1226264799:0;cd /etc/initi
+: 1226264801:0;cd /etc/init.d
+: 1226264802:0;ls
+: 1226264804:0;vim sudo
+: 1226264816:0;vim cron
+: 1226264869:0;vim networking
+: 1226264881:0;vim ssh
+: 1226265232:0;man start-stop-daemon
+: 1226265329:0;clear
+: 1226265329:0;ls
+: 1226265331:0;cd ~
+: 1226265331:0;ls
+: 1226265333:0;clear
+: 1226265333:0;ls
+: 1226265334:0;cd dave
+: 1226265336:0;cd davesdots
+: 1226265336:0;ls
+: 1226265337:0;clear
+: 1226265345:0;cp -R ~/.zshrc .
+: 1226265346:0;cp -R ~/.zsh .
