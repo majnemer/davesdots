@@ -1,0 +1,90 @@
+/* XFT */
+Xft*dpi: 96
+Xft*antialias: true
+
+/* XTerm */
+XTerm*utf8: 1
+
+XTerm*faceSize: 9
+XTerm*faceName: Monospace
+
+XTerm*background: black
+XTerm*foreground: white
+
+XTerm*termName: xterm-256color
+
+XTerm*eightBitInput: false
+XTerm*eightBitOutput: true
+XTerm*eightBitControl: false
+
+XTerm*color0: #2E3436
+XTerm*color1: #CC0000
+XTerm*color2: #4E9A06
+XTerm*color3: #C4A000
+XTerm*color4: #3465A4
+XTerm*color5: #75507B
+XTerm*color6: #06989A
+XTerm*color7: #D3D7CF
+XTerm*color8: #555753
+XTerm*color9: #EF2929
+XTerm*color10: #8AE234
+XTerm*color11: #FCE94F
+XTerm*color12: #729FCF
+XTerm*color13: #AD7FA8
+XTerm*color14: #34E2E2
+XTerm*color15: #EEEEEC
+
+/* UXTerm */
+UXTerm*faceSize: 9
+UXTerm*faceName: Monospace
+
+UXTerm*background: black
+UXTerm*foreground: white
+
+UXTerm*termName: xterm-256color
+
+UXTerm*eightBitInput: false
+UXTerm*eightBitOutput: true
+UXTerm*eightBitControl: false
+
+UXTerm*color0: #2E3436
+UXTerm*color1: #CC0000
+UXTerm*color2: #4E9A06
+UXTerm*color3: #C4A000
+UXTerm*color4: #3465A4
+UXTerm*color5: #75507B
+UXTerm*color6: #06989A
+UXTerm*color7: #D3D7CF
+UXTerm*color8: #555753
+UXTerm*color9: #EF2929
+UXTerm*color10: #8AE234
+UXTerm*color11: #FCE94F
+UXTerm*color12: #729FCF
+UXTerm*color13: #AD7FA8
+UXTerm*color14: #34E2E2
+UXTerm*color15: #EEEEEC
+
+/* URxvt */
+URxvt*font: xft:Monospace-9
+
+URxvt*background: black
+URxvt*foreground: white
+
+URxvt*scrollBar: false
+
+URxvt*color0: #2E3436
+URxvt*color1: #CC0000
+URxvt*color2: #4E9A06
+URxvt*color3: #C4A000
+URxvt*color4: #3465A4
+URxvt*color5: #75507B
+URxvt*color6: #06989A
+URxvt*color7: #D3D7CF
+URxvt*color8: #555753
+URxvt*color9: #EF2929
+URxvt*color10: #8AE234
+URxvt*color11: #FCE94F
+URxvt*color12: #729FCF
+URxvt*color13: #AD7FA8
+URxvt*color14: #34E2E2
+URxvt*color15: #EEEEEC
