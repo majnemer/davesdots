@@ -1,0 +1,1 @@
+-i8 -bli0 -ut -sai -l100 -npcs -bap -ncs -npsl -fca -nbad
