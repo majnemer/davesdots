@@ -79,10 +79,9 @@ endfun
 
 if has('autocmd')
    autocmd BufEnter * :call WideFold()
-   try
-      autocmd BufReadPost * :call DetectDetectIndent()
-   catch
-   endtry
+   if exists("*DetectIndent")
+      autocmd BufReadPost * :call DetectIndent()
+   endif
 endif
 
 " ---- Spelling ----
