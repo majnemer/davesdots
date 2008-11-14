@@ -70,9 +70,19 @@ if has('eval')
    let g:detectindent_preferred_indent = 4
 endif
 
+fun! DetectDetectIndent()
+   try
+      call DetectIndent()
+   catch
+   endtry
+endfun
+
 if has('autocmd')
    autocmd BufEnter * :call WideFold()
-   autocmd BufReadPost * :DetectIndent
+   try
+      autocmd BufReadPost * :call DetectDetectIndent()
+   catch
+   endtry
 endif
 
 " ---- Spelling ----
