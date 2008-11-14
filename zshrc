@@ -213,8 +213,14 @@ case `uname -s` in
 esac
 
 case `uname -s` in
-	Linux|SunOS|FreeBSD|Interix|OpenBSD)
+	Linux)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -U '${USERNAME}' -o pid,args | sed "/ps --forest -U '${USERNAME}' -o pid,args/d"'
+	;;
+	Interix)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
+	;;
+	SunOS|FreeBSD|Interix|OpenBSD)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
 	;;
 	Darwin)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,command | sed "/ps -U '${USERNAME}' -o pid,command/d"'
