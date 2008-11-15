@@ -278,6 +278,13 @@ imap <silent> <F12> <C-O>:silent set number!<CR>
 " Don't force column 0 for #
 inoremap # X<BS>#
 
+" Fix broken shit backspace on csil machines
+" in tcsh with badly compiled vims
+map <C-h> <BS>
+map <C-?> <BS>
+map! <C-h> <BS>
+map! <C-?> <BS>
+
 " Python specific stuff
 if has('eval')
    let python_highlight_all = 1
