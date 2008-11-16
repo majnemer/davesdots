@@ -285,7 +285,7 @@ inoremap # X<BS>#
 " and always accept <C-h> as a backspace key
 map <C-h> <BS>
 map! <C-h> <BS>
-if (&term =~ "interix")
+if (&term !~ "interix")
    map <C-?> <BS>
    map! <C-?> <BS>
 endif
