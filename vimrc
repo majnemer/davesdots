@@ -68,14 +68,14 @@ if has('eval')
 
    let g:detectindent_preferred_expandtab = 0
    let g:detectindent_preferred_indent = 4
-endif
 
-fun! <SID>DetectDetectIndent()
-   try
-      :DetectIndent
-   catch
-   endtry
-endfun
+   fun! <SID>DetectDetectIndent()
+      try
+         :DetectIndent
+      catch
+      endtry
+   endfun
+endif
 
 if has('autocmd')
    autocmd BufEnter * :call WideFold()
