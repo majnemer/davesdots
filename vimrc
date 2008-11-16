@@ -18,10 +18,10 @@ set nocompatible           " Don't emulate vi's limitations
 set encoding=utf-8         " Default encoding should always be UTF-8
 set tabstop=4              " 4 spaces for tabs
 set shiftwidth=4           " 4 spaces for indents
-"set smarttab              " Tab next line based on current line
+set smarttab              " Tab next line based on current line
 "set expandtab             " Spaces for indentation
-"set autoindent            " Automatically indent next line
-"set smartindent           " Indent next line based on current line
+set autoindent            " Automatically indent next line
+set smartindent           " Indent next line based on current line
 "set linebreak             " Display long lines wrapped at word boundaries
 set incsearch              " Enable incremental searching
 set hlsearch               " Highlight search matches
@@ -280,12 +280,15 @@ imap <silent> <F12> <C-O>:silent set number!<CR>
 " Don't force column 0 for #
 inoremap # X<BS>#
 
-" Fix broken shit backspace on csil machines
-" in tcsh with badly compiled vims
+" Force <C-?> to be backspace except when in interix mode
+" because interix uses that for forward delete...
+" and always accept <C-h> as a backspace key
 map <C-h> <BS>
-map <C-?> <BS>
 map! <C-h> <BS>
-map! <C-?> <BS>
+if (&term =~ "interix")
+   map <C-?> <BS>
+   map! <C-?> <BS>
+endif
 
 " Python specific stuff
 if has('eval')
