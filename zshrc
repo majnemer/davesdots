@@ -153,17 +153,17 @@ esac
 
 # prompt
 if [[ -z ${SSH_TTY} ]] ; then
-   PS1=$'%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
-   RPS1=$'%{\e[01;33m%}[%t]%{\e[00;00m%}'
+	PS1=$'%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+	RPS1=$'%{\e[01;33m%}[%t]%{\e[00;00m%}'
 else
-   PS1=$'%{\e[01;36m%}%n %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
-   RPS1=$'%{\e[01;33m%}%m %{\e[01;32m%}%~%{\e[00;00m%}'
+	PS1=$'%{\e[01;36m%}%n %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+	RPS1=$'%{\e[01;33m%}%m %{\e[01;32m%}%~%{\e[00;00m%}'
 fi
 
 # terminal titles
 if [[ "${TERM}" != "linux" ]] ; then
-   precmd() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
-   preexec() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
+	precmd() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
+	preexec() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
 fi
 
 # completion menu
@@ -219,7 +219,7 @@ case `uname -s` in
 	Interix)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
 	;;
-	SunOS|FreeBSD|Interix|OpenBSD)
+	SunOS|FreeBSD|OpenBSD)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
 	;;
 	Darwin)
@@ -262,20 +262,20 @@ export WATCHFMT=$'\e[01;36m'" -- %n@%m has %(a.Logged In.Logged out) --"$'\e[00;
 
 # directory hashes
 if [[ -d "${HOME}/sandbox" ]] ; then
-   hash -d sandbox="${HOME}/sandbox"
+	hash -d sandbox="${HOME}/sandbox"
 fi
 
 if [[ -d "${HOME}/work" ]] ; then
-   hash -d work="${HOME}/work"
+	hash -d work="${HOME}/work"
 
-   for dir in "${HOME}"/work/*(N-/) ; do
-      hash -d $(basename "${dir}")="${dir}"
-   done
+	for dir in "${HOME}"/work/*(N-/) ; do
+		hash -d $(basename "${dir}")="${dir}"
+	done
 fi
 
 # extras
 if [[ -d "${HOME}/.zsh" ]] ; then
-   for file in "${HOME}"/.zsh/*(N.x:t) ; do
-      source "${HOME}/.zsh/${file}"
-   done
+	for file in "${HOME}"/.zsh/*(N.x:t) ; do
+		source "${HOME}/.zsh/${file}"
+	done
 fi
