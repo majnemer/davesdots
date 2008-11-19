@@ -18,10 +18,10 @@ set nocompatible           " Don't emulate vi's limitations
 set encoding=utf-8         " Default encoding should always be UTF-8
 set tabstop=4              " 4 spaces for tabs
 set shiftwidth=4           " 4 spaces for indents
-"set smarttab              " Tab next line based on current line
+set smarttab              " Tab next line based on current line
 "set expandtab             " Spaces for indentation
-"set autoindent            " Automatically indent next line
-"set smartindent           " Indent next line based on current line
+set autoindent            " Automatically indent next line
+set smartindent           " Indent next line based on current line
 "set linebreak             " Display long lines wrapped at word boundaries
 set incsearch              " Enable incremental searching
 set hlsearch               " Highlight search matches
@@ -68,19 +68,19 @@ if has('eval')
 
    let g:detectindent_preferred_expandtab = 0
    let g:detectindent_preferred_indent = 4
-endif
 
-fun! DetectDetectIndent()
-   try
-      call DetectIndent()
-   catch
-   endtry
-endfun
+   fun! <SID>DetectDetectIndent()
+      try
+         :DetectIndent
+      catch
+      endtry
+   endfun
+endif
 
 if has('autocmd')
    autocmd BufEnter * :call WideFold()
-   if exists("*DetectIndent")
-      autocmd BufReadPost * :call DetectIndent()
+   if has('eval')
+      autocmd BufReadPost * :call s:DetectDetectIndent()
    endif
 endif
 
@@ -122,20 +122,20 @@ if has('eval')
          endtry
       endwhile
    endfun
-endif
 
-if has("gui_running")
-   set background=light                                     " We use a light background here
-   call LoadColorScheme("wombat:desert")                    " Set the colorscheme
-elseif &t_Co == 256
-   set background=light                                     " We use a light background here
-   call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
-elseif &t_Co == 88
-   set background=dark                                      " We use a dark background here
-   call LoadColorScheme("inkpot:zellner")                   " Set the colorscheme
-else
-   set background=dark                                      " We use a dark background here
-   call LoadColorScheme("zellner")                          " Set the colorscheme
+   if has("gui_running")
+      set background=light                                     " We use a light background here
+      call LoadColorScheme("wombat:desert")                    " Set the colorscheme
+   elseif &t_Co == 256
+      set background=light                                     " We use a light background here
+      call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
+   elseif &t_Co == 88
+      set background=dark                                      " We use a dark background here
+      call LoadColorScheme("inkpot:zellner")                   " Set the colorscheme
+   else
+      set background=dark                                      " We use a dark background here
+      call LoadColorScheme("zellner")                          " Set the colorscheme
+   endif
 endif
 
 " Show trailing whitespace visually
@@ -218,18 +218,20 @@ nmap <C-]> :call GoDefinition()<CR>
 
 if has('autocmd')
    " Shortcuts
-   fun! <SID>cabbrev()
-      iab #i #include
-      iab #I #include
+   if has('eval')
+      fun! <SID>cabbrev()
+         iab #i #include
+         iab #I #include
 
-      iab #d #define
-      iab #D #define
+         iab #d #define
+         iab #D #define
 
-      iab #e #endif
-      iab #E #endif
-   endfun
+         iab #e #endif
+         iab #E #endif
+      endfun
 
-   autocmd FileType c,cpp :call <SID>cabbrev()
+      autocmd FileType c,cpp :call <SID>cabbrev()
+   endif
 
    " make tab reindent in normal mode
    autocmd FileType c,cpp,cs,java nmap <Tab> =0<CR>
@@ -278,12 +280,15 @@ imap <silent> <F12> <C-O>:silent set number!<CR>
 " Don't force column 0 for #
 inoremap # X<BS>#
 
-" Fix broken shit backspace on csil machines
-" in tcsh with badly compiled vims
+" Force <C-?> to be backspace except when in interix mode
+" because interix uses that for forward delete...
+" and always accept <C-h> as a backspace key
 map <C-h> <BS>
-map <C-?> <BS>
 map! <C-h> <BS>
-map! <C-?> <BS>
+if (&term !~ "interix")
+   map <C-?> <BS>
+   map! <C-?> <BS>
+endif
 
 " Python specific stuff
 if has('eval')

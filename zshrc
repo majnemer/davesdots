@@ -127,6 +127,8 @@ case $TERM in
 		bindkey '^[[F' end-of-line
 		bindkey '^[OH' beginning-of-line
 		bindkey '^[OF' end-of-line
+		bindkey '^[[1~' beginning-of-line
+		bindkey '^[[4~' end-of-line
 		bindkey '^[[3~' delete-char
 		bindkey '^[[1;5C' emacs-forward-word
 		bindkey '^[[1;5D' emacs-backward-word
@@ -179,6 +181,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # users are all useless, ignore them always
 zstyle -e ':completion:*' users "reply=( root '${USERNAME}' )"
+
+# neat-o new features
+zstyle ':completion:*' completer _expand _complete _prefix _correct _prefix _match _approximate
 
 # caching good
 zstyle ':completion:*' use-cache on
