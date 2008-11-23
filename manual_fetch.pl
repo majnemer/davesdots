@@ -20,16 +20,14 @@ my $tgz = http_fetch("$URL;a=snapshot;h=$hash;sf=tgz");
 extract_tgz($tgz);
 
 sub http_fetch {
-	use LWP::Simple 'get';
-
 	my $url = shift;
-	return get($url);
+	return qx{wget -O - '$url'};
 }
 
 sub extract_tgz {
 	my $data = shift;
 
-	open(my $pipe, '|-', 'tar', '-xz') || die "manual_fetch.pl: tar failed: $!";
+	open(my $pipe, '|-', 'tar', '-xzf', '-') || die "manual_fetch.pl: tar failed: $!";
 	print $pipe $data;
 	close($pipe);
 }
