@@ -258,20 +258,11 @@ map Y y$
 " vK is stupid
 vmap K k
 
-" W is annoying
-nmap :W :w
-
-" Q is annoying
-nmap :Q :q
-
-" WQ is annoying
-nmap :WQ :wq
-
-" Wq is annoying
-nmap :Wq :wq
+" :W and :Q are annoying
+cmap W w
 
 " just continue
-map K K<cr>
+nmap K K<cr>
 
 " Toggle numbers with F12
 nmap <silent> <F12> :silent set number!<CR>
