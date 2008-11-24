@@ -13,6 +13,9 @@ if [[ ${ZSH_VERSION//.} -gt 420 ]] ; then
 	zle -N self-insert url-quote-magic
 fi
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
 # disable core dumps
 limit coredumpsize 0
 
@@ -60,6 +63,12 @@ if ( which dircolors &> /dev/null ) ; then
 elif ( which gdircolors &> /dev/null ) ; then
 	eval $(gdircolors -b $([ -f /etc/DIR_COLORS ] && echo "/etc/DIR_COLORS"))
 fi
+
+case "${TERM}" in
+	xterm-256color)
+		( infocmp $TERM &> /dev/null ) || export TERM=xterm
+	;;
+esac
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS=' -R'
@@ -122,7 +131,13 @@ alias :wq='exit'
 # keybindings
 bindkey -d
 bindkey -e
+
 bindkey ' ' magic-space
+
+bindkey -M emacs '\ee' edit-command-line
+
+bindkey -M emacs '' history-incremental-search-forward
+bindkey -M emacs '' history-incremental-search-backward
 
 case $TERM in
 	xterm*)
