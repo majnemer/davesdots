@@ -153,6 +153,12 @@ case $TERM in
 		bindkey '^[[7~' beginning-of-line
 		bindkey '^[[8~' end-of-line
 	;;
+	interix)
+		bindkey '^[[H' beginning-of-line
+		bindkey '^[[U' end-of-line
+		bindkey '^[[C' emacs-forward-word
+		bindkey '^[[D' emacs-backward-word
+	;;
 esac
 
 # prompt

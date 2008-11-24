@@ -34,13 +34,13 @@ function extract()
    #   *)
          case "${(L)1}" in
             *.tar)
-               tar xf "${1}" --no-same-owner
+               tar xf "${1}"
             ;;
             *.tar.gz|*.tgz|*.tar.Z)
-               tar zxf "${1}" --no-same-owner
+               tar zxf "${1}"
             ;;
             *.tar.bz2|*.tbz2)
-               tar jxf "${1}" --no-same-owner
+               tar jxf "${1}"
             ;;
             *.zip|*.ZIP|*.jar)
                unzip -qo "${1}"
@@ -61,7 +61,7 @@ function extract()
                ar x "${1}"
             ;;
             *.tar.lzma)
-               lzma -dc "${1}" | tar xf - --no-same-owner
+               lzma -dc "${1}" | tar xf
             ;;
             *.lzma)
                lzma -dc "${1}" > $(basename "${1%.*}")

@@ -283,11 +283,15 @@ inoremap # X<BS>#
 " Force <C-?> to be backspace except when in interix mode
 " because interix uses that for forward delete...
 " and always accept <C-h> as a backspace key
+" Let interix use ^[[U for end and ^[[H for home
 map <C-h> <BS>
 map! <C-h> <BS>
 if (&term !~ "interix")
-   map <C-?> <BS>
+   map  <C-?> <BS>
    map! <C-?> <BS>
+else
+   map [H <Home>
+   map [U <End>
 endif
 
 " Python specific stuff
