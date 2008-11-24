@@ -260,6 +260,7 @@ vmap K k
 
 " :W and :Q are annoying
 cmap W w
+cmap Q q
 
 " just continue
 nmap K K<cr>
