@@ -82,6 +82,9 @@ case `uname -s` in
 		alias ls="ls -Gh"
 		alias grep='grep -d skip --color=auto'
 	;;
+	Interix)
+		alias ls="ls --color"
+	;;
 	SunOS)
 		# solaris has ancient termcaps, force xterm to be old skool
 		if [[ $TERM == (xterm*) ]]; then
