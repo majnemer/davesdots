@@ -64,11 +64,14 @@ elif ( which gdircolors &> /dev/null ) ; then
 	eval $(gdircolors -b $([ -f /etc/DIR_COLORS ] && echo "/etc/DIR_COLORS"))
 fi
 
-case "${TERM}" in
-	xterm-256color)
-		( infocmp $TERM &> /dev/null ) || export TERM=xterm
-	;;
-esac
+# terminal fallback stuff
+if (which infocmp &> /dev/null) ; then
+	case "${TERM}" in
+		xterm*)
+			( infocmp $TERM &> /dev/null ) || export TERM=xterm
+		;;
+	esac
+fi
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS=' -R'
