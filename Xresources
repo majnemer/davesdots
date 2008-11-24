@@ -9,7 +9,7 @@ XTerm*faceSize: 9
 XTerm*faceName: Monospace
 
 XTerm*background: black
-XTerm*foreground: #cccccc
+XTerm*foreground: #CCCCCC
 
 XTerm*termName: xterm-256color
 
@@ -39,7 +39,7 @@ UXTerm*faceSize: 9
 UXTerm*faceName: Monospace
 
 UXTerm*background: black
-UXTerm*foreground: #cccccc
+UXTerm*foreground: #CCCCCC
 
 UXTerm*termName: xterm-256color
 
@@ -68,7 +68,7 @@ UXTerm*color15: #EEEEEC
 URxvt*font: xft:Monospace-9
 
 URxvt*background: black
-URxvt*foreground: #cccccc
+URxvt*foreground: #CCCCCC
 
 URxvt*scrollBar: false
 
