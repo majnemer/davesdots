@@ -182,11 +182,11 @@ esac
 
 # prompt
 if [[ -z ${SSH_TTY} ]] ; then
-	PS1=$'%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
-	RPS1=$'%1(j.%{\e[00;36m%}[%j].)%{\e[01;33m%}[%t]%{\e[00;00m%}'
+	PROMPT=$'%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+	RPROMPT=$'%1(j.%{\e[00;36m%}[%j].)%{\e[01;33m%}[%t]%{\e[00;00m%}'
 else
-	PS1=$'%{\e[01;36m%}%n %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
-	RPS1=$'%{\e[01;33m%}%m %{\e[01;32m%}%~%{\e[00;00m%}'
+	PROMPT=$'%{\e[01;36m%}%n %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+	RPROMPT=$'%{\e[01;33m%}%m %{\e[01;32m%}%~%{\e[00;00m%}'
 fi
 
 # terminal titles
@@ -286,6 +286,9 @@ zstyle ':completion:*' cache-path "${HOME}/.zsh/.${HOST}-cache"
 zstyle ':completion:*:messages' format $'\e[01;35m -- %d -- \e[00;00m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found -- \e[00;00m'
 zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d -- \e[00;00m'
+
+# job numbers
+zstyle ':completion:*:jobs' numbers true
 
 # kill/killall menu and general process listing
 zstyle ':completion:*:*:kill:*' menu yes select
