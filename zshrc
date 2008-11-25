@@ -16,6 +16,9 @@ fi
 autoload -U edit-command-line
 zle -N edit-command-line
 
+# only alphanumeric chars for moving around
+WORDCHARS=''
+
 # disable core dumps
 limit coredumpsize 0
 
@@ -216,11 +219,13 @@ preexec()
 				# Old approach: cmd=(builtin jobs -l %+)
 				#   weakness: shows a load of bs
 				title ${jobtexts[${(k)jobstates[(R)*+*]}]%% *} "$termtitle ${jobtexts[${(k)jobstates[(R)*+*]}]}"
-			else
+			elif (( $#cmd == 2 )); then
 				# Replace the command name, ignore extra args.
 				# Old approach: cmd=(builtin jobs -l ${(Q)cmd[2]})
 				#     weakness: shows all matching jobs on the title, not just one
 				title "${jobtexts[${cmd[2]#%}]%% *}" "$termtitle $jobtexts[${cmd[2]#%}]"
+			else
+				title "${cmd[2,-1]#%}" "$termtitle ${cmd[2,-1]#%}"
 			fi
 			;;
 		%*)
