@@ -98,11 +98,6 @@ case `uname -s` in
 		alias ls="ls --color"
 	;;
 	SunOS)
-		# solaris has ancient termcaps, force xterm to be old skool
-		if [[ $TERM == (xterm*) ]]; then
-			export TERM=xterm
-		fi
-
 		if (which gls &> /dev/null) ; then
 			alias ls="gls -h --color=auto"
 		else
@@ -192,10 +187,74 @@ else
 fi
 
 # terminal titles
-if [[ "${TERM}" != "linux" ]] ; then
-	precmd() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
-	preexec() { print -Pn "\e]0;%n@%m $(print -Pn "%40>...>$1")\007" }
-fi
+precmd()
+{
+	local termtitle
+
+	## Changing IFS breaks a few things otherwise, especially clear-zle-screen
+	IFS=$' \t\n'
+
+	termtitle=$(print -P "%n@%m")
+	title zsh "$termtitle"
+}
+
+preexec()
+{
+	# With bits from http://zshwiki.org/home/examples/hardstatus
+	# emulate -L zsh
+	local -a cmd; cmd=(${(z)1})           # Re-parse the command line
+	local termtitle
+
+	# Prepend this string to the title.
+	# termtitle=$(print -P "%(!.-=*[ROOT]*=- | .)%n@%m:")
+	termtitle=$(print -P "%n@%m:")
+
+	case $cmd[1] in
+		fg)
+			if (( $#cmd == 1 )); then
+				# No arguments, must find the current job
+				# Old approach: cmd=(builtin jobs -l %+)
+				#   weakness: shows a load of bs
+				title ${jobtexts[${(k)jobstates[(R)*+*]}]%% *} "$termtitle ${jobtexts[${(k)jobstates[(R)*+*]}]}"
+			else
+				# Replace the command name, ignore extra args.
+				# Old approach: cmd=(builtin jobs -l ${(Q)cmd[2]})
+				#     weakness: shows all matching jobs on the title, not just one
+				title "${jobtexts[${cmd[2]#%}]%% *}" "$termtitle $jobtexts[${cmd[2]#%}]"
+			fi
+			;;
+		%*)
+			title "${jobtexts[${cmd[1]#%}]% *}" "$termtitle $jobtexts[${cmd[1]#%}]"
+			;;
+		exec|sudo)
+			shift cmd
+			# If the command is 'exec', drop that, because
+			# we'd rather just see the command that is being
+			# exec'd. Note the ;& to fall through the next entry.
+			;&
+		*=*)
+			shift cmd
+			;&
+		*)
+			title $cmd[1]:t "$termtitle $cmd[*]"    # Starting a new job.
+			;;
+	esac
+}
+
+function title
+{
+	if [[ $TERM == screen* ]]; then
+		# Use these two for GNU Screen:
+		print -nR $'\ek'$1$'\e'"\\"
+		shift
+#		print -nR $'\e]0;'$*$'\a'
+		print -nR $'\e_screen \005 | '$*$'\e'"\\"
+	elif [[ $TERM == xterm* || $TERM == rxvt* ]]; then
+		# Use this one instead for XTerms:
+		shift
+		print -nR $'\e]0;'$@$'\a'
+	fi
+}
 
 # completion menu
 zstyle ':completion:*' menu select=1
