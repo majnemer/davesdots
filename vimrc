@@ -3,25 +3,26 @@
 " Trivial modifications: David Majnemer
 " vim: set ts=3 sw=3 et nowrap:
 
-scriptencoding utf-8       " This file is in UTF-8
+if has ('multi_byte')         " Make sure we have unicode support
+   scriptencoding utf-8       " This file is in UTF-8
 
-" ---- Terminal Setup ----
-if (&term =~ "xterm") && (&termencoding == "")
-   set termencoding=utf-8
+   " ---- Terminal Setup ----
+   if (&termencoding == "")
+      if (&term =~ "xterm") || (&term =~ "rxvt-unicode")
+         set termencoding=utf-8
+      endif
+   endif
+   set encoding=utf-8         " Default encoding should always be UTF-8
 endif
 
-if (&term =~ "rxvt-unicode") && (&termencoding == "")
-   set termencoding=utf-8
-endif
 " ---- General Setup ----
 set nocompatible           " Don't emulate vi's limitations
-set encoding=utf-8         " Default encoding should always be UTF-8
 set tabstop=4              " 4 spaces for tabs
 set shiftwidth=4           " 4 spaces for indents
-set smarttab              " Tab next line based on current line
+set smarttab               " Tab next line based on current line
 "set expandtab             " Spaces for indentation
-set autoindent            " Automatically indent next line
-set smartindent           " Indent next line based on current line
+set autoindent             " Automatically indent next line
+set smartindent            " Indent next line based on current line
 "set linebreak             " Display long lines wrapped at word boundaries
 set incsearch              " Enable incremental searching
 set hlsearch               " Highlight search matches
@@ -41,6 +42,7 @@ set hidden                 " Allow flipping of buffers without saving
 set noerrorbells           " Disable error bells
 set visualbell             " Turn visual bell on
 set t_vb=                  " Make the visual bell emit nothing
+set showcmd                " Show the current command
 
 if has('autocmd')
    autocmd GuiEnter * set t_vb=  " Disable the visual bell in gvim
