@@ -3,17 +3,17 @@
 # Trivial modifications: David Majnemer
 # vim:set nowrap:
 
-autoload -Uz compinit; compinit -d "${HOME}/.zsh/.zcompdump"
+autoload -U compinit; compinit -d "${HOME}/.zsh/.zcompdump"
 
-autoload -Uz age
-autoload -Uz zmv
+autoload -U age
+autoload -U zmv
 
 if [[ ${ZSH_VERSION//.} -gt 420 ]] ; then
-	autoload -Uz url-quote-magic
+	autoload -U url-quote-magic
 	zle -N self-insert url-quote-magic
 fi
 
-autoload -Uz edit-command-line
+autoload -U edit-command-line
 zle -N edit-command-line
 
 # disable core dumps
