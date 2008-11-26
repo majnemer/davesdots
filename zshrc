@@ -87,7 +87,7 @@ export LESS=' -R'
 alias cd..='cd ..'
 
 case `uname -s` in
-	Linux)
+	Linux|CYGWIN_NT-5.1)
 		alias ls="ls -h --color=auto"
 		alias grep='grep -d skip --color=auto'
 	;;
@@ -177,6 +177,10 @@ case $TERM in
 		bindkey '^[[U' end-of-line
 		bindkey '^[[C' emacs-forward-word
 		bindkey '^[[D' emacs-backward-word
+	;;
+	cygwin)
+		bindkey '^[[1~' beginning-of-line
+		bindkey '^[[4~' end-of-line
 	;;
 esac
 
@@ -283,9 +287,9 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${HOME}/.zsh/.${HOST}-cache"
 
 # descriptions
-zstyle ':completion:*:messages' format $'\e[01;35m -- %d -- \e[00;00m'
-zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found -- \e[00;00m'
-zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d -- \e[00;00m'
+zstyle ':completion:*:messages' format $'%{\e[01;35m%} -- %d -- %{\e[00;00m%}'
+zstyle ':completion:*:warnings' format $'%{\e[01;31m%} -- No Matches Found -- %{\e[00;00m%}'
+zstyle ':completion:*:descriptions' format $'%{\e[01;33m%} -- %d -- %{\e[00;00m%}'
 
 # job numbers
 zstyle ':completion:*:jobs' numbers true
@@ -305,11 +309,14 @@ case `uname -s` in
 		zstyle ':completion:*:processes-names' command 'ps -e -o args | awk "NR != 1"'
 	;;
 	Darwin)
-		if [ "$(sw_vers -productVersion | cut -f2 -d'.')" -ge "4" ] ; then
+		if [ "$(sw_vers -productVersion | cut -f2 -d'.')" -gt "4" ] ; then
 			zstyle ':completion:*:processes-names' command 'ps -e -o command | awk "NR != 1"'
 		else
 			zstyle ':completion:*:processes-names' command 'ps -A -o command | awk "NR != 1"'
 		fi
+	;;
+	CYGWIN_NT-5.1)
+		zstyle ':completion:*:processes-names' command 'ps -u '${USERNAME}' -s | awk "NR != 1"'
 	;;
 esac
 
@@ -319,6 +326,9 @@ case `uname -s` in
 	;;
 	Interix)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
+	;;
+	CYGWIN_NT-5.1)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -u '${USERNAME}' -s | sed "/ps -u '${USERNAME}' -s/d"'
 	;;
 	SunOS|FreeBSD|OpenBSD)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
@@ -332,8 +342,11 @@ case `uname -s` in
 	Interix|SunOS|FreeBSD|Linux)
 		zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
 	;;
+	CYGWIN_NT-5.1)
+		zstyle ':completion:*:*:killall:*:processes-names' command "ps -u '${USERNAME}' -s"
+	;;
 	Darwin)
-		if [ "$(sw_vers -productVersion | cut -f2 -d'.')" -ge "4" ] ; then
+		if [ "$(sw_vers -productVersion | cut -f2 -d'.')" -gt "4" ] ; then
 			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
 		else
 			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o command"
@@ -359,7 +372,7 @@ zstyle ':completion:*:diff:*' ignore-line yes
 # Keep track of other people accessing the box
 watch=( all )
 export LOGCHECK=30
-export WATCHFMT=$'\e[01;36m'" -- %n@%m has %(a.Logged In.Logged out) --"$'\e[00;00m'
+export WATCHFMT=$'%{\e[01;36m%}'" -- %n@%m has %(a.Logged In.Logged out) --"$'%{\e[00;00m%}'
 
 # directory hashes
 if [[ -d "${HOME}/sandbox" ]] ; then
