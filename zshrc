@@ -245,14 +245,14 @@ preexec()
 		%*)
 			title "${jobtexts[${cmd[1]#%}]% *}" "$termtitle $jobtexts[${cmd[1]#%}]"
 			;;
+		*=*)
+			shift cmd
+		;&
 		exec|sudo)
 			shift cmd
 			# If the command is 'exec', drop that, because
 			# we'd rather just see the command that is being
 			# exec'd. Note the ;& to fall through the next entry.
-		;&
-		*=*)
-			shift cmd
 		;&
 		*)
 			title $cmd[1]:t "$termtitle $cmd[*]"    # Starting a new job.
@@ -280,6 +280,11 @@ function title
 
 # completion menu
 zstyle ':completion:*' menu select=1
+
+# neat-o new features
+zstyle ':completion:*' completer _expand _complete _prefix _correct _match _approximate
+
+# don't complete commands that we do not have
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # group matches
@@ -291,9 +296,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # users are all useless, ignore them always
 zstyle -e ':completion:*' users "reply=( root '${USERNAME}' )"
-
-# neat-o new features
-zstyle ':completion:*' completer _expand _complete _prefix _correct _prefix _match _approximate
 
 # caching good
 zstyle ':completion:*' use-cache on
