@@ -241,7 +241,7 @@ preexec()
 			else
 				title "${cmd[2,-1]#%}" "$termtitle ${cmd[2,-1]#%}"
 			fi
-			;;
+		;;
 		%*)
 			title "${jobtexts[${cmd[1]#%}]% *}" "$termtitle $jobtexts[${cmd[1]#%}]"
 			;;
@@ -250,29 +250,32 @@ preexec()
 			# If the command is 'exec', drop that, because
 			# we'd rather just see the command that is being
 			# exec'd. Note the ;& to fall through the next entry.
-			;&
+		;&
 		*=*)
 			shift cmd
-			;&
+		;&
 		*)
 			title $cmd[1]:t "$termtitle $cmd[*]"    # Starting a new job.
-			;;
+		;;
 	esac
 }
 
 function title
 {
-	if [[ $TERM == screen* ]]; then
-		# Use these two for GNU Screen:
-		print -nR $'\ek'$1$'\e'"\\"
-		shift
-#		print -nR $'\e]0;'$*$'\a'
-		print -nR $'\e_screen \005 | '$*$'\e'"\\"
-	elif [[ $TERM == xterm* || $TERM == rxvt* ]]; then
-		# Use this one instead for XTerms:
-		shift
-		print -nR $'\e]0;'$@$'\a'
-	fi
+	case $TERM in
+		screen*)
+			# Use these two for GNU Screen:
+			print -nR $'\ek'$1$'\e'"\\"
+			shift
+#			print -nR $'\e]0;'$*$'\a'
+			print -nR $'\e_screen \005 | '$*$'\e'"\\"
+		;;
+		xterm*|rxvt*|cygwin)
+			# Use this one instead for XTerms:
+			shift
+			print -nR $'\e]0;'$@$'\a'
+		;;
+	esac
 }
 
 # completion menu
