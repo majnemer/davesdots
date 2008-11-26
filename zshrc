@@ -116,6 +116,12 @@ case `uname -s` in
 		elif (which glocate &> /dev/null) ; then
 			alias locate='glocate'
 		fi
+
+		# sorta hacky, but I cannot find a better way to do this :/
+		if [[ `which infocmp` = /opt/csw/bin/infocmp ]] ; then
+			export TERMINFO=/opt/csw/share/terminfo
+			export TERM=$TERM
+		fi
 	;;
 esac
 
