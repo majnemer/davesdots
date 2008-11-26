@@ -87,7 +87,7 @@ export LESS=' -R'
 alias cd..='cd ..'
 
 case `uname -s` in
-	Linux|CYGWIN_NT*)
+	Linux|CYGWIN*)
 		alias ls="ls -h --color=auto"
 		alias grep='grep -d skip --color=auto'
 	;;
@@ -325,7 +325,7 @@ case `uname -s` in
 			zstyle ':completion:*:processes-names' command 'ps -A -o command | awk "NR != 1"'
 		fi
 	;;
-	CYGWIN_NT*)
+	CYGWIN*)
 		zstyle ':completion:*:processes-names' command 'ps -u '${USERNAME}' -s | awk "NR != 1"'
 	;;
 esac
@@ -337,7 +337,7 @@ case `uname -s` in
 	Interix)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
 	;;
-	CYGWIN_NT*)
+	CYGWIN*)
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -u '${USERNAME}' -s | sed "/ps -u '${USERNAME}' -s/d"'
 	;;
 	SunOS|FreeBSD|OpenBSD)
@@ -352,7 +352,7 @@ case `uname -s` in
 	Interix|SunOS|FreeBSD|Linux)
 		zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
 	;;
-	CYGWIN_NT*)
+	CYGWIN*)
 		zstyle ':completion:*:*:killall:*:processes-names' command "ps -u '${USERNAME}' -s"
 	;;
 	Darwin)
