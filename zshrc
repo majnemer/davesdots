@@ -378,7 +378,7 @@ zstyle ':completion:*:diff:*' ignore-line yes
 # Keep track of other people accessing the box
 watch=( all )
 export LOGCHECK=30
-export WATCHFMT=$'%{\e[01;36m%}'" -- %n@%m has %(a.Logged In.Logged out) --"$'%{\e[00;00m%}'
+export WATCHFMT=$'\e[01;36m'" -- %n@%m has %(a.Logged In.Logged out) --"$'\e[00;00m'
 
 # directory hashes
 if [[ -d "${HOME}/sandbox" ]] ; then
