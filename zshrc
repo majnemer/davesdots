@@ -111,7 +111,9 @@ case `uname -s` in
 			alias grep='ggrep -d skip --color=auto'
 		fi
 
-		if (which glocate &> /dev/null) ; then
+		if (which slocate &> /dev/null) ; then
+			alias locate='slocate'
+		elif (which glocate &> /dev/null) ; then
 			alias locate='glocate'
 		fi
 	;;
