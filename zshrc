@@ -270,8 +270,8 @@ function title
 #			print -nR $'\e]0;'$*$'\a'
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
-		xterm*|rxvt*|cygwin)
-			# Use this one instead for XTerms:
+		xterm*|rxvt*|cygwin|interix)
+			# Use this one instead for everybody else:
 			shift
 			print -nR $'\e]0;'$@$'\a'
 		;;
