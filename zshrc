@@ -83,6 +83,8 @@ export LESS=' -R'
 
 ( which vim &> /dev/null ) && export EDITOR='vim'
 
+export GIT_PAGER=''
+
 # aliases
 alias cd..='cd ..'
 
