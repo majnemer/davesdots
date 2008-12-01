@@ -86,19 +86,25 @@ export LESS=' -R'
 # aliases
 alias cd..='cd ..'
 
+# handles per OS aliases, fixes a few terms
 case `uname -s` in
 	Linux|CYGWIN*)
 		alias ls="ls -h --color=auto"
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
-		# we must lie to the mac, for it is dumb
 		export LSCOLORS=ExGxFxDxCxDxDxHbaDacec
 		alias ls="ls -Gh"
 		alias grep='grep -d skip --color=auto'
 	;;
 	Interix)
 		alias ls="ls --color"
+
+		# sorta hacky, but I cannot find a better way to do this :/
+		if [[ `which infocmp` = /usr/local/bin/infocmp ]] ; then
+			export TERMINFO=/usr/local/share/terminfo
+			export TERM=$TERM
+		fi
 	;;
 	SunOS)
 		if (which gls &> /dev/null) ; then
@@ -169,6 +175,10 @@ case $TERM in
 		bindkey '^[[5D' emacs-backward-word
 		bindkey '^[OC' emacs-forward-word
 		bindkey '^[OD' emacs-backward-word
+		bindkey '^[Oc' emacs-forward-word
+		bindkey '^[Od' emacs-backward-word
+		bindkey '^[[c' emacs-forward-word
+		bindkey '^[[d' emacs-backward-word
 	;;
 	linux)
 		bindkey '^[[1~' beginning-of-line
@@ -184,11 +194,17 @@ case $TERM in
 		bindkey '^[[7~' beginning-of-line
 		bindkey '^[[8~' end-of-line
 	;;
+	cons*)
+		bindkey '^[[H' beginning-of-line
+		bindkey '^[[F' end-of-line
+		bindkey '^?'   delete-char
+	;;
 	interix)
 		bindkey '^[[H' beginning-of-line
 		bindkey '^[[U' end-of-line
+		bindkey '^?'   delete-char
 	;;
-	cygwin)
+	cygwin*)
 		bindkey '^[[1~' beginning-of-line
 		bindkey '^[[4~' end-of-line
 	;;
@@ -207,9 +223,6 @@ fi
 precmd()
 {
 	local termtitle
-
-	## Changing IFS breaks a few things otherwise, especially clear-zle-screen
-	IFS=$' \t\n'
 
 	termtitle=$(print -P "%n@%m")
 	title zsh "$termtitle"
@@ -267,7 +280,6 @@ function title
 			# Use these two for GNU Screen:
 			print -nR $'\ek'$1$'\e'"\\"
 			shift
-#			print -nR $'\e]0;'$*$'\a'
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
 		xterm*|rxvt*|cygwin|interix)
