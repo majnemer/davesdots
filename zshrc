@@ -68,16 +68,28 @@ elif ( which gdircolors &> /dev/null ) ; then
 fi
 
 # terminal fallback stuff
-if (which infocmp &> /dev/null) ; then
-	case "${TERM}" in
+function fix_term
+{
+	case "$1" in
+		xterm)
+			( ( infocmp $1 &> /dev/null ) && echo "xterm" ) || echo "vt100"
+		;;
+		rxvt)
+			( ( infocmp $1 &> /dev/null ) && echo "rxvt" ) || fix_term xterm
+		;;
 		xterm*)
-			( infocmp $TERM &> /dev/null ) || export TERM=xterm
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
 		;;
 		rxvt*)
-			( infocmp $TERM &> /dev/null ) || export TERM=rxvt
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
+		;;
+		*)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
 		;;
 	esac
-fi
+}
+
+export TERM=$(fix_term $TERM)
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS=' -R'
