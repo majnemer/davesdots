@@ -131,9 +131,6 @@ if has('eval')
    elseif &t_Co == 256
       set background=light                                     " We use a light background here
       call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
-   elseif &t_Co == 88
-      set background=dark                                      " We use a dark background here
-      call LoadColorScheme("inkpot:zellner")                   " Set the colorscheme
    else
       set background=dark                                      " We use a dark background here
       call LoadColorScheme("zellner")                          " Set the colorscheme

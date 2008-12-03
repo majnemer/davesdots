@@ -73,6 +73,9 @@ if (which infocmp &> /dev/null) ; then
 		xterm*)
 			( infocmp $TERM &> /dev/null ) || export TERM=xterm
 		;;
+		rxvt*)
+			( infocmp $TERM &> /dev/null ) || export TERM=rxvt
+		;;
 	esac
 fi
 
