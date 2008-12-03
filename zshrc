@@ -157,58 +157,58 @@ bindkey ' ' magic-space
 
 bindkey -M emacs '\ee' edit-command-line
 
-bindkey -M emacs '' history-incremental-search-forward
-bindkey -M emacs '' history-incremental-search-backward
+bindkey -M emacs '^P' history-incremental-search-forward
+bindkey -M emacs '^N' history-incremental-search-backward
 
 case $TERM in
 	xterm*)
-		bindkey '^[[H' beginning-of-line
-		bindkey '^[[F' end-of-line
-		bindkey '^[OH' beginning-of-line
-		bindkey '^[OF' end-of-line
-		bindkey '^[[1~' beginning-of-line
-		bindkey '^[[4~' end-of-line
-		bindkey '^[[7~' beginning-of-line
-		bindkey '^[[8~' end-of-line
-		bindkey '^[[3~' delete-char
-		bindkey '^[[1;5C' emacs-forward-word
-		bindkey '^[[1;5D' emacs-backward-word
-		bindkey '^[[5C' emacs-forward-word
-		bindkey '^[[5D' emacs-backward-word
-		bindkey '^[OC' emacs-forward-word
-		bindkey '^[OD' emacs-backward-word
-		bindkey '^[Oc' emacs-forward-word
-		bindkey '^[Od' emacs-backward-word
-		bindkey '^[[c' emacs-forward-word
-		bindkey '^[[d' emacs-backward-word
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line
+		bindkey '\eOH' beginning-of-line
+		bindkey '\eOF' end-of-line
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
+		bindkey '\e[7~' beginning-of-line
+		bindkey '\e[8~' end-of-line
+		bindkey '\e[3~' delete-char
+		bindkey '\e[1;5C' emacs-forward-word
+		bindkey '\e[1;5D' emacs-backward-word
+		bindkey '\e[5C' emacs-forward-word
+		bindkey '\e[5D' emacs-backward-word
+		bindkey '\eOC' emacs-forward-word
+		bindkey '\eOD' emacs-backward-word
+		bindkey '\eOc' emacs-forward-word
+		bindkey '\eOd' emacs-backward-word
+		bindkey '\e[c' emacs-forward-word
+		bindkey '\e[d' emacs-backward-word
 	;;
 	linux)
-		bindkey '^[[1~' beginning-of-line
-		bindkey '^[[4~' end-of-line
-		bindkey '^[[3~' delete-char
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
+		bindkey '\e[3~' delete-char
 	;;
 	rxvt*)
-		bindkey '^[[c' emacs-forward-word
-		bindkey '^[[d' emacs-backward-word
-		bindkey '^[Oc' emacs-forward-word
-		bindkey '^[Od' emacs-backward-word
-		bindkey '^[[3~' delete-char
-		bindkey '^[[7~' beginning-of-line
-		bindkey '^[[8~' end-of-line
+		bindkey '\e[c' emacs-forward-word
+		bindkey '\e[d' emacs-backward-word
+		bindkey '\eOc' emacs-forward-word
+		bindkey '\eOd' emacs-backward-word
+		bindkey '\e[3~' delete-char
+		bindkey '\e[7~' beginning-of-line
+		bindkey '\e[8~' end-of-line
 	;;
 	cons*)
-		bindkey '^[[H' beginning-of-line
-		bindkey '^[[F' end-of-line
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line
 		bindkey '^?'   delete-char
 	;;
 	interix)
-		bindkey '^[[H' beginning-of-line
-		bindkey '^[[U' end-of-line
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[U' end-of-line
 		bindkey '^?'   delete-char
 	;;
 	cygwin*)
-		bindkey '^[[1~' beginning-of-line
-		bindkey '^[[4~' end-of-line
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
 	;;
 esac
 
