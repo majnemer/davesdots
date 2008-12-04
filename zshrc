@@ -71,23 +71,14 @@ fi
 function fix_term
 {
 	case "$1" in
-		xterm)
+		xterm|screen)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
 		;;
-		rxvt)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
-		;;
-		screen)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
-		;;
-		xterm*)
+		rxvt|xterm*)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
 		;;
 		rxvt*)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
-		;;
-		screen-256color-bce)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term screen-256color
 		;;
 		screen*)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term screen
