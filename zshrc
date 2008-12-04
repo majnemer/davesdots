@@ -89,7 +89,20 @@ function fix_term
 	esac
 }
 
+# sorta hacky, but I cannot find a better way to do this :/
+function fix_terminfo_db
+{
+	if [[ `which infocmp` = "$1/bin/infocmp" ]] ; then
+		export TERMINFO="$1/share/terminfo"
+		export TERM=$TERM
+	fi
+}
+
 export TERM=$(fix_term $TERM)
+
+if [[ $TERM == *256* ]] ; then
+	export SCREEN_COLOR="-256color"
+fi
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS=' -R'
@@ -117,11 +130,7 @@ case `uname -s` in
 	Interix)
 		alias ls="ls --color"
 
-		# sorta hacky, but I cannot find a better way to do this :/
-		if [[ `which infocmp` = /usr/local/bin/infocmp ]] ; then
-			export TERMINFO=/usr/local/share/terminfo
-			export TERM=$TERM
-		fi
+		fix_terminfo_db "/usr/local"
 	;;
 	SunOS)
 		if (which gls &> /dev/null) ; then
@@ -140,11 +149,7 @@ case `uname -s` in
 			alias locate='glocate'
 		fi
 
-		# sorta hacky, but I cannot find a better way to do this :/
-		if [[ `which infocmp` = /opt/csw/bin/infocmp ]] ; then
-			export TERMINFO=/opt/csw/share/terminfo
-			export TERM=$TERM
-		fi
+		fix_terminfo_db "/opt/csw"
 	;;
 esac
 
@@ -196,6 +201,13 @@ case $TERM in
 		bindkey '\eOd' emacs-backward-word
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
+	;;
+	screen*)
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
+		bindkey '\e[1;5C' emacs-forward-word
+		bindkey '\e[1;5D' emacs-backward-word
+		bindkey '\e[3~' delete-char
 	;;
 	linux)
 		bindkey '\e[1~' beginning-of-line
