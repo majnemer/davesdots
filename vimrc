@@ -188,7 +188,7 @@ if has('autocmd')
 endif
 
 " ---- cscope/ctags setup ----
-if has('cscope') && filereadable('/usr/bin/cscope')
+if has('cscope') && executable('cscope') == 1
    " Search cscope and ctags, in that order
    set cscopetag
    set cscopetagorder=0
