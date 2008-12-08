@@ -1,0 +1,19 @@
+# are we linux?
+case `uname -s` in
+	Linux)
+		local iccvars_path=/opt/intel/Compiler/11.0/074/bin/iccvars.sh
+		if [[ -x $iccvars_path ]] ; then
+			case `uname -m` in
+				x86_64)
+					source $iccvars_path intel64
+				;;
+				i*86)
+					source $iccvars_path ia32
+				;;
+				ia64)
+					source $iccvars_path ia64
+				;;
+			esac
+		fi
+	;;
+esac
