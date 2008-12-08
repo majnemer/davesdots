@@ -68,12 +68,40 @@ elif ( which gdircolors &> /dev/null ) ; then
 fi
 
 # terminal fallback stuff
-if (which infocmp &> /dev/null) ; then
-	case "${TERM}" in
-		xterm*)
-			( infocmp $TERM &> /dev/null ) || export TERM=xterm
+function fix_term
+{
+	case "$1" in
+		xterm|screen)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
+		;;
+		rxvt|xterm*)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
+		;;
+		rxvt*)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
+		;;
+		screen*)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term screen
+		;;
+		*)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
 		;;
 	esac
+}
+
+# sorta hacky, but I cannot find a better way to do this :/
+function fix_terminfo_db
+{
+	if [[ `which infocmp` = "$1/bin/infocmp" ]] ; then
+		export TERMINFO="$1/share/terminfo"
+		export TERM=$TERM
+	fi
+}
+
+export TERM=$(fix_term $TERM)
+
+if [[ $TERM == *256* ]] ; then
+	export SCREEN_COLOR="-256color"
 fi
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
@@ -88,19 +116,21 @@ export GIT_PAGER=''
 # aliases
 alias cd..='cd ..'
 
+# handles per OS aliases, fixes a few terms
 case `uname -s` in
 	Linux|CYGWIN*)
 		alias ls="ls -h --color=auto"
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
-		# we must lie to the mac, for it is dumb
 		export LSCOLORS=ExGxFxDxCxDxDxHbaDacec
 		alias ls="ls -Gh"
 		alias grep='grep -d skip --color=auto'
 	;;
 	Interix)
 		alias ls="ls --color"
+
+		fix_terminfo_db "/usr/local"
 	;;
 	SunOS)
 		if (which gls &> /dev/null) ; then
@@ -119,11 +149,7 @@ case `uname -s` in
 			alias locate='glocate'
 		fi
 
-		# sorta hacky, but I cannot find a better way to do this :/
-		if [[ `which infocmp` = /opt/csw/bin/infocmp ]] ; then
-			export TERMINFO=/opt/csw/share/terminfo
-			export TERM=$TERM
-		fi
+		fix_terminfo_db "/opt/csw"
 	;;
 esac
 
@@ -171,6 +197,17 @@ case $TERM in
 		bindkey '\e[5D' emacs-backward-word
 		bindkey '\eOC' emacs-forward-word
 		bindkey '\eOD' emacs-backward-word
+		bindkey '\eOc' emacs-forward-word
+		bindkey '\eOd' emacs-backward-word
+		bindkey '\e[c' emacs-forward-word
+		bindkey '\e[d' emacs-backward-word
+	;;
+	screen*)
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
+		bindkey '\e[1;5C' emacs-forward-word
+		bindkey '\e[1;5D' emacs-backward-word
+		bindkey '\e[3~' delete-char
 	;;
 	linux)
 		bindkey '\e[1~' beginning-of-line
@@ -186,11 +223,17 @@ case $TERM in
 		bindkey '\e[7~' beginning-of-line
 		bindkey '\e[8~' end-of-line
 	;;
+	cons*)
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line
+		bindkey '^?'   delete-char
+	;;
 	interix)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[U' end-of-line
+		bindkey '^?'   delete-char
 	;;
-	cygwin)
+	cygwin*)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
 	;;
@@ -209,9 +252,6 @@ fi
 precmd()
 {
 	local termtitle
-
-	## Changing IFS breaks a few things otherwise, especially clear-zle-screen
-	IFS=$' \t\n'
 
 	termtitle=$(print -P "%n@%m")
 	title zsh "$termtitle"
@@ -269,7 +309,6 @@ function title
 			# Use these two for GNU Screen:
 			print -nR $'\ek'$1$'\e'"\\"
 			shift
-#			print -nR $'\e]0;'$*$'\a'
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
 		xterm*|rxvt*|cygwin|interix)

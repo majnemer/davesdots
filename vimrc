@@ -131,9 +131,6 @@ if has('eval')
    elseif &t_Co == 256
       set background=light                                     " We use a light background here
       call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
-   elseif &t_Co == 88
-      set background=dark                                      " We use a dark background here
-      call LoadColorScheme("inkpot:zellner")                   " Set the colorscheme
    else
       set background=dark                                      " We use a dark background here
       call LoadColorScheme("zellner")                          " Set the colorscheme
@@ -274,18 +271,18 @@ imap <silent> <F12> <C-O>:silent set number!<CR>
 " Don't force column 0 for #
 inoremap # X<BS>#
 
-" Force <C-?> to be backspace except when in interix mode
-" because interix uses that for forward delete...
-" and always accept <C-h> as a backspace key
-" Let interix use ^[[U for end and ^[[H for home
+" Always map <C-h> to backspace
+" Both interix and cons use C-? as forward delete,
+" besides those two exceptions, always set it to backspace
+" Also let interix use ^[[U for end and ^[[H for home
 map <C-h> <BS>
 map! <C-h> <BS>
-if (&term !~ "interix")
-   map  <C-?> <BS>
-   map! <C-?> <BS>
-else
+if (&term =~ "interix")
    map [H <Home>
    map [U <End>
+elseif (&term !~ "cons")
+   map  <C-?> <BS>
+   map! <C-?> <BS>
 endif
 
 " Python specific stuff
