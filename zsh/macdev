@@ -1,0 +1,10 @@
+local dev_path;
+case `uname -s` in
+	Darwin)
+		dev_path=/Developer/usr
+		if [[ -r $dev_path ]] ; then
+			export PATH=$PATH:$dev_path/bin:$dev_path/sbin
+			export MANPATH=`manpath -c`:$dev_path/share/man
+		fi
+	;;
+esac
