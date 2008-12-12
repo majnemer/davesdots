@@ -126,13 +126,10 @@ if has('eval')
    endfun
 
    if has("gui_running")
-      set background=light                                     " We use a light background here
       call LoadColorScheme("wombat:desert")                    " Set the colorscheme
    elseif &t_Co == 256
-      set background=light                                     " We use a light background here
       call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
    else
-      set background=dark                                      " We use a dark background here
       call LoadColorScheme("zellner")                          " Set the colorscheme
    endif
 endif
