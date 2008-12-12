@@ -178,7 +178,6 @@ bindkey ' ' magic-space
 bindkey -M emacs '\ee' edit-command-line
 
 bindkey -M emacs '^P' history-incremental-search-forward
-bindkey -M emacs '^N' history-incremental-search-backward
 
 case $TERM in
 	xterm*)
