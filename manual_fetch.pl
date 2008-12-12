@@ -21,7 +21,15 @@ extract_tgz($tgz);
 
 sub http_fetch {
 	my $url = shift;
-	return qx{wget -O - '$url'};
+
+	# See if we should use wget or curl
+	if(grep {-x "$_/curl"} split /:/, $ENV{'PATH'}) {
+		return qx{curl -s '$url'};
+	} elsif(grep {-x "$_/wget"} split /:/, $ENV{'PATH'}) {
+		return qx{wget -O - '$url'};
+	} else {
+		die "Could not find curl or wget, aborting!";
+	}
 }
 
 sub extract_tgz {
