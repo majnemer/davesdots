@@ -390,7 +390,7 @@ case `uname -s` in
 		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
 	;;
 	Darwin)
-		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,command | sed "/ps -U '${USERNAME}' -o pid,command/d"'
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,command | sed "/ps -U '${USERNAME}' -o pid/d"'
 	;;
 esac
 
