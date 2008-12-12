@@ -277,6 +277,8 @@ map! <C-h> <BS>
 if (&term =~ "interix")
    map [H <Home>
    map [U <End>
+   map  <C-?> <DEL>
+   map! <C-?> <DEL>
 elseif (&term !~ "cons")
    map  <C-?> <BS>
    map! <C-?> <BS>
