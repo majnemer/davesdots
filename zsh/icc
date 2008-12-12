@@ -13,11 +13,7 @@ if [[ -r $iccvars_path ]] ; then
 		;;
 	esac
 else
-	if [[ `uname -m` == x86_64 ]] ; then
-		iccvars_path=$(echo /opt/intel/cce/(10|9).*/bin/iccvars.sh(On[1]))
-	else
-		iccvars_path=$(echo /opt/intel/cc/(10|9).*/bin/iccvars.sh(On[1]))
-	fi
+	iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
 	if [[ -r $iccvars_path ]] ; then
 		source $iccvars_path
 	fi
