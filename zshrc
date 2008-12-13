@@ -98,12 +98,6 @@ function fix_terminfo_db
 	fi
 }
 
-export TERM=$(fix_term $TERM)
-
-if [[ $TERM == *256* ]] ; then
-	export SCREEN_COLOR="-256color"
-fi
-
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS=' -R'
 
@@ -153,6 +147,12 @@ case `uname -s` in
 	;;
 esac
 
+
+export TERM=$(fix_term $TERM)
+
+if [[ $TERM == *256* ]] ; then
+	export SCREEN_COLOR="-256color"
+fi
 
 alias df='df -h'
 alias du='du -h'
