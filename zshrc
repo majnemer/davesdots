@@ -203,6 +203,10 @@ case $TERM in
 		bindkey '\e[d' emacs-backward-word
 	;;
 	mlterm|kterm)
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line
+		bindkey '\e[1~' beginning-of-line
+		bindkey '\e[4~' end-of-line
 		bindkey '\e[1;5C' emacs-forward-word
 		bindkey '\e[1;5D' emacs-backward-word
 		bindkey '\e[3~' delete-char
