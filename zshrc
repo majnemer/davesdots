@@ -77,7 +77,7 @@ function fix_term
 		rxvt|xterm*)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
 		;;
-		rxvt*)
+		rxvt*|Eterm)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
 		;;
 		screen*)
@@ -211,7 +211,7 @@ case $TERM in
 		bindkey '\e[4~' end-of-line
 		bindkey '\e[3~' delete-char
 	;;
-	rxvt*)
+	rxvt*|Eterm)
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
 		bindkey '\eOc' emacs-forward-word
@@ -308,7 +308,7 @@ function title
 			shift
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
-		xterm*|rxvt*|cygwin|interix)
+		xterm*|rxvt*|cygwin|interix|Eterm)
 			# Use this one instead for everybody else:
 			shift
 			print -nR $'\e]0;'$@$'\a'
