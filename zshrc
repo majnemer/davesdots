@@ -316,7 +316,7 @@ function title
 			shift
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
-		xterm*|rxvt*|cygwin|interix|Eterm)
+		xterm*|rxvt*|cygwin|interix|Eterm|mlterm|kterm)
 			# Use this one instead for everybody else:
 			shift
 			print -nR $'\e]0;'$@$'\a'
