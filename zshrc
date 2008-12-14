@@ -74,11 +74,14 @@ function fix_term
 		xterm|screen)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
 		;;
-		rxvt|xterm*)
+		rxvt|xterm*|kterm)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
 		;;
 		rxvt*|Eterm)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
+		;;
+		mlterm)
+			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term kterm
 		;;
 		screen*)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term screen
@@ -198,6 +201,11 @@ case $TERM in
 		bindkey '\eOd' emacs-backward-word
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
+	;;
+	mlterm|kterm)
+		bindkey '\e[1;5C' emacs-forward-word
+		bindkey '\e[1;5D' emacs-backward-word
+		bindkey '\e[3~' delete-char
 	;;
 	screen*)
 		bindkey '\e[1~' beginning-of-line
