@@ -77,7 +77,7 @@ function fix_term
 		rxvt|xterm*|kterm)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
 		;;
-		rxvt*|Eterm)
+		rxvt*|Eterm|aterm)
 			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
 		;;
 		mlterm)
@@ -223,7 +223,7 @@ case $TERM in
 		bindkey '\e[4~' end-of-line
 		bindkey '\e[3~' delete-char
 	;;
-	rxvt*|Eterm)
+	rxvt*|Eterm|aterm)
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
 		bindkey '\eOc' emacs-forward-word
