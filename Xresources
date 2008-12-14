@@ -91,3 +91,6 @@ URxvt*color15: #EEEEEC
 
 /* Rxvt */
 Rxvt*termName: rxvt
+
+/* Aterm */
+Aterm*termName: aterm
