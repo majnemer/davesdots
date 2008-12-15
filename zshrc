@@ -70,26 +70,27 @@ fi
 # terminal fallback stuff
 function fix_term
 {
-	case "$1" in
-		xterm|screen)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
-		;;
-		rxvt|xterm*|kterm)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term xterm
-		;;
-		rxvt*|Eterm|aterm)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term rxvt
-		;;
-		mlterm)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term kterm
-		;;
-		screen*)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || fix_term screen
-		;;
-		*)
-			( ( infocmp $1 &> /dev/null ) && echo $1 ) || echo "vt100"
-		;;
-	esac
+	if (infocmp $1 &> /dev/null) ; then
+		echo $1
+	else
+		case "$1" in
+			rxvt|xterm?*|kterm)
+				fix_term xterm
+			;;
+			rxvt?*|Eterm|aterm)
+				fix_term rxvt
+			;;
+			mlterm)
+				fix_term kterm
+			;;
+			screen?*)
+				fix_term screen
+			;;
+			*)
+				echo "vt100"
+			;;
+		esac
+	fi
 }
 
 # sorta hacky, but I cannot find a better way to do this :/
