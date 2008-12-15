@@ -73,7 +73,7 @@ function fix_term
 	if (infocmp $1 &> /dev/null) ; then
 		echo $1
 	else
-		case "$1" in
+		case $1 in
 			rxvt|xterm?*|kterm)
 				fix_term xterm
 			;;
