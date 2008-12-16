@@ -182,7 +182,7 @@ bindkey ' ' magic-space
 bindkey -M emacs '\ee' edit-command-line
 
 case $TERM in
-	xterm*)
+	screen|xterm*)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[F' end-of-line
 		bindkey '\eOH' beginning-of-line
@@ -206,13 +206,6 @@ case $TERM in
 	mlterm|kterm)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[F' end-of-line
-		bindkey '\e[1~' beginning-of-line
-		bindkey '\e[4~' end-of-line
-		bindkey '\e[1;5C' emacs-forward-word
-		bindkey '\e[1;5D' emacs-backward-word
-		bindkey '\e[3~' delete-char
-	;;
-	screen*)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
 		bindkey '\e[1;5C' emacs-forward-word
