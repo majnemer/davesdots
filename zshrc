@@ -215,6 +215,8 @@ case $TERM in
 	screen*)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
+		bindkey '\eOc' emacs-forward-word
+		bindkey '\eOd' emacs-backward-word
 		bindkey '\e[1;5C' emacs-forward-word
 		bindkey '\e[1;5D' emacs-backward-word
 		bindkey '\e[3~' delete-char
