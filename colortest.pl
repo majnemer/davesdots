@@ -27,7 +27,8 @@ print "*    available combination\n";
 print "*\n";
 print "**************************\n";
 
-if( $ARGV[0] eq "-w" || $ARGV[1] eq "-w" || $ARGV[2] eq "-w" ) {
+my @arr;
+if( grep {$_ eq '-w'} @ARGV ) {
     push(@arr, [(  "[38;5;16m 16:  00/00/00",     "[38;5;17m 17:  00/00/5f",     "[38;5;18m 18:  00/00/87",     "[38;5;19m 19:  00/00/af",     "[38;5;20m 20:  00/00/d7",     "[38;5;21m 21:  00/00/ff" )] );
     push(@arr, [(  "[38;5;22m 22:  00/5f/00",     "[38;5;23m 23:  00/5f/5f",     "[38;5;24m 24:  00/5f/87",     "[38;5;25m 25:  00/5f/af",     "[38;5;26m 26:  00/5f/d7",     "[38;5;27m 27:  00/5f/ff" )] );
     push(@arr, [(  "[38;5;28m 28:  00/87/00",     "[38;5;29m 29:  00/87/5f",     "[38;5;30m 30:  00/87/87",     "[38;5;31m 31:  00/87/af",     "[38;5;32m 32:  00/87/d7",     "[38;5;33m 33:  00/87/ff" )] );
@@ -69,45 +70,44 @@ if( $ARGV[0] eq "-w" || $ARGV[1] eq "-w" || $ARGV[2] eq "-w" ) {
     push(@arr, [(  "[38;5;244m 244: 80/80/80",    "[38;5;245m 245: 8a/8a/8a",    "[38;5;246m 246: 94/94/94",    "[38;5;247m 247: 9e/9e/9e",    "[38;5;248m 248: a8/a8/a8",    "[38;5;249m 249: b2/b2/b2")] );
     push(@arr, [(  "[38;5;250m 250: bc/bc/bc",    "[38;5;251m 251: c6/c6/c6",    "[38;5;252m 252: d0/d0/d0",    "[38;5;253m 253: da/da/da",    "[38;5;254m 254: e4/e4/e4",    "[38;5;255m 255: ee/ee/ee")] );
 
-    if( $ARGV[0] eq "-s" || $ARGV[1] eq "-s" || $ARGV[2] eq "-s" ){
-        $padding = "    ";
-    }
+    my $padding = '';
+    $padding = '    ' if grep {$_ eq '-r'} @ARGV;
 
     # display in reverse order
-    if( $ARGV[0] eq "-r" || $ARGV[1] eq "-r" || $ARGV[2] eq "-r" ){
-        for( $dimone = 0; $dimone < scalar @arr; $dimone++ ) {
+    if( grep {$_ eq '-r'} @ARGV ) {
+        for( my $dimone = 0; $dimone < scalar @arr; $dimone++ ) {
 
-            $seed = ($dimone % 6) * -1;
-            for( $dimtwo = 0; $dimtwo < 6; $dimtwo++ ) {
+            my $seed = ($dimone % 6) * -1;
+            for( my $dimtwo = 0; $dimtwo < 6; $dimtwo++ ) {
 
-                $movone = $seed;
-                $movtwo = $seed * -1;
+                my $movone = $seed;
+                my $movtwo = $seed * -1;
 
                 print $arr[$dimone][$dimtwo] . $padding;
 
-                $seed = $seed+1;
+                $seed++;
             }
 
             print "\n";
         }
     }
     else {
-        for( $dimone = 0; $dimone < scalar @arr; $dimone++ ) {
+        for( my $dimone = 0; $dimone < scalar @arr; $dimone++ ) {
 
-            $seed = ($dimone % 6) * -1;
-            for( $dimtwo = 0; $dimtwo < 6; $dimtwo++ ) {
+            my $seed = ($dimone % 6) * -1;
+            for( my $dimtwo = 0; $dimtwo < 6; $dimtwo++ ) {
 
-                $movone = $seed;
-                $movtwo = $seed * -1;
+                my $movone = $seed;
+                my $movtwo = $seed * -1;
 
-                $newone = $dimone+$movone;
-                $newtwo = $dimtwo+$movtwo;
+                my $newone = $dimone+$movone;
+                my $newtwo = $dimtwo+$movtwo;
 
                 if( $newone < scalar @arr ){
                     print $arr[$newone][$newtwo] . $padding;
                 }
 
-                $seed = $seed+1;
+                $seed++;
             }
 
             print "\n";
@@ -361,5 +361,5 @@ else {
     print "\n";
     print "\n";
 }
-print "[0m";
+print "[0m"; # reset the colors to the default
 exit;
