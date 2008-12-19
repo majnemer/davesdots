@@ -17,7 +17,7 @@ my $home = bsd_glob('~', GLOB_TILDE);
 
 if(grep /^(?:-h|--help|-\?)$/, @ARGV) {
 	print <<EOH;
-install.pl: installs symbollic links from dotfile repo into your home directory
+install.pl: installs symbolic links from dotfile repo into your home directory
 
 Options:
   -f          force an overwrite existing files
@@ -33,7 +33,7 @@ my $force = 0;
 $force = 1 if grep /^(?:-f|--force)$/, @ARGV;
 
 unless(eval {symlink('', ''); 1;}) {
-	die "Your symbollic links are not very link-like.\n";
+	die "Your symbolic links are not very link-like.\n";
 }
 
 my %links = (
@@ -58,7 +58,7 @@ my %links = (
 
 for my $file (keys %links) {
 	my($path) = $links{$file} =~ m{^ (.+/)? [^/]+ $}x;
-	mkpath($path) if $path;
+	mkpath("$home/$path") if $path;
 
 	my $src  = "$scriptdir/$file";
 	my $dest = "$home/$links{$file}";
