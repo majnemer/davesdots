@@ -94,3 +94,6 @@ Rxvt*termName: rxvt
 
 /* Aterm */
 Aterm*termName: aterm
+
+/* pterm */
+pterm.TerminalType: putty-256color

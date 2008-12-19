@@ -74,7 +74,7 @@ function fix_term
 		echo $1
 	else
 		case $1 in
-			rxvt|xterm?*|kterm)
+			rxvt|xterm?*|kterm|putty)
 				fix_term xterm
 			;;
 			rxvt?*|Eterm|aterm)
@@ -85,6 +85,9 @@ function fix_term
 			;;
 			screen?*)
 				fix_term screen
+			;;
+			putty?*)
+				fix_term putty
 			;;
 			*)
 				echo "vt100"
@@ -182,7 +185,7 @@ bindkey ' ' magic-space
 bindkey -M emacs '\ee' edit-command-line
 
 case $TERM in
-	screen|xterm*)
+	screen|xterm*|putty)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[F' end-of-line
 		bindkey '\eOH' beginning-of-line
@@ -314,7 +317,7 @@ function title
 			shift
 			print -nR $'\e_screen \005 | '$*$'\e'"\\"
 		;;
-		xterm*|rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm)
+		xterm*|rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
 			# Use this one instead for everybody else:
 			shift
 			print -nR $'\e]0;'$@$'\a'
