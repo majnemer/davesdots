@@ -54,6 +54,8 @@ my %links = (
 
 	xmobarrc    => '.xmobarrc',
 	'xmonad.hs' => '.xmonad/xmonad.hs',
+
+	'gitconfig' => '.gitconfig',
 );
 
 for my $file (keys %links) {
