@@ -19,7 +19,7 @@ for my $num (16 .. 231) {
 
 # Gray scale
 for my $num (232 .. 255) {
-	my $hex    = sprintf '%02x', 0x08 + 0x0a * ($num - $GRAY_BASE);
+	my $hex    = sprintf '%02x', 0x08 + 0x0a * ($num - 232);
 	push @arr, join '/', ($hex) x 3;
 }
 
@@ -27,8 +27,8 @@ print "This is your standard text color.\n";
 my $width = 6;
 for my $num (0 .. $#arr) {
 	print  '[38;5;', $num, 'm';
-	printf '%02x: ', $num;
-	print  "$arr[$num] [0m ";
+	printf '%03d: ', $num;
+	print  "$arr[$num] [0m";
 	print "\n" if ($num + 1) % $width == 0;
 }
 print "\n";
