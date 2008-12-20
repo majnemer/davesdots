@@ -1,0 +1,34 @@
+#!/bin/sh
+
+if [[ `uname -s` = 'Darwin' ]] ; then
+	/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
+	exit
+fi
+
+KDE_LOCK='kdesktop_lock || krunner_lock --forcelock || /usr/libexec/kde4/krunner_lock --forcelock || /usr/lib/kde4/libexec/krunner_lock --forcelock'
+GNOME_LOCK='gnome-screensaver-command --lock'
+XSCREEN_LOCK='xscreensaver-command -lock || xlock'
+
+if ( ps -e | grep gdm >/dev/null 2>/dev/null ) ; then
+	# looks like Gnome. They probably want gnome-screensaver.
+	# start gnome-screensaver to ensure it's running
+	gnome-screensaver >/dev/null 2>/dev/null
+	eval $GNOME_LOCK 2>/dev/null && exit
+elif ( ps -e | grep kdm >/dev/null 2>/dev/null ) ; then
+	# looks like some version of KDE. They probably want kde's screensaver.
+	eval $KDE_LOCK 2>/dev/null && exit
+elif ( ps -e | grep xdm >/dev/null 2>/dev/null ) ; then
+	xscreensaver & >/dev/null 2>/dev/null
+	eval $XSCREEN_LOCK 2>/dev/null && exit
+fi
+
+echo Could not decide what desktop manager you are using.
+echo Trying fallback locking.
+eval $KDE_LOCK 2>/dev/null && exit
+gnome-screensaver >/dev/null 2>/dev/null
+eval $GNOME_LOCK 2>/dev/null
+xscreensaver & >/dev/null 2>/dev/null
+eval $XSCREEN_LOCK 2>/dev/null && exit
+
+echo Could not lock your screen.
+exit 1
