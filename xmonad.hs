@@ -5,7 +5,14 @@ import XMonad.Layout.Grid
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run
+
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+
+import XMonad.Prompt
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Ssh
+
 import System.IO
 
 myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
@@ -31,4 +38,8 @@ main = do
 					ppOutput = hPutStrLn xmproc,
 					ppTitle = xmobarColor "green" ""
 					}
-		}
+		} `additionalKeys`
+			[
+				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top }),
+				((mod1Mask, xK_s), sshPrompt defaultXPConfig { position = Top })
+			]
