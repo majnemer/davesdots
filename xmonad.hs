@@ -40,6 +40,5 @@ main = do
 					}
 		} `additionalKeys`
 			[
-				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top }),
-				((mod1Mask, xK_s), sshPrompt defaultXPConfig { position = Top })
+				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top })
 			]
