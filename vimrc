@@ -44,9 +44,6 @@ set visualbell             " Turn visual bell on
 set t_vb=                  " Make the visual bell emit nothing
 set showcmd                " Show the current command
 
-if has('autocmd')
-   autocmd GuiEnter * set t_vb=  " Disable the visual bell in gvim
-endif
 " ---- Filetypes ----
 if has('syntax')
    syntax on
@@ -158,17 +155,6 @@ endif
 if has('mouse')
    " Dont copy the listchars when copying
    set mouse=nvi
-endif
-
-" Get rid of the annoying UI
-if has("gui")
-   set guioptions-=t       " Disable menu tear-offs
-   set guioptions-=T       " Disable the toolbar
-   set guioptions-=m       " Disable the menu
-   set guioptions-=R       " Disable the (right) scrollbar
-   set guioptions-=r       " Disable the (right) scrollbar
-   set guioptions-=l       " Disable the (left) scrollbar
-   set guioptions-=L       " Disable the (left) scrollbar
 endif
 
 if has('autocmd')
