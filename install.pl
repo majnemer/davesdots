@@ -41,10 +41,12 @@ my %links = (
 	toprc      => '.toprc',
 	lessfilter => '.lessfilter',
 
-	vimrc    => '.vimrc',
 	vim      => '.vim',
-	zshrc    => '.zshrc',
+	vimrc    => '.vimrc',
+	gvimrc   => '.gvimrc',
+
 	zsh      => '.zsh',
+	zshrc    => '.zshrc',
 
 	Xdefaults  => '.Xdefaults',
 	Xresources => '.Xresources',

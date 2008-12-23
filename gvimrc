@@ -1,6 +1,6 @@
 if has('autocmd')
     autocmd GuiEnter * set t_vb=  " Disable the visual bell
-fi
+endif
 
 " Get rid of the annoying UI
 set guioptions-=t       " Disable menu tear-offs
