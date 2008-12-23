@@ -3,8 +3,8 @@
 " Trivial modifications: David Majnemer
 " vim: set ts=3 sw=3 et nowrap:
 
-if has ('multi_byte')         " Make sure we have unicode support
-   scriptencoding utf-8       " This file is in UTF-8
+if has ('multi_byte')      " Make sure we have unicode support
+   scriptencoding utf-8    " This file is in UTF-8
 
    " ---- Terminal Setup ----
    if (&termencoding == "")
@@ -12,7 +12,7 @@ if has ('multi_byte')         " Make sure we have unicode support
          set termencoding=utf-8
       endif
    endif
-   set encoding=utf-8         " Default encoding should always be UTF-8
+   set encoding=utf-8      " Default encoding should always be UTF-8
 endif
 
 " ---- General Setup ----
@@ -50,9 +50,9 @@ if has('syntax')
 endif
 
 if has('osfiletype')
-   filetype on                " Detect filetype by extension
-   filetype indent on         " Enable indents based on extensions
-   filetype plugin on         " Load filetype plugins
+   filetype on             " Detect filetype by extension
+   filetype indent on      " Enable indents based on extensions
+   filetype plugin on      " Load filetype plugins
 endif
 
 " ---- Folding ----
@@ -128,11 +128,11 @@ if has('eval')
    endfun
 
    if has("gui_running")
-      call LoadColorScheme("wombat:desert")                    " Set the colorscheme
+      call LoadColorScheme("wombat:desert")
    elseif &t_Co == 256
-      call LoadColorScheme("wombat:inkpot")                    " Set the colorscheme
+      call LoadColorScheme("wombat:inkpot")
    else
-      call LoadColorScheme("zellner")                          " Set the colorscheme
+      call LoadColorScheme("zellner")
    endif
 endif
 
