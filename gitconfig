@@ -3,6 +3,7 @@
 	ci = commit
 	st = status
 	di = diff --color-words
+	up = pull
 [color]
 	diff = auto
 	status = auto
