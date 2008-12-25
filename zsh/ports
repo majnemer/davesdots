@@ -1,0 +1,23 @@
+if [[ -d /opt/local/man ]] ; then
+	if [[ -z "${MANPATH}" ]] ; then
+		export MANPATH="/opt/local/man":$(manpath)
+	else
+		export MANPATH="/opt/local/man:${MANPATH}"
+	fi
+fi
+
+if [[ -d /opt/local/bin ]] ; then
+	if [[ -z "${PATH}" ]] ; then
+		export PATH="/opt/local/bin"
+	else
+		export PATH="/opt/local/bin:${PATH}"
+	fi
+fi
+
+if [[ -d /opt/local/sbin ]] ; then
+	export PATH="/opt/local/sbin:${PATH}"
+fi
+
+if [[ -d /opt/local/libexec ]] ; then
+	export PATH="/opt/local/libexec:${PATH}"
+fi
