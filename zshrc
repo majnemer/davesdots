@@ -101,7 +101,6 @@ function fix_terminfo_db
 {
 	if [[ `which infocmp` = "$1/bin/infocmp" ]] ; then
 		export TERMINFO="$1/share/terminfo"
-		export TERM=$TERM
 	fi
 }
 
@@ -155,7 +154,7 @@ esac
 
 export TERM=$(fix_term $TERM)
 
-if [[ $TERM == *256* ]] ; then
+if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null)  ; then
 	export SCREEN_COLOR="-256color"
 fi
 
@@ -213,7 +212,7 @@ case $TERM in
 		bindkey '\e[1;5D' emacs-backward-word
 		bindkey '\e[3~' delete-char
 	;;
-	linux)
+	linux|vt100)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
 		bindkey '\e[3~' delete-char
