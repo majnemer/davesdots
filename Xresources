@@ -70,7 +70,7 @@ URxvt*font: xft:Monospace-9
 URxvt*background: black
 URxvt*foreground: #CCCCCC
 
-URxvt*scrollBar: false
+URxvt*termName: rxvt-unicode
 
 URxvt*color0: #2E3436
 URxvt*color1: #CC0000
