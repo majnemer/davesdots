@@ -105,7 +105,7 @@ function fix_terminfo_db
 }
 
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
-export LESS=' -R'
+export LESS='-iR'
 
 ( which less &> /dev/null ) && export PAGER='less'
 
