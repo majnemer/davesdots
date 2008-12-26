@@ -19,9 +19,6 @@ nethack on
 # mess with bold
 attrcolor b ".I"
 
-# get screen to go for 256 colors
-termcapinfo xterm-256color 'Co#256'
-
 # erase background with current bg color
 defbce on
 
