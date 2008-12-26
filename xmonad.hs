@@ -2,6 +2,7 @@ import XMonad
 
 import XMonad.Layout
 import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -33,12 +34,13 @@ main = do
 	xmproc <- spawnPipe "xmobar"
 	xmonad $ defaultConfig {
 		manageHook = manageDocks <+> manageHook defaultConfig,
-		layoutHook = avoidStruts  $  myLayoutHook,
+		layoutHook = avoidStruts  $  smartBorders $ myLayoutHook,
 		logHook    = dynamicLogWithPP $ xmobarPP {
 					ppOutput = hPutStrLn xmproc,
 					ppTitle = xmobarColor "green" ""
 					}
 		} `additionalKeys`
 			[
-				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top })
+				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top }),
+				((mod1Mask, xK_b), sendMessage ToggleStruts)
 			]
