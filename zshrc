@@ -61,11 +61,11 @@ unsetopt HIST_BEEP
 unsetopt EXTENDED_HISTORY
 
 # colors
-if ( which dircolors &> /dev/null ) ; then
-	eval $(dircolors -b $([ -f /etc/DIR_COLORS ] && echo "/etc/DIR_COLORS"))
-elif ( which gdircolors &> /dev/null ) ; then
-	eval $(gdircolors -b $([ -f /etc/DIR_COLORS ] && echo "/etc/DIR_COLORS"))
-fi
+for dircolors in gdircolors dircolors ; do
+	if (which $dircolors &> /dev/null) ; then
+		eval $($dircolors -b $([ -f /etc/DIR_COLORS ] && echo "/etc/DIR_COLORS")) && break
+	fi
+done
 
 # terminal fallback stuff
 function fix_term
@@ -107,9 +107,15 @@ function fix_terminfo_db
 ( which lesspipe &> /dev/null ) && eval $(lesspipe)
 export LESS='-iR'
 
-( which less &> /dev/null ) && export PAGER='less'
+export PAGER
+for PAGER in less more pg ; do
+	(which $PAGER &> /dev/null) && break
+done
 
-( which vim &> /dev/null ) && export EDITOR='vim'
+export EDITOR
+for EDITOR in vim elvis vile nvi vi ; do
+	(which $EDITOR &> /dev/null) && break
+done
 
 # aliases
 alias cd..='cd ..'
@@ -141,11 +147,9 @@ case `uname -s` in
 			alias grep='ggrep -d skip --color=auto'
 		fi
 
-		if (which slocate &> /dev/null) ; then
-			alias locate='slocate'
-		elif (which glocate &> /dev/null) ; then
-			alias locate='glocate'
-		fi
+		for locate in glocate slocate ; do
+			(which $locate &> /dev/null) && alias locate=$locate
+		done
 
 		fix_terminfo_db "/opt/csw"
 	;;
@@ -154,7 +158,7 @@ esac
 
 export TERM=$(fix_term $TERM)
 
-if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null)  ; then
+if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null) ; then
 	export SCREEN_COLOR="-256color"
 fi
 

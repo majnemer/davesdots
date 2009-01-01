@@ -1,5 +1,3 @@
 for wrap in cle rlfe rlwrap ; do
-	if (which $wrap &> /dev/null) ; then
-		alias ocaml="$wrap ocaml"
-	fi
+	(which $wrap &> /dev/null) && alias ocaml="$wrap ocaml"
 done
