@@ -1,0 +1,52 @@
+# terminal fallback stuff
+function fix_term ()
+{
+	if (infocmp $1 &> /dev/null) ; then
+		echo $1
+	else
+		case $1 in
+			rxvt|xterm?*|kterm|putty)
+				fix_term xterm
+			;;
+			*rxvt?*|Eterm|aterm)
+				fix_term rxvt
+			;;
+			mlterm)
+				fix_term kterm
+			;;
+			screen?*)
+				fix_term screen
+			;;
+			putty?*)
+				fix_term putty
+			;;
+			*)
+				echo "vt100"
+			;;
+		esac
+	fi
+}
+
+# sorta hacky, but I cannot find a better way to do this :/
+function fix_terminfo_db ()
+{
+	if [[ `type -p infocmp` = "$1/bin/infocmp" ]] ; then
+		export TERMINFO="$1/share/terminfo"
+	fi
+}
+# terminal surgery
+case `uname -s` in
+	Interix)
+		fix_terminfo_db "/usr/local"
+	;;
+	SunOS)
+		fix_terminfo_db "/opt/csw"
+	;;
+esac
+
+export TERM=$(fix_term $TERM)
+
+if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null) ; then
+	export SCREEN_COLOR="-256color"
+fi
+

@@ -1,0 +1,22 @@
+if [[ -d /usr/local/git/man ]] ; then
+	if [[ -z "${MANPATH}" ]] ; then
+		MANPATH="/usr/local/git/man":$(manpath)
+	else
+		MANPATH="/usr/local/git/man:${MANPATH}"
+	fi
+	export MANPATH
+fi
+
+if [[ -d /usr/local/git/bin ]] ; then
+	if [[ -z "${PATH}" ]] ; then
+		PATH="/usr/local/git/bin"
+	else
+		PATH="/usr/local/git/bin:${PATH}"
+	fi
+fi
+
+if [[ -d /usr/local/git/libexec/git-core ]] ; then
+	PATH="/usr/local/git/libexec/git-core:${PATH}"
+fi
+
+export PATH

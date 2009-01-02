@@ -1,0 +1,55 @@
+# colors
+for dircolors in gdircolors dircolors ; do
+	if (type -p $dircolors &> /dev/null) ; then
+		[ -f /etc/DIR_COLORS ] && eval $($dircolors -b /etc/DIR_COLORS) && break
+		[ -f "${HOME}/.dir_colors" ] && eval $($dircolors -b "${HOME}/.dir_colors") && break
+		eval $($dircolors -b) && break
+	fi
+done
+
+# gimmie an editor, make it a nice vi clone
+for EDITOR in vim elvis vile nvi vi ; do
+	(type -p $EDITOR &> /dev/null) && break
+done
+export EDITOR
+
+# aliases
+alias cd..='cd ..'
+
+# handles per OS aliases, fixes a few terms
+case `uname -s` in
+	Linux|CYGWIN*)
+		alias ls="ls -h --color=auto"
+		alias grep='grep -d skip --color=auto'
+	;;
+	FreeBSD|Darwin|DragonFly)
+		export LSCOLORS=ExGxFxDxCxDxDxHbaDacec
+		alias ls="ls -Gh"
+		alias grep='grep -d skip --color=auto'
+	;;
+	Interix)
+		alias ls="ls --color"
+	;;
+	SunOS)
+		if (type -p gls &> /dev/null) ; then
+			alias ls="gls -h --color=auto"
+		else
+			alias ls="ls -h"
+		fi
+
+		if (type -p ggrep &> /dev/null) ; then
+			alias grep='ggrep -d skip --color=auto'
+		fi
+
+		for locate in glocate slocate ; do
+			(type -p $locate &> /dev/null) && alias locate=$locate
+		done
+	;;
+esac
+
+alias df='df -h'
+alias du='du -h'
+
+alias ping='ping -c4'
+
+(type -p time &> /dev/null) && alias time='command time'

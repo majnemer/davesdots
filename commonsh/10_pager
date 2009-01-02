@@ -1,0 +1,17 @@
+for PAGER in less more pg ; do
+	(type -p $PAGER &> /dev/null) && break
+done
+export PAGER
+
+# if we are in less, we can set some options and use lesspipe
+if [[ $PAGER = "less" ]] ; then
+	# lesspipe can go by either lesspipe or lesspipe.sh
+	for lesspipe in lesspipe lesspipe.sh ; do
+		if (type -p $lesspipe &> /dev/null) ; then
+			eval $(SHELL=/bin/sh $lesspipe) && break
+		fi
+	done
+
+	# let less be case insensitive
+	export LESS='-iR'
+fi

@@ -1,0 +1,3 @@
+for wrap in rlwrap rlfe cle ; do
+	(type -p $wrap &> /dev/null) && alias ocaml="$wrap ocaml" && break
+done

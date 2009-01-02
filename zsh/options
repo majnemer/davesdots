@@ -1,0 +1,44 @@
+# only alphanumeric chars for moving around
+WORDCHARS=''
+
+# disable core dumps
+limit coredumpsize 0
+
+# clear on exit
+trap clear 0
+
+# shell options
+setopt AUTO_CD             # directoy command does cd
+setopt CORRECT             # correct spelling of commands
+setopt AUTO_PUSHD          # cd uses directory stack
+setopt CHASE_DOTS          # resolve .. in cd
+setopt CHASE_LINKS         # resolve symbolic links in cd
+setopt CDABLE_VARS         # cd var works if $var is a directory
+setopt PUSHD_SILENT        # make pushd quiet
+setopt ALWAYS_TO_END       # goto end of word on completion
+setopt EXTENDED_GLOB       # use zsh globbing extensions
+setopt SH_WORD_SPLIT       # split non-array variables
+setopt BASH_AUTO_LIST      # list completions on second tab
+setopt LIST_ROWS_FIRST     # list completions across
+setopt COMPLETE_IN_WORD    # completion works inside words
+setopt MAGIC_EQUAL_SUBST   # special expansion after all =
+
+unsetopt BEEP              # stop beeping!
+unsetopt LIST_BEEP         # seriously, stop beeping!
+
+unsetopt NO_MATCH          # dont error on no glob matches
+
+# history
+export HISTSIZE=1000
+export SAVEHIST=1000
+export HISTFILE="${HOME}/.zsh/.history"
+
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+
+unsetopt HIST_BEEP
+unsetopt EXTENDED_HISTORY
+

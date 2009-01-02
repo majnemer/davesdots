@@ -1,0 +1,3 @@
+for file in /etc/bash_completion /opt/local/etc/bash_completion ; do
+	[ -f ${file} ] && source $file && break
+done

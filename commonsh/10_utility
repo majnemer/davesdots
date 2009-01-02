@@ -1,0 +1,74 @@
+# utility.sh
+# Miscellaneous Utility Functions
+
+function unkey-host ()
+{
+   [ ${#} -ne 1 ] && return 1
+   sed -i -e "/$1/d" $HOME/.ssh/known_hosts
+}
+
+function mkcd ()
+{
+   if [[ -d "$1" ]] ; then
+      cd "$1"
+      return
+   fi
+
+   mkdir -p "$1" && cd "$1"
+}
+
+function extract ()
+{
+   if [[ ! -f "$1" ]] ; then
+      echo "The file ("$1") does not exist!"
+      return
+   fi
+
+   local filename
+
+   filename=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+
+   case "$filename" in
+      *.tar)
+         tar xf "${1}"
+      ;;
+      *.tar.gz|*.tgz|*.tar.z)
+         tar zxf "${1}"
+      ;;
+      *.tar.bz2|*.tbz2)
+         tar jxf "${1}"
+      ;;
+      *.zip|*.jar)
+         unzip -qo "${1}"
+      ;;
+      *.gz|*.z)
+         gzip -dc "${1}" > $(basename "${1%.*}")
+      ;;
+      *.bz2)
+         bzip2 -dc "${1}" > $(basename "${1%.*}")
+      ;;
+      *.rar)
+         unrar x -idq "${1}"
+      ;;
+      *.lha|*.lzh)
+         lha xqf "${1}"
+      ;;
+      *.a|*.deb)
+         ar x "${1}"
+      ;;
+      *.tar.lzma)
+         lzma -dc "${1}" | tar xf
+      ;;
+      *.lzma)
+         lzma -dc "${1}" > $(basename "${1%.*}")
+      ;;
+      *)
+         echo "Unable to extract '"$1"'"
+         return 1
+      ;;
+   esac
+
+   return $?
+}
+
+# vim: set ft=sh ts=3 sw=3 et:
