@@ -45,6 +45,8 @@ my %links = (
 	vimrc    => '.vimrc',
 	gvimrc   => '.gvimrc',
 
+	inputrc  => '.inputrc',
+
 	zsh      => '.zsh',
 	zshrc    => '.zshrc',
 
