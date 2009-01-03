@@ -14,7 +14,7 @@ if [[ -d "/opt/intel/Compiler" ]] ; then
 			;;
 		esac
 	fi
-else
+elif [[ -d "/opt/intel/cc" ]] || [[ -d "/opt/intel/cce" ]] ; then
 	iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
 	if [[ -r $iccvars_path ]] ; then
 		source $iccvars_path
