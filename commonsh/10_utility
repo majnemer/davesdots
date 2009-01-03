@@ -1,15 +1,16 @@
+#! /bin/sh
 # utility.sh
 # Miscellaneous Utility Functions
 
-function unkey-host ()
+unkey_host ()
 {
    [ ${#} -ne 1 ] && return 1
    sed -i -e "/$1/d" $HOME/.ssh/known_hosts
 }
 
-function mkcd ()
+mkcd ()
 {
-   if [[ -d "$1" ]] ; then
+   if [ -d "$1" ] ; then
       cd "$1"
       return
    fi
@@ -17,16 +18,14 @@ function mkcd ()
    mkdir -p "$1" && cd "$1"
 }
 
-function extract ()
+extract ()
 {
-   if [[ ! -f "$1" ]] ; then
+   if [ ! -f "$1" ] ; then
       echo "The file ("$1") does not exist!"
       return
    fi
 
-   local filename
-
-   filename=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+   filename=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 
    case "$filename" in
       *.tar)
@@ -42,10 +41,10 @@ function extract ()
          unzip -qo "${1}"
       ;;
       *.gz|*.z)
-         gzip -dc "${1}" > $(basename "${1%.*}")
+         gzip -dc "${1}" > `basename "${1%.*}"`
       ;;
       *.bz2)
-         bzip2 -dc "${1}" > $(basename "${1%.*}")
+         bzip2 -dc "${1}" > `basename "${1%.*}"`
       ;;
       *.rar)
          unrar x -idq "${1}"
@@ -60,7 +59,7 @@ function extract ()
          lzma -dc "${1}" | tar xf
       ;;
       *.lzma)
-         lzma -dc "${1}" > $(basename "${1%.*}")
+         lzma -dc "${1}" > `basename "${1%.*}"`
       ;;
       *)
          echo "Unable to extract '"$1"'"

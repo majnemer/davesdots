@@ -1,7 +1,9 @@
+#! /bin/sh
+
 # terminal fallback stuff
-function fix_term ()
+fix_term ()
 {
-	if (infocmp $1 &> /dev/null) ; then
+	if (infocmp $1 > /dev/null 2>&1) ; then
 		echo $1
 	else
 		case $1 in
@@ -28,12 +30,14 @@ function fix_term ()
 }
 
 # sorta hacky, but I cannot find a better way to do this :/
-function fix_terminfo_db ()
+fix_terminfo_db ()
 {
-	if [[ `type -p infocmp` = "$1/bin/infocmp" ]] ; then
-		export TERMINFO="$1/share/terminfo"
+	if [ `command -v infocmp` = "$1/bin/infocmp" ] ; then
+		TERMINFO="$1/share/terminfo"
+		export TERMINFO
 	fi
 }
+
 # terminal surgery
 case `uname -s` in
 	Interix)
@@ -42,11 +46,19 @@ case `uname -s` in
 	SunOS)
 		fix_terminfo_db "/opt/csw"
 	;;
+	Darwin)
+		fix_terminfo_db "/opt/local"
+	;;
 esac
 
-export TERM=$(fix_term $TERM)
+TERM=`fix_term $TERM`
+export TERM
 
-if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null) ; then
-	export SCREEN_COLOR="-256color"
-fi
-
+case $TERM in
+	*256*)
+		if (infocmp screen-256color-bce > /dev/null 2>&1) ; then
+			SCREEN_COLOR="-256color"
+			export SCREEN_COLOR
+		fi
+	;;
+esac

@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 # Decode file for less
 case `echo "$1" | tr '[:upper:]' '[:lower:]'` in
 	# we don't handle archives, we let the big guy do it
