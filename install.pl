@@ -47,6 +47,10 @@ my %links = (
 
 	inputrc  => '.inputrc',
 
+	bash          => '.bash',
+	bashrc        => '.bashrc',
+	bash_profile  => '.bash_profile',
+
 	zsh      => '.zsh',
 	zshrc    => '.zshrc',
 
