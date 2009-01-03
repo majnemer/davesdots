@@ -13,5 +13,5 @@ if [[ $PAGER = "less" ]] ; then
 	done
 
 	# let less be case insensitive
-	export LESS='-iR'
+	export LESS='-i -R -M'
 fi
