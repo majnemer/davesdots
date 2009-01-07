@@ -1,8 +1,7 @@
 import XMonad
 
-import XMonad.Layout
 import XMonad.Layout.Grid
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders(smartBorders)
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -11,10 +10,9 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 
 import XMonad.Prompt
-import XMonad.Prompt.Shell
-import XMonad.Prompt.Ssh
+import XMonad.Prompt.Shell(shellPrompt)
 
-import System.IO
+import System.IO(hPutStrLn)
 
 myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
 	where
@@ -30,6 +28,8 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
 		-- Percent of screen to increment by when resizing panes
 		delta   = 3/100
 
+myModMask = mod1Mask
+
 main = do
 	xmproc <- spawnPipe "xmobar"
 	xmonad $ defaultConfig {
@@ -38,9 +38,10 @@ main = do
 		logHook    = dynamicLogWithPP $ xmobarPP {
 					ppOutput = hPutStrLn xmproc,
 					ppTitle = xmobarColor "green" ""
-					}
-		} `additionalKeys`
+					},
+		modMask    = myModMask
+		}	`additionalKeys`
 			[
-				((mod1Mask, xK_o), shellPrompt defaultXPConfig { position = Top }),
-				((mod1Mask, xK_b), sendMessage ToggleStruts)
+				((myModMask, xK_o), shellPrompt defaultXPConfig { position = Top }),
+				((myModMask, xK_b), sendMessage ToggleStruts)
 			]
