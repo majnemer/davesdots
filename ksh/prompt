@@ -1,9 +1,12 @@
-if [ $USER = root ] ; then
+if [ ! $USER ] ; then
+	USER=$LOGNAME
+fi
+
+if [ $USER ] && [ $USER = root ] ; then
 	BASE="#"
 else
 	BASE="$"
 fi
-
 
 PS1=$'\E[01;32m'"${USER} "$'\E[01;34m''$PWD'" ${BASE} "$'\E[0m'
 export PS1
