@@ -142,6 +142,11 @@ $if mode=emacs
 		"\e[H": beginning-of-line
 		"\e[U": end-of-line
 	$endif
+	$if term=sun
+		"\e[214z": beginning-of-line
+		"\e[220z": end-of-line
+		"^?":      delete-char
+	$endif
 	$if term=cygwin
 		"\e[1~": beginning-of-line
 		"\e[4~": end-of-line

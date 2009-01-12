@@ -264,8 +264,11 @@ inoremap # X<BS>#
 map <C-h> <BS>
 map! <C-h> <BS>
 if (&term =~ "interix")
+   map  <C-?> <DEL>
+   map! <C-?> <DEL>
    map [H <Home>
    map [U <End>
+elseif (&term =~ "^sun")
    map  <C-?> <DEL>
    map! <C-?> <DEL>
 elseif (&term !~ "cons")
