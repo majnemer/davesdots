@@ -4,19 +4,19 @@ if [ -d "/opt/intel/Compiler" ] ; then
 	if [ -r $iccvars_path ] ; then
 		case `uname -m` in
 			x86_64)
-				source $iccvars_path intel64
+				. $iccvars_path intel64
 			;;
 			i*86)
-				source $iccvars_path ia32
+				. $iccvars_path ia32
 			;;
 			ia64)
-				source $iccvars_path ia64
+				. $iccvars_path ia64
 			;;
 		esac
 	fi
 elif [ -d "/opt/intel/cc" ] || [ -d "/opt/intel/cce" ] ; then
 	iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
 	if [ -r $iccvars_path ] ; then
-		source $iccvars_path
+		. $iccvars_path
 	fi
 fi
