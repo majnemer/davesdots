@@ -1,4 +1,4 @@
-if [ ! $USER ] ; then
+if [ -z "${USER}" ] ; then
 	USER=$LOGNAME
 fi
 
