@@ -1,0 +1,11 @@
+if [ -d "${HOME}/.commonsh" ] ; then
+    for file in "${HOME}"/.commonsh/* ; do
+        . $file
+    done
+fi
+
+if [ -d "${HOME}/.sh" ] ; then
+    for file in "${HOME}"/.sh/* ; do
+        . $file
+    done
+fi
