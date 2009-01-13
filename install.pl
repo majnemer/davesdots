@@ -60,6 +60,9 @@ my %links = (
 	kshrc    => '.kshrc',
 	mkshrc   => '.mkshrc',
 
+	sh      => '.sh',
+	shinit  => '.shinit',
+
 	Xdefaults  => '.Xdefaults',
 	Xresources => '.Xresources',
 
