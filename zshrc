@@ -8,7 +8,7 @@ autoload -U compinit; compinit -d "${HOME}/.zsh/.zcompdump"
 autoload -U age
 autoload -U zmv
 
-if [[ ${ZSH_VERSION//.} -gt 420 ]] ; then
+if [ ${ZSH_VERSION//.} -gt 420 ] ; then
 	autoload -U url-quote-magic
 	zle -N self-insert url-quote-magic
 fi
@@ -22,11 +22,11 @@ export LOGCHECK=30
 export WATCHFMT=$'\e[01;36m'" -- %n@%m has %(a.Logged In.Logged out) --"$'\e[00;00m'
 
 # directory hashes
-if [[ -d "${HOME}/sandbox" ]] ; then
+if [ -d "${HOME}/sandbox" ] ; then
 	hash -d sandbox="${HOME}/sandbox"
 fi
 
-if [[ -d "${HOME}/work" ]] ; then
+if [ -d "${HOME}/work" ] ; then
 	hash -d work="${HOME}/work"
 
 	for dir in "${HOME}"/work/*(N-/) ; do
@@ -35,15 +35,15 @@ if [[ -d "${HOME}/work" ]] ; then
 fi
 
 # common shell utils
-if [[ -d "${HOME}/.commonsh" ]] ; then
+if [ -d "${HOME}/.commonsh" ] ; then
 	for file in "${HOME}"/.commonsh/*(N.x:t) ; do
-		source "${HOME}/.commonsh/${file}"
+		. "${HOME}/.commonsh/${file}"
 	done
 fi
 
 # extras
-if [[ -d "${HOME}/.zsh" ]] ; then
+if [ -d "${HOME}/.zsh" ] ; then
 	for file in "${HOME}"/.zsh/*(N.x:t) ; do
-		source "${HOME}/.zsh/${file}"
+		. "${HOME}/.zsh/${file}"
 	done
 fi

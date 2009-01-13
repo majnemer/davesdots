@@ -1,25 +1,27 @@
-if [[ -d /opt/local/man ]] ; then
-	if [[ -z "${MANPATH}" ]] ; then
-		MANPATH="/opt/local/man":$(manpath)
+#! /bin/sh
+
+if [ -d /opt/local/man ] ; then
+	if [ -z "${MANPATH}" ] ; then
+		MANPATH="/opt/local/man":`manpath`
 	else
 		MANPATH="/opt/local/man:${MANPATH}"
 	fi
 	export MANPATH
 fi
 
-if [[ -d /opt/local/bin ]] ; then
-	if [[ -z "${PATH}" ]] ; then
+if [ -d /opt/local/bin ] ; then
+	if [ -z "${PATH}" ] ; then
 		PATH="/opt/local/bin"
 	else
 		PATH="/opt/local/bin:${PATH}"
 	fi
 fi
 
-if [[ -d /opt/local/sbin ]] ; then
+if [ -d /opt/local/sbin ] ; then
 	PATH="/opt/local/sbin:${PATH}"
 fi
 
-if [[ -d /opt/local/libexec ]] ; then
+if [ -d /opt/local/libexec ] ; then
 	PATH="/opt/local/libexec:${PATH}"
 fi
 

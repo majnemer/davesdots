@@ -39,6 +39,7 @@ unless(eval {symlink('', ''); 1;}) {
 my %links = (
 	screenrc   => '.screenrc',
 	toprc      => '.toprc',
+	dir_colors => '.dir_colors',
 	lessfilter => '.lessfilter',
 
 	vim      => '.vim',
@@ -55,6 +56,13 @@ my %links = (
 
 	zsh      => '.zsh',
 	zshrc    => '.zshrc',
+
+	ksh      => '.ksh',
+	kshrc    => '.kshrc',
+	mkshrc   => '.mkshrc',
+
+	sh      => '.sh',
+	shinit  => '.shinit',
 
 	Xdefaults  => '.Xdefaults',
 	Xresources => '.Xresources',

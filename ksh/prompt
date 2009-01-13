@@ -1,0 +1,9 @@
+if [ $USER = root ] ; then
+	BASE="#"
+else
+	BASE="$"
+fi
+
+
+PS1=$'\E[01;32m'"${USER} "$'\E[01;34m''$PWD'" ${BASE} "$'\E[0m'
+export PS1

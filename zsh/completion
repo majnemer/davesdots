@@ -44,7 +44,7 @@ case `uname -s` in
 		zstyle ':completion:*:processes-names' command 'ps -e -o args | awk "NR != 1"'
 	;;
 	Darwin)
-		if [[ $(sw_vers -productVersion) > 10.4 ]] ; then
+		if [[ `sw_vers -productVersion` = 10<5->.<-> ]] ; then
 			zstyle ':completion:*:processes-names' command 'ps -e -o command | awk "NR != 1"'
 		else
 			zstyle ':completion:*:processes-names' command 'ps -A -o command | awk "NR != 1"'
@@ -81,7 +81,7 @@ case `uname -s` in
 		zstyle ':completion:*:*:killall:*:processes-names' command "ps -u '${USERNAME}' -s"
 	;;
 	Darwin)
-		if [[ $(sw_vers -productVersion) > 10.4 ]] ; then
+		if [[ `sw_vers -productVersion` = 10<5->.<-> ]] ; then
 			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
 		else
 			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o command"

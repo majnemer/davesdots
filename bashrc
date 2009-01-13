@@ -3,14 +3,14 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-if [[ -d "${HOME}/.commonsh" ]] ; then
+if [ -d "${HOME}/.commonsh" ] ; then
     for file in "${HOME}"/.commonsh/* ; do
-        source $file
+        . $file
     done
 fi
 
-if [[ -d "${HOME}/.bash" ]] ; then
+if [ -d "${HOME}/.bash" ] ; then
     for file in "${HOME}"/.bash/* ; do
-        source $file
+        . $file
     done
 fi

@@ -1,17 +1,22 @@
+#! /bin/sh
 # colors
 for dircolors in gdircolors dircolors ; do
-	if (type -p $dircolors &> /dev/null) ; then
-		[ -f /etc/DIR_COLORS ] && eval $($dircolors -b /etc/DIR_COLORS) && break
-		[ -f "${HOME}/.dir_colors" ] && eval $($dircolors -b "${HOME}/.dir_colors") && break
-		eval $($dircolors -b) && break
+	if (command -v $dircolors > /dev/null 2>&1) ; then
+		[ -f "${HOME}/.dir_colors" ] && eval `$dircolors -b "${HOME}/.dir_colors"` && break
+		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
+		eval `$dircolors -b` && break
 	fi
 done
 
 # gimmie an editor, make it a nice vi clone
 for EDITOR in vim elvis vile nvi vi ; do
-	(type -p $EDITOR &> /dev/null) && break
+	(command -v $EDITOR > /dev/null 2>&1) && break
 done
 export EDITOR
+
+# make the history editor the editor we want
+FCEDIT=$EDITOR
+export $FCEDIT
 
 # aliases
 alias cd..='cd ..'
@@ -23,7 +28,8 @@ case `uname -s` in
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
-		export LSCOLORS=ExGxFxDxCxDxDxHbaDacec
+		LSCOLORS=ExGxFxDxCxDxDxHbaDacec
+		export LSCOLORS
 		alias ls="ls -Gh"
 		alias grep='grep -d skip --color=auto'
 	;;
@@ -31,7 +37,7 @@ case `uname -s` in
 		alias ls="ls --color"
 	;;
 	SunOS)
-		if (type -p gls &> /dev/null) ; then
+		if (command -v gls > /dev/null 2>&1) ; then
 			alias ls="gls -h --color=auto"
 		else
 			# you have a GNU ls, surprise...
@@ -45,7 +51,7 @@ case `uname -s` in
 			esac
 		fi
 
-		if (type -p ggrep &> /dev/null) ; then
+		if (command -v ggrep > /dev/null 2>&1) ; then
 			alias grep='ggrep -d skip --color=auto'
 		else
 			# woah, you have a GNU grep...
@@ -57,7 +63,7 @@ case `uname -s` in
 		fi
 
 		for locate in glocate slocate ; do
-			(type -p $locate &> /dev/null) && alias locate=$locate && break
+			(command -v $locate > /dev/null 2>&1) && alias locate=$locate
 		done
 	;;
 esac
@@ -67,4 +73,4 @@ alias du='du -h'
 
 alias ping='ping -c4'
 
-(type -p time &> /dev/null) && alias time='command time'
+(command -v time > /dev/null 2>&1) && alias time='command time'
