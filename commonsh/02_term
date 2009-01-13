@@ -52,6 +52,14 @@ case `uname -s` in
 esac
 
 TERM=`fix_term $TERM`
+
+# I am sorry to hear that you are running an
+# xterm that has no colors (I am looking at you solaris)
+if [ $TERM = xterm ] && (type -p tput > /dev/null 2>&1) && [ `tput -T xterm colors` = -1 ] ; then
+	# lets see what we can do about your terrible term
+	TERM=`fix_term xterm-color`
+fi
+
 export TERM
 
 case $TERM in
