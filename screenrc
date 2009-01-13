@@ -25,9 +25,6 @@ defbce on
 # turn on utf8
 defutf8 on
 
-# set the term to 256 color, maybe
-term "screen${SCREEN_COLOR}-bce"
-
 # changes from the default binding " to `windowlist -b', so we don't create
 # a new empty window
 bind \" windowlist

@@ -14,6 +14,16 @@ function fix_term ()
 			mlterm)
 				fix_term kterm
 			;;
+			screen-256colors-bce)
+				fix_term screen-256colors
+			;;
+			screen-256colors)
+				if (infocmp xterm-256colors &> /dev/null) ; then
+					fix_term xterm-256colors
+				else
+					fix_term screen
+				fi
+			;;
 			screen?*)
 				fix_term screen
 			;;
@@ -46,7 +56,8 @@ esac
 
 export TERM=$(fix_term $TERM)
 
-if [[ $TERM == *256* ]] && (infocmp screen-256color-bce &> /dev/null) ; then
-	export SCREEN_COLOR="-256color"
+if [[ $TERM == *256* ]] ; then
+	SCREEN_TERM=$(fix_term screen-256color-bce)
+	alias screen="screen -T ${SCREEN_TERM}"
 fi
 
