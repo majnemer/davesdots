@@ -2,8 +2,8 @@
 # colors
 for dircolors in gdircolors dircolors ; do
 	if (command -v $dircolors > /dev/null 2>&1) ; then
-		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
 		[ -f "${HOME}/.dir_colors" ] && eval `$dircolors -b "${HOME}/.dir_colors"` && break
+		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
 		eval `$dircolors -b` && break
 	fi
 done
