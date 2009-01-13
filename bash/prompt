@@ -1,0 +1,16 @@
+function do_prompt ()
+{
+    if [ $? -ne 0 ] ; then
+        local ERROR_PROMPT="\[\033[01;31m\]"
+    fi
+
+    local BASE
+    if [ $UID -ne 0 ] ; then
+        BASE="$"
+    else
+        BASE="#"
+    fi
+    export PS1="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w ${ERROR_PROMPT}${BASE} \[\033[00m\]"
+}
+
+PROMPT_COMMAND=do_prompt
