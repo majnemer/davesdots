@@ -5,12 +5,17 @@ export PAGER
 
 # if we are in less, we can set some options and use lesspipe
 if [ $PAGER = less ] ; then
-	# lesspipe can go by either lesspipe or lesspipe.sh
 	for lesspipe in lesspipe lesspipe.sh ; do
-		if (command -v $lesspipe > /dev/null 2>&1) ; then
-			eval `SHELL=/bin/sh $lesspipe` && break
+		lesspipe_test=`command -v ${lesspipe} 2>/dev/null`
+		if [ -n $lesspipe_test ] ; then
+			LESSOPEN="| ${lesspipe_test} %s" && break
+			export LESSOPEN
 		fi
 	done
+	if [ $lesspipe = lesspipe ] ; then
+		LESSCLOSE="${lesspipe_test} %s %s"
+		export LESSCLOSE
+	fi
 
 	# let less be case insensitive
 	LESS='-R -M'
