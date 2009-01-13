@@ -56,6 +56,10 @@ my %links = (
 	zsh      => '.zsh',
 	zshrc    => '.zshrc',
 
+	ksh      => '.ksh',
+	kshrc    => '.kshrc',
+	mkshrc   => '.mkshrc',
+
 	Xdefaults  => '.Xdefaults',
 	Xresources => '.Xresources',
 

@@ -1,0 +1,4 @@
+set -o emacs
+
+HISTSIZE=1000
+export HISTSIZE
