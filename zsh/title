@@ -3,7 +3,7 @@ precmd()
 {
 	local termtitle
 
-	termtitle=$(print -P "%n@%m")
+	termtitle=`print -P "%n@%m"`
 	title zsh "$termtitle"
 }
 
@@ -16,7 +16,7 @@ preexec()
 
 	# Prepend this string to the title.
 	# termtitle=$(print -P "%(!.-=*[ROOT]*=- | .)%n@%m:")
-	termtitle=$(print -P "%n@%m:")
+	termtitle=`print -P "%n@%m:"`
 
 	case $cmd[1] in
 		fg)

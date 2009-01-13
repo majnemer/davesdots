@@ -18,14 +18,14 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [[ -d "${HOME}/.commonsh" ]] ; then
+if [ -d "${HOME}/.commonsh" ] ; then
     for file in "${HOME}"/.commonsh/* ; do
-        source $file
+        . $file
     done
 fi
 
-if [[ -d "${HOME}/.bash" ]] ; then
+if [ -d "${HOME}/.bash" ] ; then
     for file in "${HOME}"/.bash/* ; do
-        source $file
+        . $file
     done
 fi

@@ -1,7 +1,7 @@
 local iccvars_path;
-if [[ -d "/opt/intel/Compiler" ]] ; then
+if [ -d "/opt/intel/Compiler" ] ; then
 	iccvars_path=$(echo /opt/intel/Compiler/11.*/*/bin/iccvars.sh(On[1]))
-	if [[ -r $iccvars_path ]] ; then
+	if [ -r $iccvars_path ] ; then
 		case `uname -m` in
 			x86_64)
 				source $iccvars_path intel64
@@ -14,9 +14,9 @@ if [[ -d "/opt/intel/Compiler" ]] ; then
 			;;
 		esac
 	fi
-elif [[ -d "/opt/intel/cc" ]] || [[ -d "/opt/intel/cce" ]] ; then
+elif [ -d "/opt/intel/cc" ] || [ -d "/opt/intel/cce" ] ; then
 	iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
-	if [[ -r $iccvars_path ]] ; then
+	if [ -r $iccvars_path ] ; then
 		source $iccvars_path
 	fi
 fi
