@@ -34,15 +34,30 @@ case `uname -s` in
 		if (type -p gls &> /dev/null) ; then
 			alias ls="gls -h --color=auto"
 		else
-			alias ls="ls -h"
+			# you have a GNU ls, surprise...
+			case `ls --version 2>/dev/null | head -1` in
+				*fileutils*|*coreutils*)
+					alias ls="ls -h --color=auto"
+				;;
+				*)
+					alias ls="ls -h"
+				;;
+			esac
 		fi
 
 		if (type -p ggrep &> /dev/null) ; then
 			alias grep='ggrep -d skip --color=auto'
+		else
+			# woah, you have a GNU grep...
+			case `grep --version 2>/dev/null | head -1` in
+				*GNU*)
+					alias grep='grep -d skip --color=auto'
+				;;
+			esac
 		fi
 
 		for locate in glocate slocate ; do
-			(type -p $locate &> /dev/null) && alias locate=$locate
+			(type -p $locate &> /dev/null) && alias locate=$locate && break
 		done
 	;;
 esac
