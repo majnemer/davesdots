@@ -1,0 +1,8 @@
+if [ $USER = root ] ; then
+	BASE="#"
+else
+	BASE="$"
+fi
+
+PS1="${USER} ${BASE} "
+export PS1
