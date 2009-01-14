@@ -61,6 +61,11 @@ case $TERM in
 		bindkey '\e[U' end-of-line
 		bindkey '^?'   delete-char
 	;;
+	sun*)
+		bindkey '\e[214z' beginning-of-line
+		bindkey '\e[220z' end-of-line
+		bindkey '^?'   delete-char
+	;;
 	cygwin*)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line

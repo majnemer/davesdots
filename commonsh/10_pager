@@ -7,7 +7,7 @@ export PAGER
 if [ $PAGER = less ] ; then
 	for lesspipe in lesspipe lesspipe.sh ; do
 		lesspipe_test=`command -v ${lesspipe} 2>/dev/null`
-		if [ -n $lesspipe_test ] ; then
+		if [ -n "${lesspipe_test}" ] ; then
 			LESSOPEN="| ${lesspipe_test} %s" && break
 			export LESSOPEN
 		fi

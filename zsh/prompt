@@ -1,5 +1,5 @@
 # prompt
-if [ -z ${SSH_TTY} ] ; then
+if [ -z "${SSH_TTY}" ] ; then
 	PROMPT=$'%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
 	RPROMPT=$'%1(j.%{\e[00;36m%}[%j].)%{\e[01;33m%}[%t]%{\e[00;00m%}'
 else

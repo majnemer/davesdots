@@ -41,7 +41,7 @@ case `uname -s` in
 			alias ls="gls -h --color=auto"
 		else
 			# you have a GNU ls, surprise...
-			case `ls --version 2>/dev/null | head -1` in
+			case `ls --version 2>/dev/null | head -n 1` in
 				*fileutils*|*coreutils*)
 					alias ls="ls -h --color=auto"
 				;;
@@ -55,7 +55,7 @@ case `uname -s` in
 			alias grep='ggrep -d skip --color=auto'
 		else
 			# woah, you have a GNU grep...
-			case `grep --version 2>/dev/null | head -1` in
+			case `grep --version 2>/dev/null | head -n 1` in
 				*GNU*)
 					alias grep='grep -d skip --color=auto'
 				;;
