@@ -2,7 +2,7 @@ if [ -z "${USER}" ] ; then
 	USER=$LOGNAME
 fi
 
-if [ $USER ] && [ $USER = root ] ; then
+if [ -n "${USER}" ] && [ ${USER} = root ] ; then
 	BASE="#"
 else
 	BASE="$"
