@@ -1,0 +1,11 @@
+#! /bin/sh
+
+if [ -d "${HOME}/.cabal/bin" ] ; then
+	if [ -z "${PATH}" ] ; then
+		PATH="${HOME}/.cabal/bin"
+	else
+		PATH="${HOME}/.cabal/bin:${PATH}"
+	fi
+fi
+
+export PATH
