@@ -3,7 +3,7 @@
 # terminal fallback stuff
 fix_term ()
 {
-	if (infocmp $1 > /dev/null 2>&1) ; then
+	if ( infocmp $1 >/dev/null 2>&1 ) ; then
 		echo $1
 	else
 		case $1 in
@@ -20,7 +20,7 @@ fix_term ()
 				fix_term screen-256colors
 			;;
 			screen-256colors)
-				if (infocmp xterm-256colors &> /dev/null) ; then
+				if ( infocmp xterm-256colors >/dev/null 2>&1 ) ; then
 					fix_term xterm-256colors
 				else
 					fix_term screen
@@ -65,7 +65,7 @@ TERM=`fix_term $TERM`
 
 # I am sorry to hear that you are running an
 # xterm that has no colors (I am looking at you solaris)
-if [ $TERM = xterm ] && (command -v tput > /dev/null 2>&1) && [ `tput -T xterm colors` = -1 ] ; then
+if [ $TERM = xterm ] && ( command -v tput >/dev/null 2>&1 ) && [ `tput -T xterm colors` = -1 ] ; then
 	# lets see what we can do about your terrible term
 	TERM=`fix_term xterm-color`
 fi
@@ -74,7 +74,6 @@ export TERM
 
 case $TERM in
 	*256*)
-		SCREEN_TERM=$(fix_term screen-256color-bce)
-		alias screen="screen -T ${SCREEN_TERM}"
+		alias screen="screen -T `fix_term screen-256color-bce`"
 	;;
 esac

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if [[ `uname -s` = 'Darwin' ]] ; then
+if [ `uname -s` = 'Darwin' ] ; then
 	/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
 	exit
 fi

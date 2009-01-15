@@ -1,5 +1,5 @@
 for PAGER in less more pg ; do
-	(command -v $PAGER > /dev/null 2>&1) && break
+	( command -v $PAGER >/dev/null 2>&1 ) && break
 done
 export PAGER
 
