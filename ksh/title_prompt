@@ -1,0 +1,24 @@
+if [ -z "${USER}" ] ; then
+	USER=$LOGNAME
+fi
+
+if [ -n "${USER}" ] && [ ${USER} = root ] ; then
+	BASE="#"
+else
+	BASE="$"
+fi
+
+case $TERM in
+	xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
+		TITLE=']0;${USER}:${PWD}'
+	;;
+	screen*)
+		TITLE='k\\k${USER}:${PWD}\\'
+	;;
+	*)
+		TITLE=''
+	;;
+esac
+
+PS1=$TITLE$'\E[01;32m'"${USER} "$'\E[01;34m''$PWD'" ${BASE} "$'\E[0m'
+export PS1
