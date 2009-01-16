@@ -42,6 +42,6 @@ main = do
 		modMask    = myModMask
 		}	`additionalKeys`
 			[
-				((myModMask, xK_o), shellPrompt defaultXPConfig { position = Top }),
+				((myModMask, xK_p), shellPrompt defaultXPConfig { position = Top }),
 				((myModMask, xK_b), sendMessage ToggleStruts)
 			]
