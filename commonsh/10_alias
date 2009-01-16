@@ -16,7 +16,7 @@ export EDITOR
 
 # make the history editor the editor we want
 FCEDIT=$EDITOR
-export $FCEDIT
+export FCEDIT
 
 # aliases
 alias cd..='cd ..'
