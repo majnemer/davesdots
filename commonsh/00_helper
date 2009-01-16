@@ -7,8 +7,6 @@ concat_path ()
 		exit
 	fi
 
-	local addition
-
 	addition=$1
 
 	if [ -d "${addition}" ] ; then
@@ -28,8 +26,6 @@ concat_manpath ()
 		echo "Please give me a value to concatinate to the variable!"
 		exit
 	fi
-
-	local addition
 
 	addition=$1
 
