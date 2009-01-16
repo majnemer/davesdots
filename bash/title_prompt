@@ -10,15 +10,21 @@ function do_prompt ()
     else
         BASE="#"
     fi
+
+    local TITLEBAR
     case $TERM in
-        xterm*)
+       xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
             TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+        ;;
+        screen*)
+            TITLEBAR='\[\033k\033\134\033k\u@\h:\w\033\134\]'
         ;;
         *)
             TITLEBAR=''
         ;;
     esac
-    export PS1="${TITLEBAR}\[\033[01;32m\]\u@\h \[\033[01;34m\]\w ${ERROR_PROMPT}${BASE} \[\033[00m\]"
+    PS1="${TITLEBAR}\[\033[01;32m\]\u@\h \[\033[01;34m\]\w ${ERROR_PROMPT}${BASE} \[\033[00m\]"
+    export PS1
 }
 
 PROMPT_COMMAND=do_prompt
