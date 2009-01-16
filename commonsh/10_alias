@@ -28,9 +28,13 @@ case `uname -s` in
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
-		LSCOLORS=ExGxFxDxCxDxDxHbaDacec
-		export LSCOLORS
-		alias ls="ls -Gh"
+		if ( command -v gls >/dev/null 2>&1 ) ; then
+			alias ls="gls -h --color=auto"
+		else
+			LSCOLORS=ExGxFxDxCxDxDxHbaDacec
+			export LSCOLORS
+			alias ls="ls -Gh"
+		fi
 		alias grep='grep -d skip --color=auto'
 	;;
 	Interix)
