@@ -32,16 +32,16 @@ myModMask = mod1Mask
 
 main = do
 	xmproc <- spawnPipe "xmobar"
-	xmonad $ defaultConfig {
-		manageHook = manageDocks <+> manageHook defaultConfig,
-		layoutHook = avoidStruts  $  smartBorders $ myLayoutHook,
-		logHook    = dynamicLogWithPP $ xmobarPP {
-					ppOutput = hPutStrLn xmproc,
-					ppTitle = xmobarColor "green" ""
-					},
-		modMask    = myModMask
-		}	`additionalKeys`
-			[
-				((myModMask, xK_p), shellPrompt defaultXPConfig { position = Top }),
-				((myModMask, xK_b), sendMessage ToggleStruts)
+	xmonad $ defaultConfig
+			{ manageHook = manageDocks <+> manageHook defaultConfig
+			, layoutHook = avoidStruts  $  smartBorders $ myLayoutHook
+			, logHook    = dynamicLogWithPP $ xmobarPP
+				{ ppOutput = hPutStrLn xmproc
+				, ppTitle = xmobarColor "green" ""
+				}
+			, modMask    = myModMask
+			}
+			`additionalKeys`
+			[ ((myModMask, xK_p), shellPrompt defaultXPConfig { position = Top })
+			, ((myModMask, xK_b), sendMessage ToggleStruts)
 			]
