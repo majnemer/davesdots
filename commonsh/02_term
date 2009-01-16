@@ -42,7 +42,7 @@ fix_term ()
 # sorta hacky, but I cannot find a better way to do this :/
 fix_terminfo_db ()
 {
-	if [ `command -v infocmp 2>/dev/null` = "$1/bin/infocmp" ] ; then
+	if [ -d "$1" ] && [ `command -v infocmp 2>/dev/null` = "$1/bin/infocmp" ] ; then
 		TERMINFO="$1/share/terminfo"
 		export TERMINFO
 	fi

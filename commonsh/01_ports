@@ -1,28 +1,7 @@
 #! /bin/sh
 
-if [ -d /opt/local/man ] ; then
-	if [ -z "${MANPATH}" ] ; then
-		MANPATH="/opt/local/man":`manpath`
-	else
-		MANPATH="/opt/local/man:${MANPATH}"
-	fi
-	export MANPATH
-fi
+concat_manpath "/opt/local/man"
+concat_path "/opt/local/bin"
+concat_path "/opt/local/sbin"
+concat_path "/opt/local/libexec"
 
-if [ -d /opt/local/bin ] ; then
-	if [ -z "${PATH}" ] ; then
-		PATH="/opt/local/bin"
-	else
-		PATH="/opt/local/bin:${PATH}"
-	fi
-fi
-
-if [ -d /opt/local/sbin ] ; then
-	PATH="/opt/local/sbin:${PATH}"
-fi
-
-if [ -d /opt/local/libexec ] ; then
-	PATH="/opt/local/libexec:${PATH}"
-fi
-
-export PATH
