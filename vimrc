@@ -42,6 +42,8 @@ set visualbell             " Turn visual bell on
 set t_vb=                  " Make the visual bell emit nothing
 set showcmd                " Show the current command
 
+set diffopt+=iwhite
+
 " ---- Filetypes ----
 if has('syntax')
    syntax on
@@ -129,6 +131,8 @@ if has('eval')
       call LoadColorScheme("wombat:desert")
    elseif &t_Co == 256
       call LoadColorScheme("wombat:inkpot")
+   elseif &t_Co == 88
+      call LoadColorScheme("wombat:zellner")
    else
       call LoadColorScheme("zellner")
    endif
