@@ -56,15 +56,14 @@ function title
 {
 	case $TERM in
 		screen*)
-			# Use these two for GNU Screen:
-			print -nR $'\ek'$1$'\e'"\\"
-			shift
-			print -nR $'\e_screen \005 | '$*$'\e'"\\"
+			# Use this for GNU Screen:
+			print -nR $'\ek'$2$'\e'"\\"
 		;;
 		xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
 			# Use this one instead for everybody else:
 			shift
-			print -nR $'\e]0;'$@$'\a'
+			print -nR $'\e]1;'$@$'\a'
+			print -nR $'\e]2;'$@$'\a'
 		;;
 	esac
 }

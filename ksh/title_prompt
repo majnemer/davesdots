@@ -10,10 +10,10 @@ fi
 
 case $TERM in
 	xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
-		TITLE=']0;${USER}:${PWD}'
+		TITLE=']1;${USER}:${PWD}]2;${USER}:${PWD}'
 	;;
 	screen*)
-		TITLE='k\\k${USER}:${PWD}\\'
+		TITLE='k${USER}:${PWD}\\'
 	;;
 	*)
 		TITLE=''
