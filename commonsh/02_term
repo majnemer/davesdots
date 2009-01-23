@@ -48,32 +48,34 @@ fix_terminfo_db ()
 	fi
 }
 
-# terminal surgery
-case `uname -s` in
-	Interix)
-		fix_terminfo_db "/usr/local"
-	;;
-	SunOS)
-		fix_terminfo_db "/opt/csw"
-	;;
-	Darwin)
-		fix_terminfo_db "/opt/local"
-	;;
-esac
+if ( command -v infocmp >/dev/null 2>&1 ) ; then
+	# terminal surgery
+	case `uname -s` in
+		Interix)
+			fix_terminfo_db "/usr/local"
+		;;
+		SunOS)
+			fix_terminfo_db "/opt/csw"
+		;;
+		Darwin)
+			fix_terminfo_db "/opt/local"
+		;;
+	esac
 
-TERM=`fix_term $TERM`
+	TERM=`fix_term $TERM`
 
-# I am sorry to hear that you are running an
-# xterm that has no colors (I am looking at you solaris)
-if [ $TERM = xterm ] && ( command -v tput >/dev/null 2>&1 ) && [ `tput -T xterm colors` = -1 ] ; then
-	# lets see what we can do about your terrible term
-	TERM=`fix_term xterm-color`
+	# I am sorry to hear that you are running an
+	# xterm that has no colors (I am looking at you solaris)
+	if [ $TERM = xterm ] && ( command -v tput >/dev/null 2>&1 ) && [ `tput -T xterm colors` = -1 ] ; then
+		# lets see what we can do about your terrible term
+		TERM=`fix_term xterm-color`
+	fi
+
+	export TERM
+
+	case $TERM in
+		*256*)
+			alias screen="screen -T `fix_term screen-256color-bce`"
+		;;
+	esac
 fi
-
-export TERM
-
-case $TERM in
-	*256*)
-		alias screen="screen -T `fix_term screen-256color-bce`"
-	;;
-esac
