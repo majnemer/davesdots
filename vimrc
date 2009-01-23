@@ -7,7 +7,7 @@ if has ('multi_byte')      " Make sure we have unicode support
    scriptencoding utf-8    " This file is in UTF-8
 
    " ---- Terminal Setup ----
-   if (&termencoding == "" && &term =~ "xterm") || (&term =~ "rxvt-unicode")
+   if (&termencoding == "" && (&term =~ "xterm" || &term =~ "putty")) || (&term =~ "rxvt-unicode")
       set termencoding=utf-8
    endif
    set encoding=utf-8      " Default encoding should always be UTF-8
