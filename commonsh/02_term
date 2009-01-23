@@ -7,7 +7,7 @@ fix_term ()
 		echo $1
 	else
 		case $1 in
-			rxvt|xterm?*|kterm|putty)
+			rxvt|xterm?*|kterm|putty|screen)
 				fix_term xterm
 			;;
 			*rxvt?*|Eterm|aterm)
