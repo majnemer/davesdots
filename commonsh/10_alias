@@ -20,6 +20,8 @@ export FCEDIT
 
 # aliases
 alias cd..='cd ..'
+alias :q='exit'
+alias :wq='exit'
 
 # handles per OS aliases, fixes a few terms
 case `uname -s` in
@@ -62,6 +64,8 @@ case `uname -s` in
 		done
 	;;
 esac
+
+alias rm='rm -ir'
 
 alias df='df -h'
 alias du='du -h'
