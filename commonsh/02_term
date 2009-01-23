@@ -3,6 +3,7 @@
 # terminal fallback stuff
 fix_term ()
 {
+	# we were requested to go on screen and we are on a mac
 	if ( infocmp $1 >/dev/null 2>&1 ) ; then
 		echo $1
 	else
@@ -75,7 +76,7 @@ if ( command -v infocmp >/dev/null 2>&1 ) ; then
 
 	case $TERM in
 		*256*)
-			alias screen="screen -T `fix_term screen-256color-bce`"
+			alias screen="screen -T `fix_term xterm-256color`"
 		;;
 	esac
 fi
