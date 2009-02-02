@@ -74,6 +74,8 @@ my %links = (
 	'xmonad.hs' => '.xmonad/xmonad.hs',
 
 	'gitconfig' => '.gitconfig',
+
+	'lock' => 'bin/lock',
 );
 
 for my $file (keys %links) {
