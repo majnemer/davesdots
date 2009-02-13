@@ -160,9 +160,6 @@ if has('mouse')
 endif
 
 if has('autocmd')
-   " unhighlight search when idle
-   autocmd CursorHold * nohls | redraw
-
    " always refresh syntax from the start
    autocmd BufEnter * syntax sync fromstart
 
@@ -248,8 +245,12 @@ map Y y$
 vmap K k
 
 " :W and :Q are annoying
-cmap W w
-cmap Q q
+nmap :X :x
+nmap :W :w
+nmap :Q :q
+nmap :WQ :wq
+nmap :Wq :wq
+
 
 " just continue
 nmap K K<cr>
