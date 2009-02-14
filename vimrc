@@ -245,12 +245,11 @@ map Y y$
 vmap K k
 
 " :W and :Q are annoying
-nmap :X :x
-nmap :W :w
-nmap :Q :q
-nmap :WQ :wq
-nmap :Wq :wq
-
+command! -nargs=0 -bang X x<bang>
+command! -nargs=0 -bang Q q<bang>
+command! -nargs=0 -bang W w<bang>
+command! -nargs=0 -bang WQ wq<bang>
+command! -nargs=0 -bang Wq wq<bang>
 
 " just continue
 nmap K K<cr>
@@ -258,6 +257,7 @@ nmap K K<cr>
 " Toggle numbers with F12
 nmap <silent> <F12> :silent set number!<CR>
 imap <silent> <F12> <C-O>:silent set number!<CR>
+noremap <silent> <F4> :set hls!<CR>
 
 " Don't force column 0 for #
 inoremap # X<BS>#
