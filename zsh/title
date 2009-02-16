@@ -58,7 +58,12 @@ function title
 			# Use this for GNU Screen:
 			print -nR $'\ek'$2$'\e'"\\"
 		;;
-		xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
+		interix)
+			# Use this for interix as "2" makes it upset
+			shift
+			print -nR $'\e]0;'$@$'\a'
+		;;
+		xterm*|*rxvt*|cygwin|Eterm|mlterm|kterm|aterm|putty*)
 			# Use this one instead for everybody else:
 			shift
 			print -nR $'\e]1;'$@$'\a'
