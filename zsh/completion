@@ -1,6 +1,9 @@
 # completion menu
 zstyle ':completion:*' menu select=1
 
+# change the order up
+zstyle ':completion:*:(cd|mv|cp):*' tag-order local-directories directory-stack named-directories path-directories
+
 # neat-o new features
 zstyle ':completion:*' completer _expand _complete _prefix _correct _match _approximate
 

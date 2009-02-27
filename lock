@@ -1,10 +1,37 @@
 #! /bin/sh
 
-if [ `uname -s` = 'Darwin' ] ; then
+# Yell if they are trying to lock remotely. This won't work.
+# Even if it does, it's wrong.
+if [ "${SSH_TTY}" ] && [ -z "${STY}" ] ; then
+	echo "You're doing it wrong. Don't try to lock a remote computer."
+	exit 1
+fi
+
+# Graphically locking on Macs is simple.
+# If we're not in screen, attempt to graphically lock it.
+if [ `uname -s` = 'Darwin' ] && [ -z "${STY}" ] ; then
 	/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
 	exit
 fi
 
+# Handle non-graphical locking
+if [ -z "${DISPLAY}" ] ; then
+	if [ -z "${STY}" ] ; then # not running screen
+		if ( command -v vlock >/dev/null 2>/dev/null ) ; then
+			vlock
+			exit
+		else
+			echo "You don't have vlock. Maybe try locking in screen."
+		fi
+	else
+		echo "You are in screen. Use 'C-a x' to lock"
+	fi
+	exit 1
+fi
+
+# Try to lock sanely on X11.
+# Certain combinations of desktop managers and locking programs
+# allow new sessions to be started.
 KDE_LOCK='kdesktop_lock --forcelock || krunner_lock --forcelock || /usr/libexec/kde4/krunner_lock --forcelock || /usr/lib/kde4/libexec/krunner_lock --forcelock'
 GNOME_LOCK='gnome-screensaver-command --lock'
 XSCREEN_LOCK='xscreensaver-command -lock || xlock'
@@ -22,13 +49,13 @@ elif ( ps -e | grep xdm >/dev/null 2>/dev/null ) ; then
 	eval $XSCREEN_LOCK 2>/dev/null && exit
 fi
 
-echo Could not decide what desktop manager you are using.
-echo Trying fallback locking.
+echo "Could not decide what desktop manager you are using."
+echo "Trying fallback locking."
 eval $KDE_LOCK 2>/dev/null && exit
 gnome-screensaver >/dev/null 2>/dev/null
 eval $GNOME_LOCK 2>/dev/null
 xscreensaver & >/dev/null 2>/dev/null
 eval $XSCREEN_LOCK 2>/dev/null && exit
 
-echo Could not lock your screen.
+echo "Could not lock your screen."
 exit 1

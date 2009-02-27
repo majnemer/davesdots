@@ -61,6 +61,9 @@ extract ()
       *.lzma)
          lzma -dc "${1}" > `basename "${1%.*}"`
       ;;
+      *.7z)
+         7zr x "${1}"
+      ;;
       *)
          echo "Unable to extract '"$1"'"
          return 1

@@ -21,7 +21,7 @@
 
 fun! <SID>IsCommentStart(line)
     " &comments isn't reliable
-    if &ft == "c" || &ft == "cpp"
+    if &ft == "c" || &ft == "cpp" || &ft == "java" || &ft == "scala"
         return -1 != match(a:line, '/\*')
     elseif &ft == "perl" " catch POD in Perl
         return -1 != match(a:line, '^=\w')
@@ -31,7 +31,7 @@ fun! <SID>IsCommentStart(line)
 endfun
 
 fun! <SID>IsCommentEnd(line)
-    if &ft == "c" || &ft == "cpp"
+    if &ft == "c" || &ft == "cpp" || &ft == "java" || &ft == "scala"
         return -1 != match(a:line, '\*/')
     elseif &ft == "perl" " catch POD
         return -1 != match(a:line, '^=cut')

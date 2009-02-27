@@ -42,4 +42,5 @@ main = do
 			`additionalKeysP`
 			[ ("M-p", shellPrompt defaultXPConfig { position = Top })
 			, ("M-b", sendMessage ToggleStruts)
+			, ("M-S-l", spawn "~/bin/lock")
 			]

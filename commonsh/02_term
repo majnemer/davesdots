@@ -30,8 +30,11 @@ fix_term ()
 			screen?*)
 				fix_term screen
 			;;
-			putty?*)
-				fix_term putty
+			putty-vt100)
+				echo "vt100"
+			;;
+			putty-256color)
+				fix_term xterm-256color
 			;;
 			*)
 				echo "vt100"

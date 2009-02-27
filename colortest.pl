@@ -1,8 +1,5 @@
 #! /usr/bin/env perl
 
-use strict;
-use warnings;
-
 # Generate the array
 
 # Fill in the first 16 colors. The exact hex codes vary by terminal and device
@@ -35,7 +32,6 @@ print "\n";
 
 
 sub number_to_color {
-	use integer;
 	my $num = shift;
 	$num   -= 16;
 
