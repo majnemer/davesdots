@@ -3,10 +3,10 @@
 # Trivial modifications: David Majnemer
 # vim:set nowrap:
 
-autoload -U compinit; compinit -d "${HOME}/.zsh/.zcompdump"
+autoload compinit; compinit -d "${HOME}/.zsh/.zcompdump"
 
-autoload -U age
-autoload -U zmv
+autoload age
+autoload zmv
 
 if [ ${ZSH_VERSION//.} -gt 420 ] ; then
 	autoload -U url-quote-magic

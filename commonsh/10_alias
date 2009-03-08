@@ -20,8 +20,6 @@ export FCEDIT
 
 # aliases
 alias cd..='cd ..'
-alias :q='exit'
-alias :wq='exit'
 
 # handles per OS aliases, fixes a few terms
 case `uname -s` in
