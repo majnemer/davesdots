@@ -2,7 +2,7 @@
 # colors
 for dircolors in gdircolors dircolors ; do
 	if ( command -v $dircolors >/dev/null 2>&1)  ; then
-		[ -f "${HOME}/.dir_colors" ] && eval `$dircolors -b "${HOME}/.dir_colors"` && break
+		[ -f "${HOME}/.$dircolors" ] && eval `$dircolors -b "${HOME}/.$dircolors"` && break
 		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
 		eval `$dircolors -b` && break
 	fi
@@ -35,7 +35,7 @@ case `uname -s` in
 		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
 			alias ls="ls -h --color=auto"
 		else
-			LSCOLORS=ExGxFxDxCxDxDxHbaDacec
+			LSCOLORS="ExGxFxDxCxDxDxHbaDEaEa"
 			export LSCOLORS
 			alias ls="ls -Gh"
 		fi
