@@ -64,10 +64,14 @@ function title
 			print -nR $'\e]0;'$@$'\a'
 		;;
 		xterm*|*rxvt*|cygwin|Eterm|mlterm|kterm|aterm|putty*)
-			# Use this one instead for everybody else:
-			shift
-			print -nR $'\e]1;'$@$'\a'
-			print -nR $'\e]2;'$@$'\a'
+			if [ "${STY}" ] ; then
+				print -nR $'\ek'$2$'\e'"\\"
+			else
+				# Use this one instead for everybody else:
+				shift
+				print -nR $'\e]1;'$@$'\a'
+				print -nR $'\e]2;'$@$'\a'
+			fi
 		;;
 	esac
 }

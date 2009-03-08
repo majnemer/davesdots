@@ -10,7 +10,11 @@ fi
 
 case $TERM in
 	xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
-		TITLE=']1;${USER}:${PWD}]2;${USER}:${PWD}'
+		if [ "${STY}" ] ; then
+			TITLE='k${USER}:${PWD}\\'
+		else
+			TITLE=']1;${USER}:${PWD}]2;${USER}:${PWD}'
+		fi
 	;;
 	screen*)
 		TITLE='k${USER}:${PWD}\\'

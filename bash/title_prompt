@@ -14,7 +14,11 @@ function do_prompt ()
     local TITLEBAR
     case $TERM in
        xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
-            TITLEBAR='\[\033]1;\u@\h:\w\007\033]2;\u@\h:\w\007\]'
+            if [ "${STY}" ] ; then
+                TITLEBAR='\[\033k\u@\h:\w\033\134\]'
+            else
+                TITLEBAR='\[\033]1;\u@\h:\w\007\033]2;\u@\h:\w\007\]'
+            fi
         ;;
         screen*)
             TITLEBAR='\[\033k\u@\h:\w\033\134\]'
