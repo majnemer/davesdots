@@ -1,0 +1,7 @@
+#! /bin/sh
+
+concat_manpath "/opt/local/man"
+concat_path "/opt/local/bin"
+concat_path "/opt/local/sbin"
+concat_path "/opt/local/libexec"
+

@@ -1,0 +1,2 @@
+#! /bin/sh
+concat_path "${HOME}/bin"

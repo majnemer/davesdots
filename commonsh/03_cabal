@@ -1,0 +1,4 @@
+#! /bin/sh
+
+concat_path "${HOME}/.cabal/bin"
+

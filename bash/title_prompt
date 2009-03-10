@@ -1,0 +1,34 @@
+function do_prompt ()
+{
+    if [ $? -ne 0 ] ; then
+        local ERROR_PROMPT="\[\033[01;31m\]"
+    fi
+
+    local BASE
+    if [ $UID -ne 0 ] ; then
+        BASE="$"
+    else
+        BASE="#"
+    fi
+
+    local TITLEBAR
+    case $TERM in
+       xterm*|*rxvt*|cygwin|interix|Eterm|mlterm|kterm|aterm|putty*)
+            if [ "${STY}" ] ; then
+                TITLEBAR='\[\033k\u@\h:\w\033\134\]'
+            else
+                TITLEBAR='\[\033]1;\u@\h:\w\007\033]2;\u@\h:\w\007\]'
+            fi
+        ;;
+        screen*)
+            TITLEBAR='\[\033k\u@\h:\w\033\134\]'
+        ;;
+        *)
+            TITLEBAR=''
+        ;;
+    esac
+    PS1="${TITLEBAR}\[\033[01;32m\]\u@\h \[\033[01;34m\]\w ${ERROR_PROMPT}${BASE} \[\033[00m\]"
+    export PS1
+}
+
+PROMPT_COMMAND=do_prompt

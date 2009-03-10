@@ -1,0 +1,72 @@
+#! /bin/sh
+
+concat_path ()
+{
+	if [ -z "$1" ] ; then
+		echo "Please give me a value to concatinate to the variable!"
+		exit
+	fi
+
+	addition=$1
+
+	if [ -d "${addition}" ] ; then
+		if [ -z "${PATH}" ] ; then
+			PATH=${addition}
+		else
+			PATH=${addition}:${PATH}
+		fi
+
+		export PATH
+	fi
+}
+
+concat_manpath ()
+{
+	if [ -z "$1" ] ; then
+		echo "Please give me a value to concatinate to the variable!"
+		exit
+	fi
+
+	addition=$1
+
+	if [ -d "${addition}" ] ; then
+		if [ -z "${MANPATH}" ] ; then
+			MANPATH=${addition}
+		else
+			MANPATH=${addition}:${MANPATH}
+		fi
+
+		export MANPATH
+	fi
+}
+
+# we don't have a MANPATH? we can find one.
+if [ -z "${MANPATH}" ] ; then
+	case `uname -s` in
+			SunOS)
+				# some solaris systems have manpath
+				if ( command -v manpath >/dev/null 2>&1 ) ; then
+					MANPATH=`manpath`
+					export MANPATH
+				else
+					concat_manpath "/usr/share/man"
+				fi
+			;;
+			OpenBSD)
+				concat_manpath "/usr/local/man/old"
+				concat_manpath "/usr/gnu/man/old"
+				concat_manpath "/usr/contrib/man/old"
+				concat_manpath "/usr/X11R6/man/old"
+				concat_manpath "/usr/X11/man/old"
+				concat_manpath "/usr/gnu/man"
+				concat_manpath "/usr/contrib/man"
+				concat_manpath "/usr/X11R6/man"
+				concat_manpath "/usr/X11/man"
+				concat_manpath "/usr/share/man"
+			;;
+			Darwin|Linux|FreeBSD)
+				MANPATH=`manpath`
+				export MANPATH
+			;;
+	esac
+fi

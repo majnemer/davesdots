@@ -1,0 +1,6 @@
+#! /bin/sh
+
+concat_manpath "/usr/local/git/man"
+concat_path "/usr/local/git/bin"
+concat_path "/usr/local/git/libexec/git-core"
+

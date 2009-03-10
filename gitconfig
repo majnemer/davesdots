@@ -1,0 +1,13 @@
+[alias]
+	co   = checkout
+	ci   = commit
+	st   = status
+	stat = status
+	di   = diff --color-words
+	up   = pull
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	pager =

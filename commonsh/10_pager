@@ -1,0 +1,25 @@
+#! /bin/sh
+for PAGER in less more pg ; do
+	( command -v $PAGER >/dev/null 2>&1 ) && break
+done
+export PAGER
+
+# if we are in less, we can set some options and use lesspipe
+if [ $PAGER = less ] ; then
+	for lesspipe in lesspipe lesspipe.sh ; do
+		lesspipe_test=`command -v ${lesspipe} 2>/dev/null`
+		if [ -n "${lesspipe_test}" ] ; then
+			LESSOPEN="| ${lesspipe_test} %s"
+			export LESSOPEN
+			break
+		fi
+	done
+	if [ $lesspipe = lesspipe ] ; then
+		LESSCLOSE="${lesspipe_test} %s %s"
+		export LESSCLOSE
+	fi
+
+	# let less be case insensitive
+	LESS='-R -M'
+	export LESS
+fi

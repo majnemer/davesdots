@@ -1,0 +1,8 @@
+set -o emacs
+
+# put history in .ksh
+HISTFILE="${HOME}/.ksh/.history"
+export HISTFILE
+
+HISTSIZE=1000
+export HISTSIZE

@@ -1,0 +1,154 @@
+# Be 8 bit clean. (EXPERIMENTAL: if problems occur, contact me)
+set input-meta on
+set output-meta on
+set convert-meta on
+
+# Turn off that bell
+set bell-style none
+
+$if mode=emacs
+	$if term=screen
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+		"\eOH": beginning-of-line
+		"\eOF": end-of-line
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+		"\e[3~": delete-char
+		"\e[1;5C": forward-word
+		"\e[1;5D": backward-word
+		"\e[5C": forward-word
+		"\e[5D": backward-word
+		"\eOC": forward-word
+		"\eOD": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[c": forward-word
+		"\e[d": backward-word
+	$endif
+	$if term=xterm
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+		"\eOH": beginning-of-line
+		"\eOF": end-of-line
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+		"\e[3~": delete-char
+		"\e[1;5C": forward-word
+		"\e[1;5D": backward-word
+		"\e[5C": forward-word
+		"\e[5D": backward-word
+		"\eOC": forward-word
+		"\eOD": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[c": forward-word
+		"\e[d": backward-word
+	$endif
+	$if term=putty
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+		"\eOH": beginning-of-line
+		"\eOF": end-of-line
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+		"\e[3~": delete-char
+		"\e[1;5C": forward-word
+		"\e[1;5D": backward-word
+		"\e[5C": forward-word
+		"\e[5D": backward-word
+		"\eOC": forward-word
+		"\eOD": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[c": forward-word
+		"\e[d": backward-word
+	$endif
+	$if term=mlterm
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[1;5C": forward-word
+		"\e[1;5D": backward-word
+		"\e[3~": delete-char
+	$endif
+	$if term=kterm
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[1;5C": forward-word
+		"\e[1;5D": backward-word
+		"\e[3~": delete-char
+	$endif
+	$if term=linux
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[3~": delete-char
+	$endif
+	$if term=vt100
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+		"\e[3~": delete-char
+	$endif
+	$if term=rxvt
+		"\e[c": forward-word
+		"\e[d": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[3~": delete-char
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+	$endif
+	$if term=Eterm
+		"\e[c": forward-word
+		"\e[d": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[3~": delete-char
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+	$endif
+	$if term=aterm
+		"\e[c": forward-word
+		"\e[d": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[3~": delete-char
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+	$endif
+	$if term=mrxvt
+		"\e[c": forward-word
+		"\e[d": backward-word
+		"\eOc": forward-word
+		"\eOd": backward-word
+		"\e[3~": delete-char
+		"\e[7~": beginning-of-line
+		"\e[8~": end-of-line
+	$endif
+	$if term=cons
+		"\e[H": beginning-of-line
+		"\e[F": end-of-line
+	$endif
+	$if term=interix
+		"\e[H": beginning-of-line
+		"\e[U": end-of-line
+	$endif
+	$if term=sun
+		"\e[214z": beginning-of-line
+		"\e[220z": end-of-line
+		"^?":      delete-char
+	$endif
+	$if term=cygwin
+		"\e[1~": beginning-of-line
+		"\e[4~": end-of-line
+	$endif
+$endif

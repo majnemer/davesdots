@@ -1,0 +1,4 @@
+#! /bin/sh
+for wrap in rlwrap rlfe cle ; do
+	( command -v $wrap >/dev/null 2>&1 ) && alias ocaml="$wrap ocaml" && break
+done

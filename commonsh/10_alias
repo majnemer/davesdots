@@ -1,0 +1,73 @@
+#! /bin/sh
+# colors
+for dircolors in gdircolors dircolors ; do
+	if ( command -v $dircolors >/dev/null 2>&1)  ; then
+		[ -f "${HOME}/.$dircolors" ] && eval `$dircolors -b "${HOME}/.$dircolors"` && break
+		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
+		eval `$dircolors -b` && break
+	fi
+done
+
+# gimmie an editor, make it a nice vi clone
+for EDITOR in vim elvis vile nvi vi ; do
+	( command -v $EDITOR >/dev/null 2>&1 ) && break
+done
+export EDITOR
+
+# make the history editor the editor we want
+FCEDIT=$EDITOR
+export FCEDIT
+
+# aliases
+alias cd..='cd ..'
+
+# handles per OS aliases, fixes a few terms
+case `uname -s` in
+	Linux|CYGWIN*)
+		alias ls="ls -h --color=auto"
+		alias grep='grep -d skip --color=auto'
+	;;
+	FreeBSD|Darwin|DragonFly)
+		if ( command -v gls >/dev/null 2>&1 ) ; then
+			alias ls="gls -h --color=auto"
+		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+			alias ls="ls -h --color=auto"
+		else
+			LSCOLORS="ExGxFxDxCxDxDxHbaDEaEa"
+			export LSCOLORS
+			alias ls="ls -Gh"
+		fi
+		alias grep='grep -d skip --color=auto'
+	;;
+	Interix)
+		alias ls="ls --color"
+	;;
+	SunOS)
+		if ( command -v gls >/dev/null 2>&1 ) ; then
+			alias ls="gls -h --color=auto"
+		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+			alias ls="ls -h --color=auto"
+		else
+			alias ls="ls -h"
+		fi
+
+		if ( command -v ggrep >/dev/null 2>&1 ) ; then
+			alias grep='ggrep -d skip --color=auto'
+		elif ( grep --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+			alias grep='grep -d skip --color=auto'
+		fi
+
+		for locate in glocate slocate ; do
+			( command -v $locate >/dev/null 2>&1 ) && alias locate=$locate
+		done
+	;;
+esac
+
+alias rm='rm -ir'
+
+alias df='df -h'
+alias du='du -h'
+
+alias ping='ping -c4'
+
+( command -v time >/dev/null 2>&1 ) && alias time='command time'

@@ -1,0 +1,58 @@
+# Originally by Deason
+# Modified by Majnematic
+
+# turn on visual bell
+vbell on
+
+# default scrollback to 5000 lines
+defscrollback 5000
+
+# turn off visual bell
+termcapinfo * vb@
+
+# see, it's a bell, get it?
+vbell_msg "Ring Ring Ring Ring Ring Ring"
+
+# make screen even more fun
+nethack on
+
+# mess with bold
+attrcolor b ".I"
+
+# erase background with current bg color
+defbce on
+
+# turn on utf8
+defutf8 on
+
+# changes from the default binding " to `windowlist -b', so we don't create
+# a new empty window
+bind \" windowlist
+
+# includes window title name in activity/bell messages
+activity "Activity in window %n (%t)"
+bell_msg "Bell in window %n (%t)"
+
+# Argh, choosing a hardstatus line is difficult
+# This can only be explained by example, but it takes too much damn space.
+# The screen man page is actually good documentation for this, but it takes
+# a little while to read. Look for "STRING ESCAPES', and that section will
+# explain what all this line noise means.
+#
+# White background, black text, underlined bold current window
+#hardstatus alwayslastline "%{= Wk}%-w%50>%{=ub dd}%n %t%?(%u)%?%{-}%+w%<"
+# Normal text, underlined bold current window
+#hardstatus alwayslastline "%{= dd}%-w%50>%{=ub}%n %t%?(%u)%?%{-}%+w%<"
+# Blue background, white text, underlined bold current window
+hardstatus alwayslastline "%{= bw}%-w%50>%{=ub dd}%n %t%?(%u)%?%{-}%+w%<"
+
+startup_message off
+
+# Show the screen version just for a second
+msgwait 1
+version
+
+# how many seconds a message appears when we don't press any keys
+msgwait 2
+
+altscreen on

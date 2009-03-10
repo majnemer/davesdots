@@ -1,0 +1,114 @@
+# completion menu
+zstyle ':completion:*' menu select=1
+
+# change the order up
+zstyle ':completion:*:(cd|mv|cp):*' tag-order local-directories directory-stack named-directories path-directories
+
+# man page completion
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.*'  insert-sections true
+
+# neat-o new features
+zstyle ':completion:*' completer _expand _complete _prefix _correct _match _approximate
+
+# don't complete commands that we do not have
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+# group matches
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:matches' group 'yes'
+
+# colors on completions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# users are all useless, ignore them always
+zstyle -e ':completion:*' users "reply=( root '${USERNAME}' )"
+
+# caching good
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${HOME}/.zsh/.${HOST}-cache"
+
+# descriptions
+zstyle ':completion:*:messages' format $'%{\e[01;35m%} -- %d -- %{\e[00;00m%}'
+zstyle ':completion:*:warnings' format $'%{\e[01;31m%} -- No Matches Found -- %{\e[00;00m%}'
+zstyle ':completion:*:descriptions' format $'%{\e[01;33m%} -- %d -- %{\e[00;00m%}'
+
+# job numbers
+zstyle ':completion:*:jobs' numbers true
+
+# kill/killall menu and general process listing
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*' sort false
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=31;31'
+
+zstyle ':completion:*:*:killall:*' menu yes select
+
+case `uname -s` in
+	Linux)
+		zstyle ':completion:*:processes-names' command 'ps -e --no-headers -o args'
+	;;
+	FreeBSD|Interix|OpenBSD|SunOS)
+		zstyle ':completion:*:processes-names' command 'ps -e -o args | awk "NR != 1"'
+	;;
+	Darwin)
+		if [[ `sw_vers -productVersion` = 10<5->.<-> ]] ; then
+			zstyle ':completion:*:processes-names' command 'ps -e -o command | awk "NR != 1"'
+		else
+			zstyle ':completion:*:processes-names' command 'ps -A -o command | awk "NR != 1"'
+		fi
+	;;
+	CYGWIN*)
+		zstyle ':completion:*:processes-names' command 'ps -e -s | awk "NR != 1"'
+	;;
+esac
+
+case `uname -s` in
+	Linux)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -U '${USERNAME}' -o pid,args | sed "/ps --forest -U '${USERNAME}' -o pid,args/d"'
+	;;
+	Interix)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
+	;;
+	CYGWIN*)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -u '${USERNAME}' -s | sed "/ps -u '${USERNAME}' -s/d"'
+	;;
+	SunOS|FreeBSD|OpenBSD)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
+	;;
+	Darwin)
+		zstyle ':completion:*:*:kill:*:processes' command 'ps -U '${USERNAME}' -o pid,command | sed "/ps -U '${USERNAME}' -o pid/d"'
+	;;
+esac
+
+case `uname -s` in
+	Interix|SunOS|FreeBSD|Linux)
+		zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
+	;;
+	CYGWIN*)
+		zstyle ':completion:*:*:killall:*:processes-names' command "ps -u '${USERNAME}' -s"
+	;;
+	Darwin)
+		if [[ `sw_vers -productVersion` = 10<5->.<-> ]] ; then
+			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o comm"
+		else
+			zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o command"
+		fi
+	;;
+	OpenBSD)
+		zstyle ':completion:*:*:killall:*:processes-names' command "ps -U '${USERNAME}' -o command"
+	;;
+esac
+
+# case insensitivity, partial matching, substitution
+zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[-._]=* r:|=*' 'l:|=* r:|=*' '+l:|=*'
+
+# compctl should die
+zstyle ':completion:*' use-compctl false
+
+# dont suggest the first parameter again
+zstyle ':completion:*:ls:*' ignore-line yes
+zstyle ':completion:*:rm:*' ignore-line yes
+zstyle ':completion:*:scp:*' ignore-line yes
+zstyle ':completion:*:diff:*' ignore-line yes
+zstyle ':completion:*:kill:*' ignore-line yes
+

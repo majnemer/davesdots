@@ -1,0 +1,13 @@
+#! /bin/sh
+# Decode file for less
+case `echo "$1" | tr '[:upper:]' '[:lower:]'` in
+	# we don't handle archives, we let the big guy do it
+	*.arj|*.tar.bz2|*.bz|*.bz2|*.deb|*.udeb|*.doc|*.gif|*.jpeg|*.jpg|*.pcd|*.png|*.tga|*.tiff|*.tif|*.iso|*.bin|*.raw|*.lha|*.lzh|*.pdf|*.rar|*.r[0-9][0-9]*.rpm|*.tar.gz|*.tgz|*.tar.z|*.tar.dz|*.gz|*.z|*.dz|*.tar|*.jar|*.war|*.ear|*.xpi|*.zip*.7z|*.zoo)
+		exit 1;;
+	*changelog)
+		source-highlight --failsafe -f esc -s changelog -i "$1";;
+	*)
+		source-highlight --failsafe -f esc -i "$1";;
+esac
+
+exit 0
