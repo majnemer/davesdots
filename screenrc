@@ -7,6 +7,9 @@ vbell on
 # default scrollback to 5000 lines
 defscrollback 5000
 
+# when in history mode, use incremental searching
+markkeys "^S=/:^R=?"
+
 # turn off visual bell
 termcapinfo * vb@
 
