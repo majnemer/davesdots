@@ -31,11 +31,14 @@ extract ()
       *.tar)
          tar xf "${1}"
       ;;
-      *.tar.gz|*.tgz|*.tar.z)
-         tar zxf "${1}"
+      *.tar.gz|*.tgz)
+         gunzip -c "${1}" | tar xf -
+      ;;
+      *.tar.z)
+         uncompress -c "${1}" | tar xf -
       ;;
       *.tar.bz2|*.tbz2)
-         tar jxf "${1}"
+         bzcat "${1}" | tar xf -
       ;;
       *.zip|*.jar)
          unzip -qo "${1}"
