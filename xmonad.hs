@@ -11,6 +11,7 @@ import XMonad.Util.EZConfig(additionalKeysP)
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell(shellPrompt)
+import XMonad.Prompt.Window
 
 import System.IO(hPutStrLn)
 
@@ -40,6 +41,8 @@ main = do
 			}
 			`additionalKeysP`
 			[ ("M-p", shellPrompt defaultXPConfig { position = Top })
+			, ("M-S-a", windowPromptGoto defaultXPConfig { position = Top })
+			, ("M-a", windowPromptBring defaultXPConfig { position = Top })
 			, ("M-b", sendMessage ToggleStruts)
 			, ("M-S-l", spawn "~/bin/lock")
 			]
