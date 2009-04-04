@@ -245,7 +245,6 @@ map Y y$
 vmap K k
 
 " :W and :Q are annoying
-command! -nargs=0 -bang X x<bang>
 command! -nargs=0 -bang Q q<bang>
 command! -nargs=0 -bang W w<bang>
 command! -nargs=0 -bang WQ wq<bang>
