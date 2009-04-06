@@ -28,6 +28,10 @@ case `uname -s` in
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
+		if ( command -v top >/dev/null 2>&1 ) ; then
+			alias top="top -o cpu"
+		fi
+
 		if ( command -v gls >/dev/null 2>&1 ) ; then
 			alias ls="gls -h --color=auto"
 		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
