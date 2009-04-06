@@ -41,6 +41,8 @@ case $TERM in
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
 		bindkey '\e[3~' delete-char
+		bindkey '\eOC' emacs-forward-word
+		bindkey '\eOD' emacs-backward-word
 	;;
 	*rxvt*|Eterm|aterm)
 		bindkey '\e[c' emacs-forward-word
