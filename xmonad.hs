@@ -30,7 +30,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
 		delta   = 3/100
 
 main = do
-	xmproc <- spawnPipe "~/.cabal/bin/xmobar"
+	xmproc <- spawnPipe "xmobar"
 	xmonad $ defaultConfig
 			{ manageHook = manageDocks <+> manageHook defaultConfig
 			, layoutHook = avoidStruts  $  smartBorders $ myLayoutHook
@@ -38,7 +38,6 @@ main = do
 				{ ppOutput = hPutStrLn xmproc
 				, ppTitle  = xmobarColor "green" ""
 				}
-			, terminal   = "uxterm /bin/zsh"
 			}
 			`additionalKeysP`
 			[ ("M-p", shellPrompt defaultXPConfig { position = Top })
