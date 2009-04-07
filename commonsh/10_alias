@@ -18,6 +18,11 @@ export EDITOR
 FCEDIT=$EDITOR
 export FCEDIT
 
+# vimx -> vim
+if [ "${EDITOR}" = vimx ] ; then
+	alias vimx=vim
+fi
+
 # aliases
 alias cd..='cd ..'
 
