@@ -20,7 +20,7 @@ export FCEDIT
 
 # vimx -> vim
 if [ "${EDITOR}" = vimx ] ; then
-	alias vimx=vim
+	alias vim=vimx
 fi
 
 # aliases
