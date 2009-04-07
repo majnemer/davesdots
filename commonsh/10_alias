@@ -9,7 +9,7 @@ for dircolors in gdircolors dircolors ; do
 done
 
 # gimmie an editor, make it a nice vi clone
-for EDITOR in vim elvis vile nvi vi ; do
+for EDITOR in vimx vim elvis vile nvi vi ; do
 	( command -v $EDITOR >/dev/null 2>&1 ) && break
 done
 export EDITOR
