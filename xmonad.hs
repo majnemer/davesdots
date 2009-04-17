@@ -43,6 +43,6 @@ main = do
 			[ ("M-p", shellPrompt defaultXPConfig { position = Top })
 			, ("M-S-a", windowPromptGoto defaultXPConfig { position = Top })
 			, ("M-a", windowPromptBring defaultXPConfig { position = Top })
-			, ("M-b", sendMessage ToggleStruts)
+			, ("M-x", sendMessage ToggleStruts)
 			, ("M-S-l", spawn "~/bin/lock")
 			]
