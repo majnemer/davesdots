@@ -255,6 +255,16 @@ endif
 " just continue
 nmap K K<cr>
 
+" tabs
+map <C-S-Tab> :tabprevious<CR>
+imap <C-S-Tab> <Esc>:tabprevious<CR>i
+
+map <C-Tab> :tabnext<CR>
+imap <C-Tab> <Esc>:tabnext<CR>i
+
+nmap <C-t> :tabnew<CR>
+imap <C-t> <Esc>:tabnew<CR>i
+
 " Toggle numbers with F12
 nmap <silent> <F12> :silent set number!<CR>
 imap <silent> <F12> <C-O>:silent set number!<CR>
