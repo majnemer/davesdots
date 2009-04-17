@@ -262,12 +262,22 @@ nmap K K<cr>
 " tabs
 map <C-S-Tab> :tabprevious<CR>
 imap <C-S-Tab> <Esc>:tabprevious<CR>i
+map <S-Left> :tabprevious<CR>
+imap <S-Left> <Esc>:tabprevious<CR>i
 
 map <C-Tab> :tabnext<CR>
 imap <C-Tab> <Esc>:tabnext<CR>i
+map <S-Right> :tabnext<CR>
+imap <S-Right> <Esc>:tabnext<CR>i
 
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>i
+
+map <C-w> :tabclose<CR>
+
+" Disable q and Q
+map q <Nop>
+map Q <Nop>
 
 " Toggle numbers with F12
 nmap <silent> <F12> :silent set number!<CR>
