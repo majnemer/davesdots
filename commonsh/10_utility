@@ -20,6 +20,11 @@ mkcd ()
 
 extract ()
 {
+   if ( command -v aunpack > /dev/null 2>&1 ) ; then
+      aunpack "${1}"
+      return
+   fi
+
    if [ ! -f "$1" ] ; then
       echo "The file ("$1") does not exist!"
       return
