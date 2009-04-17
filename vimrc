@@ -97,11 +97,15 @@ if (v:version >= 700)
    imap <silent> <F10> <C-O>:silent set spell!<CR>
 endif
 
-" Always display a pretty statusline
-set title
+" Display a pretty statusline if we can
+if has('title')
+   set title
+endif
 set laststatus=2
 set shortmess=atI
-set statusline=Editing:\ %r%t%m\ %=Location:\ Line\ %l/%L\ \ Col:\ %c\ (%p%%)
+if has('statusline')
+   set statusline=Editing:\ %r%t%m\ %=Location:\ Line\ %l/%L\ \ Col:\ %c\ (%p%%)
+endif
 
 " Enable modelines only on secure vim
 if (v:version == 603 && has("patch045")) || (v:version > 603)
