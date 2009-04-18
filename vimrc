@@ -273,7 +273,7 @@ imap <S-Right> <Esc>:tabnext<CR>i
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>i
 
-map <C-w> :tabclose<CR>
+map <C-q> :tabclose<CR>
 
 " Disable q and Q
 map q <Nop>
