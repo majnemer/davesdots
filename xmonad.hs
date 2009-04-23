@@ -1,4 +1,5 @@
 import XMonad
+import qualified XMonad.StackSet as W
 
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders(smartBorders)
@@ -8,6 +9,7 @@ import XMonad.Hooks.ManageDocks
 
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeysP)
+import XMonad.Util.Scratchpad
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell(shellPrompt)
@@ -32,7 +34,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
 main = do
 	xmproc <- spawnPipe "xmobar"
 	xmonad $ defaultConfig
-			{ manageHook = manageDocks <+> manageHook defaultConfig
+			{ manageHook = manageDocks <+> manageHook defaultConfig <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 			, layoutHook = avoidStruts  $  smartBorders $ myLayoutHook
 			, logHook    = dynamicLogWithPP $ xmobarPP
 				{ ppOutput = hPutStrLn xmproc
@@ -45,4 +47,5 @@ main = do
 			, ("M-a", windowPromptBring defaultXPConfig { position = Top })
 			, ("M-x", sendMessage ToggleStruts)
 			, ("M-S-l", spawn "~/bin/lock")
+			, ("M-g", scratchpadSpawnAction defaultConfig)
 			]
