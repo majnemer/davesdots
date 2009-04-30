@@ -1,0 +1,86 @@
+#!/usr/bin/perl
+# caffeine_deposit.pl
+# Written by akreher2 on April 27th, 2009
+
+use strict;
+use warnings;
+
+my $URL    = 'https://www-s.acm.uiuc.edu/caffeine';
+
+# Argument handling
+die "Usage: $0 netid amount\n" unless @ARGV == 2;
+
+my $to     = shift;
+my $amount = shift;
+
+unless ($amount =~ /^-?\d+(?:\.\d{1,2})?$/) {
+	die "amount ($amount) does not look like a valid number.\n";
+}
+
+use Term::ReadKey 'ReadMode';
+use WWW::Mechanize;
+
+print "Deposit: \$$amount -> '$to'\n";
+
+# Fetch the main page
+my $mech = WWW::Mechanize->new(autocheck => 1, agent => 'Caffeinator');
+
+# Try to automatically log in, otherwise prompt for use
+eval {
+	$mech->get("$URL/user");
+};
+if ($@ && $@ =~ /authorization \s+ required/xi) {
+	# authorization failed. we probably don't have tickets,
+	# so we'll prompt the user for information and use that for authorization.
+	print "Kerberos auth failed.\nEnter your netid: ";
+	my $netid = <STDIN>;
+	chomp $netid;
+
+	print "Enter your ACM Linux password (echo off): ";
+	ReadMode('noecho');
+	my $passwd = <STDIN>;
+	chomp $passwd;
+	ReadMode('restore');
+	print "\n";
+
+	$mech->credentials($netid, $passwd);
+	$mech->get("$URL/user");
+} elsif ($@){ # some other error
+	die $@;
+}
+
+# Make sure we can deposit stuff
+unless ($mech->content =~ /admin \s+ operations/xi) {
+	die "You are not a caffeine admin.\n";
+}
+
+# Look up the user
+$mech->submit_form(
+	form_name => 'lookupuser',
+	fields    => {
+		user => $to,
+	},
+);
+
+if ($mech->content =~ /Unknown \s+ user/xi) {
+	die "netid($to) is not valid\n";
+}
+
+# Print out the current balance
+{
+	my($balance) = $mech->content =~ m{balance</td><td>\$([\d\.\-]+)}i;
+	print "$to currently has $balance on caffeine.\n";
+}
+
+# Deposit the money
+$mech->submit_form(
+	form_name => 'depositmoney',
+	fields    => {
+		cash => $amount,
+	},
+);
+
+{
+	my($balance) = $mech->content =~ m{balance</td><td>\$([\d\.\-]+)}i;
+	print "$to now has $balance on caffeine.\n";
+}

@@ -76,7 +76,8 @@ my %links = (
 
 	gitconfig => '.gitconfig',
 
-	lock => 'bin/lock',
+	caffeinate => 'bin/caffeinate',
+	lock       => 'bin/lock',
 );
 
 my $i = 0; # Keep track of how many links we added
