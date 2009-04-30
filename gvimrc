@@ -11,5 +11,6 @@ set guioptions-=r       " Disable the (right) scrollbar
 set guioptions-=l       " Disable the (left) scrollbar
 set guioptions-=L       " Disable the (left) scrollbar
 set guioptions-=a       " Share the copy buffer with visual mode
+set guioptions-=e       " Kill off the GUI tabs
 
 set guifont=Monospace\ 9
