@@ -12,4 +12,9 @@ set guioptions-=l       " Disable the (left) scrollbar
 set guioptions-=L       " Disable the (left) scrollbar
 set guioptions-=a       " Share the copy buffer with visual mode
 
+" gtk tabs are ugly
+if has('gui_gtk')
+    set guioptions-=e       " Kill off the GUI tabs
+endif
+
 set guifont=Monospace\ 9
