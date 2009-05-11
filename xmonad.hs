@@ -38,7 +38,7 @@ main = do
 			, layoutHook = avoidStruts  $  smartBorders $ myLayoutHook
 			, logHook    = dynamicLogWithPP $ xmobarPP
 				{ ppOutput = hPutStrLn xmproc
-				, ppTitle  = xmobarColor "green" ""
+				, ppTitle  = xmobarColor "#8AE234" ""
 				}
 			}
 			`additionalKeysP`
