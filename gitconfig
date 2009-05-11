@@ -1,10 +1,13 @@
 [alias]
-	co   = checkout
 	ci   = commit
 	st   = status
-	stat = status
+	co   = checkout
 	di   = diff --color-words
+	move = mv
 	up   = pull
+	stat = status
+	delete = rm
+	export = archive
 [color]
 	diff = auto
 	status = auto
