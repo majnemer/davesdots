@@ -1,16 +1,24 @@
 [alias]
-	ci   = commit
-	st   = status
-	co   = checkout
-	di   = diff --color-words
-	move = mv
-	up   = pull
+	ci = commit
+	st = status
+	co = checkout
+	di = diff --color-words
+	move   = mv
+	ren    = mv
+	rename = mv
+	up = pull
 	stat = status
+	del    = rm
 	delete = rm
+	remove = rm
 	export = archive
+	ann    = blame
+	praise = blame
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 [core]
 	pager =
+[push]
+	default = matching

@@ -1,2 +1,3 @@
 #! /bin/sh
 concat_path "${HOME}/bin"
+concat_manpath "${HOME}/share/man"
