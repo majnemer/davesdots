@@ -1,10 +1,23 @@
 #! /bin/sh
 # colors
 for dircolors in gdircolors dircolors ; do
-	if ( command -v $dircolors >/dev/null 2>&1)  ; then
-		[ -f "${HOME}/.$dircolors" ] && eval `$dircolors -b "${HOME}/.$dircolors"` && break
-		[ -f /etc/DIR_COLORS ] && eval `$dircolors -b /etc/DIR_COLORS` && break
-		eval `$dircolors -b` && break
+	if ( command -v $dircolors >/dev/null 2>&1 ) ; then
+		dircolor_text=''
+		if [ -f "${HOME}/.dir_colors" ] ; then
+			dircolor_text=`cat "${HOME}/.dir_colors"`
+			eval `$dircolors -b "${HOME}/.dir_colors"`
+		elif [ -f /etc/DIR_COLORS ] ; then
+			dircolor_text=`cat /etc/DIR_COLORS`
+			eval `$dircolors -b /etc/DIR_COLORS`
+		fi
+
+		if ( $dircolors --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+			dircolor_text="${dircolor_text}\nSTICKY_OTHER_WRITABLE 01;04;34;40"
+			dircolor_text="${dircolor_text}\nOTHER_WRITABLE 01;34;40"
+		fi
+
+		eval `echo "${dircolor_text}" | $dircolors -b -`
+		break
 	fi
 done
 
