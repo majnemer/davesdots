@@ -7,7 +7,7 @@ if has ('multi_byte')      " Make sure we have unicode support
    scriptencoding utf-8    " This file is in UTF-8
 
    " ---- Terminal Setup ----
-   if (&termencoding == "" && (&term =~ "xterm" || &term =~ "putty")) || (&term =~ "rxvt-unicode")
+   if (&termencoding == "" && (&term =~ "xterm" || &term =~ "putty")) || (&term =~ "rxvt-unicode") || (&term =~ "screen")
       set termencoding=utf-8
    endif
    set encoding=utf-8      " Default encoding should always be UTF-8
@@ -20,17 +20,20 @@ set shiftwidth=4           " 4 spaces for indents
 set smarttab               " Tab next line based on current line
 "set expandtab             " Spaces for indentation
 set autoindent             " Automatically indent next line
-set smartindent            " Indent next line based on current line
+if has('smartindent')
+   set smartindent            " Indent next line based on current line
+endif
 "set linebreak             " Display long lines wrapped at word boundaries
 set incsearch              " Enable incremental searching
 set hlsearch               " Highlight search matches
-set ignorecase             " Ignore case when searching
+set ignorecase             " Ignore case when searching...
+set smartcase              " ...except when we don't want it
 set infercase              " Attempt to figure out the correct case
 set showfulltag            " Show full tags when doing completion
 set virtualedit=block      " Only allow virtual editing in block mode
 set lazyredraw             " Lazy Redraw (faster macro execution)
 set wildmenu               " Menu on completion please
-set wildmode=longest,full  " Match the longest substring, complete with first
+set wildmode=longest:full  " Match the longest substring, complete with first
 set wildignore=*.o,*~      " Ignore temp files in wildmenu
 set scrolloff=3            " Show 3 lines of context during scrolls
 set sidescrolloff=2        " Show 2 columns of context during scrolls
@@ -49,7 +52,7 @@ if has('syntax')
    syntax on
 endif
 
-if has('osfiletype')
+if has('eval')
    filetype on             " Detect filetype by extension
    filetype indent on      " Enable indents based on extensions
    filetype plugin on      " Load filetype plugins
@@ -82,10 +85,12 @@ if has('autocmd')
       autocmd BufReadPost * :call s:DetectDetectIndent()
    endif
 
-   autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+   if has('viminfo')
+      autocmd BufReadPost *
+         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+         \   exe "normal g`\"" |
+         \ endif
+   endif
 endif
 
 " ---- Spelling ----
@@ -259,6 +264,14 @@ endif
 " just continue
 nmap K K<cr>
 
+" some emacs-isms are OK
+map! <C-a> <Home>
+map <C-a> <Home>
+map! <C-e> <End>
+map <C-e> <End>
+map <C-k> d$
+imap <C-k> <Esc><Right>d$a
+
 " tabs
 map <C-S-Tab> :tabprevious<CR>
 imap <C-S-Tab> <Esc>:tabprevious<CR>i
@@ -304,8 +317,30 @@ elseif (&term !~ "cons")
    map! <C-?> <BS>
 endif
 
+if (&term =~ "^xterm")
+   map [H <Home>
+   map [F <End>
+endif
+
 " Python specific stuff
 if has('eval')
    let python_highlight_all = 1
    let python_slow_sync = 1
 endif
+
+" ---- OmniCpp ----
+if has('autocmd')
+   autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+endif
+
+set completeopt=menu,menuone,longest
+
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+map <C-F12> :!$HOME/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+" add current directory's generated tags file to available tags
+set tags+=./tags
