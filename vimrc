@@ -226,11 +226,16 @@ if has('autocmd')
       endfun
 
       autocmd FileType c,cpp :call <SID>cabbrev()
+
+      if filereadable(glob('~/.latex/Makefile')) && !filereadable(getcwd() . "/Makefile")
+         autocmd FileType tex set makeprg=make\ -f\ ~/.latex/Makefile
+      endif
    endif
 
    " make tab reindent in normal mode
    autocmd FileType c,cpp,cs,java nmap <Tab> =0<CR>
 endif
+
 
 " tab indents selection
 vmap <silent> <Tab> >gv
@@ -329,18 +334,20 @@ if has('eval')
 endif
 
 " ---- OmniCpp ----
-if has('autocmd')
-   autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+if v:version >= 700
+   if has('autocmd')
+      autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+   endif
+
+   set completeopt=menu,menuone,longest
+
+   let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+   let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+   let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+   let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+   let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+   let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+   map <C-F12> :!$HOME/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+   " add current directory's generated tags file to available tags
+   set tags+=./tags
 endif
-
-set completeopt=menu,menuone,longest
-
-let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
-map <C-F12> :!etags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
-" add current directory's generated tags file to available tags
-set tags+=./tags

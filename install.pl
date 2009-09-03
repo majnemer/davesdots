@@ -39,8 +39,7 @@ unless(eval {symlink('', ''); 1;}) {
 my %links = (
 	screenrc   => '.screenrc',
 	toprc      => '.toprc',
-	dircolors  => '.dircolors',
-	gdircolors => '.gdircolors',
+	dir_colors => '.dir_colors',
 	lessfilter => '.lessfilter',
 
 	vim      => '.vim',
@@ -78,6 +77,8 @@ my %links = (
 
 	caffeinate => 'bin/caffeinate',
 	lock       => 'bin/lock',
+
+	latex => '.latex',
 );
 
 my $i = 0; # Keep track of how many links we added
