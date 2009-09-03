@@ -29,31 +29,37 @@
 #
 fileinfo	:= LaTeX Makefile
 author		:= Chris Monson
-version		:= 2.1.24
-svninfo		:= $$Id: Makefile,v 1.1 2009/02/25 03:10:34 z8g Exp $$
+version		:= 2.1.30
+svninfo		:= $$Id$$
 #
 # If you specify sources here, all other files with the same suffix
 # will be treated as if they were _include_ files.
-#onlysources.tex	:= main.tex
-#onlysources.tex.sh	:=
-#onlysources.rst	:=
-#onlysources.fig	:=
-#onlysources.gpi	:=
-#onlysources.dot	:=
-#onlysources.xvg	:=
-#onlysources.eps.gz	:=
-#onlysources.eps	:=
+#onlysources.tex	?= main.tex
+#onlysources.tex.sh	?=
+#onlysources.rst	?=
+#onlysources.fig	?=
+#onlysources.gpi	?=
+#onlysources.dot	?=
+#onlysources.xvg	?=
+#onlysources.svg	?=
+#onlysources.eps.gz	?=
+#onlysources.eps	?=
 #
 # If you list files here, they will be treated as _include_ files
-#includes.tex		:= file1.tex file2.tex
-#includes.tex.sh	:=
-#includes.rst		:=
-#includes.fig		:=
-#includes.gpi		:=
-#includes.dot		:=
-#includes.xvg		:=
-#includes.eps.gz	:=
-#includes.eps		:=
+#includes.tex		?= file1.tex file2.tex
+#includes.tex.sh	?=
+#includes.rst		?=
+#includes.fig		?=
+#includes.gpi		?=
+#includes.dot		?=
+#includes.xvg		?=
+#includes.svg		?=
+#includes.eps.gz	?=
+#includes.eps		?=
+#
+# If you list files or wildcards here, they will *not* be cleaned - default is
+# to allow everything to be cleaned.
+#neverclean		?= *.pdf
 #
 # Alternatively (recommended), you can add those lines to a Makefile.ini file
 # and it will get picked up automatically without your having to edit this
@@ -92,6 +98,33 @@ svninfo		:= $$Id: Makefile,v 1.1 2009/02/25 03:10:34 z8g Exp $$
 #		graceful solution to this issue.
 #
 # CHANGES:
+# Chris Monson (2009-08-28):
+# 	* Bumped version to 2.1.30
+# 	* Closed issue 39: Capture multi-line log warnings/errors to output
+# Chris Monson (2009-08-26):
+# 	* Bumped version to 2.1.29
+# 	* Closed issue 42: add svg support using inkscape
+# Chris Monson (2009-08-17):
+# 	* Bumped version to 2.1.28
+# 	* Patch from paul.biggar for issue 38: package warnings are overlooked
+# Chris Monson (2009-08-07):
+# 	* Bumped version to 2.1.27
+# 	* Included patch for issue 37 - removes pdf/ps files before copying,
+# 		allowing some broken viewers to see changes properly.
+# Chris Monson (2009-05-15):
+# 	* Bumped version to 2.1.26
+# 	* Included patch for issue 9 from favonia - detects .fig changes for
+# 		pstex files during regular compilation, so long as the pstex
+# 		has been built at least once with make all-pstex.
+# Chris Monson (2009-03-27):
+# 	* Bumped version to 2.1.25
+# 	* Cleaned up a bunch of variable setting stuff - more stuff is now
+# 		settable from Makefile.ini
+# 	* Cleaned up documentation for various features, especially settable
+# 		variables.
+# 	* issue 28: support for png -> eps conversion (it even looks good!)
+# 	* issue 29: support for "neverclean" files in Makefile.ini
+# 	* issue 30: make ps2pdf14 the default - fall back when not there
 # Chris Monson (2009-03-09):
 # 	* Bumped version to 2.1.24
 # 	* issue 27: xmgrace support (thanks to rolandschulzhd)
@@ -376,37 +409,42 @@ svninfo		:= $$Id: Makefile,v 1.1 2009/02/25 03:10:34 z8g Exp $$
 # EXTERNAL PROGRAMS:
 # = ESSENTIAL PROGRAMS =
 # == Basic Shell Utilities ==
-CAT		:= cat
-CP		:= cp -f
-DIFF		:= diff
-ECHO		:= echo
-EGREP		:= egrep
-ENV		:= env
-MV		:= mv -f
-SED		:= sed
-SORT		:= sort
-TOUCH		:= touch
-UNIQ		:= uniq
-WHICH		:= which
-XARGS		:= xargs
+CAT		?= cat
+CP		?= cp -f
+DIFF		?= diff
+ECHO		?= echo
+EGREP		?= egrep
+ENV		?= env
+MV		?= mv -f
+SED		?= sed
+SORT		?= sort
+TOUCH		?= touch
+UNIQ		?= uniq
+WHICH		?= which
+XARGS		?= xargs
 # == LaTeX (tetex-provided) ==
-BIBTEX		:= bibtex
-DVIPS		:= dvips
-LATEX		:= latex
-MAKEINDEX	:= makeindex
-KPSEWHICH	:= kpsewhich
-PS2PDF_NORMAL	:= ps2pdf
-PS2PDF_EMBED	:= ps2pdf13
+BIBTEX		?= bibtex
+DVIPS		?= dvips
+LATEX		?= latex
+MAKEINDEX	?= makeindex
+KPSEWHICH	?= kpsewhich
+PS2PDF_NORMAL	?= ps2pdf
+PS2PDF_EMBED13	?= ps2pdf13
+PS2PDF_EMBED	?= ps2pdf14
 # = OPTIONAL PROGRAMS =
 # == Makefile Color Output ==
-TPUT		:= tput
+TPUT		?= tput
 # == TeX Generation ==
 RST2LATEX	?= rst2latex.py
 # == EPS Generation ==
 DOT		?= dot		# GraphViz
 FIG2DEV		?= fig2dev	# XFig
 GNUPLOT		?= gnuplot	# GNUplot
+INKSCAPE	?= inkscape	# Inkscape (svg support)
 XMGRACE		?= xmgrace	# XMgrace
+PNGTOPNM	?= pngtopnm	# From NetPBM - step 1 for png -> eps
+PPMTOPGM	?= ppmtopgm	# From NetPBM - (gray) step 2 for png -> eps
+PNMTOPS		?= pnmtops	# From NetPBM - step 3 for png -> eps
 GUNZIP		?= gunzip	# GZipped EPS
 # == Beamer Enlarged Output ==
 PSNUP		?= psnup
@@ -419,6 +457,18 @@ VIEW_GRAPHICS	?= display
 # (the builtin doesn't always understand -n)
 FIXED_ECHO	:= $(if $(findstring -n,$(shell $(ECHO) -n)),$(shell which echo),$(ECHO))
 ECHO		:= $(if $(FIXED_ECHO),$(FIXED_ECHO),$(ECHO))
+
+# Fall back to ps2pdf13 (and ultimately ps2pdf) if ps2pdf14 is not on the system:
+PS2PDF_EMBED	:= \
+	$(if \
+		$(shell $(WHICH) $(PS2PDF_EMBED)), \
+		$(PS2PDF_EMBED), \
+		$(if \
+			$(shell $(WHICH) $(PS2PDF_EMBED13)), \
+			$(PS2PDF_EMBED13), \
+			$(PS2PDF_NORMAL) \
+		) \
+	)
 
 # SH NOTES
 #
@@ -493,6 +543,12 @@ remove-files-helper	= $(if $1,$(RM) $1,:)
 
 # $(call remove-files,file1 file2)
 remove-files		= $(call remove-files-helper,$(wildcard $1))
+
+# Removes all cleanable files in the given list
+# $(call clean-files,file1 file2 file3 ...)
+# Works exactly like remove-files, but filters out files in $(neverclean)
+clean-files		= \
+	$(call remove-files-helper,$(call cleanable-files,$(wildcard $1)))
 
 # This removes files without checking whether they are there or not.  This
 # sometimes has to be used when the file is created by a series of shell
@@ -669,8 +725,15 @@ all_files.fig		:= $(wildcard *.fig)
 all_files.gpi		:= $(wildcard *.gpi)
 all_files.dot		:= $(wildcard *.dot)
 all_files.xvg		:= $(wildcard *.xvg)
+all_files.svg		:= $(wildcard *.svg)
+all_files.png		:= $(wildcard *.png)
 all_files.eps.gz	:= $(wildcard *.eps.gz)
 all_files.eps		:= $(wildcard *.eps)
+
+# Utility function for obtaining all files not specified in $(neverclean)
+# $(call cleanable-files,file1 file2 file3 ...)
+# Returns the list of files that is not in $(wildcard $(neverclean))
+cleanable-files = $(filter-out $(wildcard $(neverclean)), $1)
 
 # Utility function for getting all .$1 files that are to be ignored
 #  * files listed in $(includes.$1)
@@ -705,6 +768,8 @@ files.gpi	:= $(call filter-buildable,gpi)
 files.dot	:= $(call filter-buildable,dot)
 files.fig	:= $(call filter-buildable,fig)
 files.xvg	:= $(call filter-buildable,xvg)
+files.svg	:= $(call filter-buildable,svg)
+files.png	:= $(call filter-buildable,png)
 files.eps.gz	:= $(call filter-buildable,eps.gz)
 
 # Make all pstex targets secondary.  The pstex_t target requires the pstex
@@ -723,6 +788,8 @@ default_files.gpi	:= $(call filter-default,gpi)
 default_files.dot	:= $(call filter-default,dot)
 default_files.fig	:= $(call filter-default,fig)
 default_files.xvg	:= $(call filter-default,xvg)
+default_files.svg	:= $(call filter-default,svg)
+default_files.png	:= $(call filter-default,png)
 default_files.eps.gz	:= $(call filter-default,eps.gz)
 
 # Utility function for creating larger lists of files
@@ -732,15 +799,15 @@ concat-files	= $(foreach s,$1,$($(if $2,$2_,)files.$s))
 # Useful file groupings
 all_files_source	:= $(call concat-files,tex,all)
 all_files_scripts	:= $(call concat-files,tex.sh rst,all)
-all_files_graphics	:= $(call concat-files,fig gpi eps.gz xvg dot,all)
+all_files_graphics	:= $(call concat-files,fig gpi eps.gz xvg svg png dot,all)
 
 default_files_source	:= $(call concat-files,tex,default)
 default_files_scripts	:= $(call concat-files,tex.sh rst,default)
-default_files_graphics	:= $(call concat-files,fig gpi eps.gz xvg dot,default)
+default_files_graphics	:= $(call concat-files,fig gpi eps.gz xvg svg png dot,default)
 
 files_source	:= $(call concat-files,tex)
 files_scripts	:= $(call concat-files,tex.sh rst)
-files_graphics	:= $(call concat-files,fig gpi eps.gz xvg dot)
+files_graphics	:= $(call concat-files,fig gpi eps.gz xvg svg png dot)
 
 # Utility function for obtaining stems
 # $(call get-stems,suffix,[prefix])
@@ -754,6 +821,8 @@ all_stems.fig		:= $(call get-stems,fig,all)
 all_stems.gpi		:= $(call get-stems,gpi,all)
 all_stems.dot		:= $(call get-stems,dot,all)
 all_stems.xvg		:= $(call get-stems,xvg,all)
+all_stems.svg		:= $(call get-stems,svg,all)
+all_stems.png		:= $(call get-stems,png,all)
 all_stems.eps.gz	:= $(call get-stems,eps.gz,all)
 all_stems.eps		:= $(call get-stems,eps,all)
 
@@ -765,6 +834,8 @@ default_stems.fig		:= $(call get-stems,fig,default)
 default_stems.gpi		:= $(call get-stems,gpi,default)
 default_stems.dot		:= $(call get-stems,dot,default)
 default_stems.xvg		:= $(call get-stems,xvg,default)
+default_stems.svg		:= $(call get-stems,svg,default)
+default_stems.png		:= $(call get-stems,png,default)
 default_stems.eps.gz		:= $(call get-stems,eps.gz,default)
 
 # List of all stems (all possible bare PDF targets created here):
@@ -775,6 +846,8 @@ stems.fig		:= $(call get-stems,fig)
 stems.gpi		:= $(call get-stems,gpi)
 stems.dot		:= $(call get-stems,dot)
 stems.xvg		:= $(call get-stems,xvg)
+stems.svg		:= $(call get-stems,svg)
+stems.png		:= $(call get-stems,png)
 stems.eps.gz		:= $(call get-stems,eps.gz)
 
 # Utility function for creating larger lists of stems
@@ -783,7 +856,7 @@ concat-stems	= $(sort $(foreach s,$1,$($(if $2,$2_,)stems.$s)))
 
 all_stems_source	:= $(call concat-stems,tex,all)
 all_stems_script	:= $(call concat-stems,tex.sh rst,all)
-all_stems_graphic	:= $(call concat-stems,fig gpi eps.gz xvg dot,all)
+all_stems_graphic	:= $(call concat-stems,fig gpi eps.gz xvg svg png dot,all)
 all_stems_gray_graphic	:= $(addsuffix ._gray_,\
 	$(all_stems_graphic) $(all_stems.eps) \
 	)
@@ -796,7 +869,7 @@ all_stems_ssg		:= $(sort $(all_stems_ss) $(all_stems_gray))
 
 default_stems_source	:= $(call concat-stems,tex,default)
 default_stems_script	:= $(call concat-stems,tex.sh rst,default)
-default_stems_graphic	:= $(call concat-stems,fig gpi eps.gz xvg dot,default)
+default_stems_graphic	:= $(call concat-stems,fig gpi eps.gz xvg svg png dot,default)
 default_stems_gray_graphic	:= $(addsuffix ._gray_,$(default_stems_graphic))
 default_stems_gg	:= $(sort \
 	$(default_stems_graphic) $(default_stems_gray_graphic))
@@ -808,7 +881,7 @@ default_stems_ssg	:= $(sort $(default_stems_ss) $(default_stems_gray))
 
 stems_source		:= $(call concat-stems,tex)
 stems_script		:= $(call concat-stems,tex.sh rst)
-stems_graphic		:= $(call concat-stems,fig gpi eps.gz xvg dot)
+stems_graphic		:= $(call concat-stems,fig gpi eps.gz xvg svg png dot)
 stems_gray_graphic	:= $(addsuffix ._gray_,\
 	$(stems_graphic) $(all_stems.eps))
 stems_gg		:= $(sort $(stems_graphic) $(stems_gray_graphic))
@@ -983,6 +1056,7 @@ $(SED) \
 -e '/\.tex$$/p' \
 -e '/\.cls$$/p' \
 -e '/\.sty$$/p' \
+-e '/\.pstex_t$$/p' \
 -e 'd' \
 $1 | $(SORT) | $(UNIQ)
 endef
@@ -1219,18 +1293,58 @@ ps2pdf_embedded	:= \
 	-dMaxSubsetPct=100
 
 # Colorize LaTeX output.
+# This uses a neat trick from the Sed & Awk Book from O'Reilly:
+# 1) Ensure that the last line of the file gets appended to the hold buffer,
+# 	and blank it out to trigger end-of-paragraph logic below.
+# 2) When encountering a blank line (LaTeX output helpfully breaks output on
+# 	newlines)
+# 	a) swap the hold buffer (containing the paragraph) into the pattern buffer (putting a blank line into the hold buffer),
+# 	b) remove the newline at the beginning (don't ask),
+# 	c) apply any colorizing substitutions necessary to ensure happiness.
+# 	d) get the newline out of the hold buffer and append it
+# 	e) profit! (print)
+# 3) Anything not colorized is deleted, unless in verbose mode.
 color_tex	:= \
 	$(SED) \
-	-e '/^[[:space:]]*Output written/{' \
-	-e ' s/.*(\([^)]\{1,\}\)).*/Success!  Wrote \1/' \
-	-e ' s/[[:digit:]]\{1,\}/$(C_PAGES)&$(C_RESET)/g' \
-	-e ' s/Success!/$(C_SUCCESS)&$(C_RESET)/g' \
+	-e '$${' \
+	-e '  /^$$/!{' \
+	-e '    H' \
+	-e '    s/.*//' \
+	-e '  }' \
 	-e '}' \
-	-e 's/^! *LaTeX Error:.*/$(C_ERROR)&$(C_RESET)/' -e 't' \
-	-e 's/^LaTeX Warning:.*/$(C_WARNING)&$(C_RESET)/' -e 't' \
-	-e 's/^Underfull.*/$(C_UNDERFULL)&$(C_RESET)/' -e 't' \
-	-e 's/^Overfull.*/$(C_OVERFULL)&$(C_RESET)/' -e 't' \
-	$(if $(VERBOSE),,-e 'd')
+	-e '/^$$/!{' \
+	-e '  H' \
+	-e '  d' \
+	-e '}' \
+	-e '/^$$/{' \
+	-e '  x' \
+	-e '  s/^\n//' \
+	-e '  /^Output written/{' \
+	-e '    s/.*(\([^)]\{1,\}\)).*/Success!  Wrote \1/' \
+	-e '    s/[[:digit:]]\{1,\}/$(C_PAGES)&$(C_RESET)/g' \
+	-e '    s/Success!/$(C_SUCCESS)&$(C_RESET)/g' \
+	-e '    b end' \
+	-e '  }' \
+	-e '  /^! *LaTeX Error:.*/{' \
+	-e '    s//$(C_ERROR)&$(C_RESET)/' \
+	-e '    b end' \
+	-e '  }' \
+	-e '  /^.*Warning:.*/{' \
+	-e '    s//$(C_WARNING)&$(C_RESET)/' \
+	-e '    b end' \
+	-e '  }' \
+	-e '  /^Underfull.*/{' \
+	-e '    s//$(C_UNDERFULL)&$(C_RESET)/' \
+	-e '    b end' \
+	-e '  }' \
+	-e '  /^Overfull.*/{' \
+	-e '    s//$(C_OVERFULL)&$(C_RESET)/' \
+	-e '    b end' \
+	-e '  }' \
+	$(if $(VERBOSE),,-e '  d') \
+	-e '  :end' \
+	-e '  G' \
+	-e '}' \
 
 # Colorize BibTeX output.
 color_bib	:= \
@@ -1326,6 +1440,23 @@ $(call remove-temporary-files,$1head.make); \
 [ "$$success" = "1" ] && $(sh_true) || $(sh_false);
 endef
 
+# Creation of .eps files from .png files
+#
+# The intermediate step of PNM (using NetPBM) produces much nicer output than
+# ImageMagick's "convert" binary.  I couldn't get the right combination of
+# flags to make it look nice, anyway.
+#
+# To handle gray scale conversion, we pipe things through ppmtopgm in the
+# middle.
+#
+# $(call convert-png,<png file>,<eps file>)
+define convert-png
+$(PNGTOPNM) "$1" \
+	$(if $3,| $(PPMTOPGM),) \
+	| $(PNMTOPS) -noturn \
+	> "$2"
+endef
+
 # Creation of .eps files from .fig files
 # $(call convert-fig,<fig file>,<eps file>,[gray])
 convert-fig	= $(FIG2DEV) -L eps $(if $3,-N,) $1 $2
@@ -1348,6 +1479,11 @@ $(RST2LATEX) \
 	$(if $(rst_style_file),--stylesheet=$(rst_style_file),) \
 	$1 $2
 endef
+
+# Converts svg files into .eps files
+#
+# $(call convert-svg,<svg file>,<eps file>,[gray])
+convert-svg	= $(INKSCAPE) --export-eps='$2' '$1'
 
 # Converts xvg files into .eps files
 #
@@ -1565,6 +1701,7 @@ endif
 	$(QUIET)$(call make-pdf,$<,$@.temp,$@.log,$*.embed.make); \
 	if [ x"$$?" = x"0" ]; then \
 	    $(if $(VERBOSE),$(CAT) $@.log,:); \
+	    $(RM) -f '$@'; \
 	    $(MV) '$@.temp' '$@'; \
 	else \
 	    $(CAT) $@.log; \
@@ -1579,6 +1716,7 @@ endif
 			$(firstword $(shell $(CAT) $*.paper.make))); \
 	if [ x"$$?" = x"0" ]; then \
 	    $(if $(VERBOSE),$(CAT) $@.log,:); \
+	    $(RM) -f '$@'; \
 	    $(MV) '$@.temp' '$@'; \
 	else \
 	    $(CAT) $@.log; \
@@ -1766,6 +1904,14 @@ $(gray_eps_file):
 	$(QUIET)$(call echo-graphic,$^,$@)
 	$(QUIET)$(call convert-xvg,$<,$@,1)
 
+%._gray_.eps: %.svg $(gray_eps_file)
+	$(QUIET)$(call echo-graphic,$^,$@)
+	$(QUIET)$(call convert-svg,$<,$@,1)
+
+%._gray_.eps: %.png $(gray_eps_file)
+	$(QUIET)$(call echo-graphic,$^,$@)
+	$(QUIET)$(call convert-png,$<,$@,1)
+
 %._gray_.eps: %.eps.gz $(gray_eps_file)
 	$(QUIET)$(call echo-graphic,$^,$@)
 	$(QUIET)$(call convert-epsgz,$<,$@,1)
@@ -1797,6 +1943,14 @@ $(gray_eps_file):
 %.eps: %.xvg $(if $(GRAY),$(gray_eps_file))
 	$(QUIET)$(call echo-graphic,$^,$@)
 	$(QUIET)$(call convert-xvg,$<,$@,$(GRAY))
+
+%.eps: %.svg $(if $(GRAY),$(gray_eps_file))
+	$(QUIET)$(call echo-graphic,$^,$@)
+	$(QUIET)$(call convert-svg,$<,$@,$(GRAY))
+
+%.eps: %.png $(if $(GRAY),$(gray_eps_file))
+	$(QUIET)$(call echo-graphic,$^,$@)
+	$(QUIET)$(call convert-png,$<,$@,$(GRAY))
 
 %.eps: %.eps.gz $(if $(GRAY),$(gray_eps_file))
 	$(QUIET)$(call echo-graphic,$^,$@)
@@ -2042,11 +2196,11 @@ endif
 #
 .PHONY: clean-deps
 clean-deps:
-	$(QUIET)$(call remove-files,$(all_d_targets) *.make *.make.temp *.cookie)
+	$(QUIET)$(call clean-files,$(all_d_targets) *.make *.make.temp *.cookie)
 
 .PHONY: clean-tex
 clean-tex: clean-deps
-	$(QUIET)$(call remove-files,$(rm_tex))
+	$(QUIET)$(call clean-files,$(rm_tex))
 
 .PHONY: clean-graphics
 # TODO: This *always* deletes pstex files, even if they were not generated by
@@ -2056,15 +2210,15 @@ clean-tex: clean-deps
 # even want to keep pstex functionality, so my motivation is not terribly high
 # for doing it right.
 clean-graphics:
-	$(QUIET)$(call remove-files,$(all_graphics_targets) *.gpi.d *.pstex *.pstex_t)
+	$(QUIET)$(call clean-files,$(all_graphics_targets) *.gpi.d *.pstex *.pstex_t)
 
 .PHONY: clean-backups
 clean-backups:
-	$(QUIET)$(call remove-files,$(backup_patterns) *.temp)
+	$(QUIET)$(call clean-files,$(backup_patterns) *.temp)
 
 .PHONY: clean-auxiliary
 clean-auxiliary:
-	$(QUIET)$(call remove-files,$(graph_stem).*)
+	$(QUIET)$(call clean-files,$(graph_stem).*)
 
 .PHONY: clean-nographics
 clean-nographics: clean-tex clean-deps clean-backups clean-auxiliary ;
@@ -2129,6 +2283,28 @@ define help_text
 #
 #        make -d SHELL_DEBUG=1 VERBOSE=1 2>&1 | less
 #
+# STANDARD AUXILIARY FILES:
+#
+#      Makefile.ini
+#
+#          This file can contain variable declarations that override various
+#          aspects of the makefile.  For example, one might specify
+#
+#          neverclean := *.pdf *.ps
+#          onlysources.tex := main.tex
+#          PS2PDF_EMBED := ps2pdf14
+#          LATEX_COLOR_WARNING := 'bold red uline'
+#
+#          And this would override the neverclean setting to ensure that pdf
+#          and ps files always remain behind, set the makefile to treat all
+#          .tex files that are not "main.tex" as includes (and therefore not
+#          default targets), and ps2pdf14 as the proper ps to pdf conversion
+#          program for embedded fonts.  It also changes the LaTeX warning
+#          output to be red, bold, and underlined.
+#
+#          There are numerous variables in this file that can be overridden in
+#          this way.  Search for '?=' to find them all.
+#
 # STANDARD ENVIRONMENT VARIABLES:
 #
 #      LATEX_COLOR_WARNING		'$(LATEX_COLOR_WARNING)'
@@ -2189,6 +2365,14 @@ define help_text
 #        dependency detection.  All other .tex files will be considered as
 #        include files.  Note that these options work for *any* source type,
 #        so you could do something similar with includes.gpi, for example.
+#        Note that this works for *any valid source* target.  All of the
+#        onlysources.* variables are commented out in the shipping version of
+#        this file, so it does the right thing when they simply don't exist.
+#        The comments are purely documentation.  If you know, for example, that
+#        file.mycoolformat is supported by this Makefile, but don't see the
+#        "onlysources.mycoolformat" declared in the comments, that doesn't mean
+#        you can't use it.  Go ahead and set "onlysources.mycoolformat" and it
+#        should do the right thing.
 #
 #    show:
 #        Builds and displays all documents in this directory.  It uses the
@@ -2208,6 +2392,12 @@ define help_text
 #
 #    clean:
 #        Remove ALL generated files, leaving only source intact.
+#        This will *always* skip files mentioned in the "neverclean" variable,
+#        either in this file or specified in Makefile.ini:
+#        
+#        	neverclean := *.pdf *.ps
+#
+#       The neverclean variable works on all "clean" targets below, as well.
 #
 #    clean-graphics:
 #        Remove all generated graphics files.
@@ -2345,6 +2535,8 @@ define help_text
 #       .gpi    : gnuplot
 #       .fig    : xfig
 #       .xvg    : xmgrace
+#       .svg	: scalable vector graphics (goes through inkscape)
+#       .png	: png (goes through NetPBM)
 #       .eps.gz : gzipped eps
 #
 #       The behavior of this makefile with each type is described in
@@ -2472,6 +2664,8 @@ define help_text
 #        GNUPlot:       .gpi
 #        XFig:          .fig
 #        XMgrace:       .xvg
+#        SVG:		.svg
+#        PNG:		.png
 #        GZipped EPS:   .eps.gz
 #
 #        If the file exists as a .eps already, it is merely used (and will not
