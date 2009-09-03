@@ -226,11 +226,16 @@ if has('autocmd')
       endfun
 
       autocmd FileType c,cpp :call <SID>cabbrev()
+
+      if filereadable(glob('~/.latex/Makefile')) && !filereadable(getcwd() . "/Makefile")
+         autocmd FileType tex set makeprg=make\ -f\ ~/.latex/Makefile
+      endif
    endif
 
    " make tab reindent in normal mode
    autocmd FileType c,cpp,cs,java nmap <Tab> =0<CR>
 endif
+
 
 " tab indents selection
 vmap <silent> <Tab> >gv
