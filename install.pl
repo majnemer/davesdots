@@ -91,7 +91,7 @@ for my $file (keys %links) {
 
 	# If a link already exists, see if it points to this file. If so, skip it.
 	# This prevents extra warnings caused by previous runs of install.pl.
-	if(-e $dest && -l $dest) {
+	if(!$force && -e $dest && -l $dest) {
 		next if readlink($dest) eq $src;
 	}
 
