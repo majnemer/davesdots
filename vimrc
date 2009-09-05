@@ -33,7 +33,7 @@ set showfulltag            " Show full tags when doing completion
 set virtualedit=block      " Only allow virtual editing in block mode
 set lazyredraw             " Lazy Redraw (faster macro execution)
 set wildmenu               " Menu on completion please
-set wildmode=longest:full  " Match the longest substring, complete with first
+set wildmode=longest,full  " Match the longest substring, complete with first
 set wildignore=*.o,*~      " Ignore temp files in wildmenu
 set scrolloff=3            " Show 3 lines of context during scrolls
 set sidescrolloff=2        " Show 2 columns of context during scrolls
@@ -115,6 +115,7 @@ endif
 " Enable modelines only on secure vim
 if (v:version == 603 && has("patch045")) || (v:version > 603)
    set modeline
+   set modelines=3
 else
    set nomodeline
 endif
@@ -230,12 +231,23 @@ if has('autocmd')
       if filereadable(glob('~/.latex/Makefile')) && !filereadable(getcwd() . "/Makefile")
          autocmd FileType tex set makeprg=make\ -f\ ~/.latex/Makefile
       endif
+
+      autocmd BufRead,BufNewFile *.mm set filetype=noweb
    endif
 
    " make tab reindent in normal mode
    autocmd FileType c,cpp,cs,java nmap <Tab> =0<CR>
 endif
 
+" Append modeline after last line in buffer.
+" Use substitute() (not printf()) to handle '%%s' modeline in LaTeX files.
+function! AppendModeline()
+   let save_cursor = getpos('.')
+   let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.': '
+   $put =substitute(&commentstring, '%s', append, '')
+   call setpos('.', save_cursor)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " tab indents selection
 vmap <silent> <Tab> >gv
