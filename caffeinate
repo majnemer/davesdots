@@ -4,6 +4,10 @@
 
 use strict;
 use warnings;
+use LWP::Debug ();
+
+# LWP::Authen::Negotiate is the Perl module that makes kerberos authenitcation
+# magically work
 
 my $URL    = 'https://www-s.acm.uiuc.edu/caffeine';
 
