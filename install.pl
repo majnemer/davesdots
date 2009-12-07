@@ -96,10 +96,10 @@ for my $file (keys %links) {
 	}
 
 	# Remove the destination if it exists and we were told to force an overwrite
-	if($force && -f $dest) {
-		unlink($dest) || warn "Couldn't unlink '$dest': $!\n";
-	} elsif($force && -d $dest) {
+	if($force && -d $dest) {
 		rmtree($dest) || warn "Couldn't rmtree '$dest': $!\n";
+	} elsif($force) {
+		unlink($dest) || warn "Couldn't unlink '$dest': $!\n";
 	}
 
 	symlink($src => $dest) ? $i++ : warn "Couldn't link '$src' to '$dest': $!\n";
