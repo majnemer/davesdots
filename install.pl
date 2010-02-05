@@ -77,6 +77,8 @@ my %links = (
 	caffeinate => 'bin/caffeinate',
 	lock       => 'bin/lock',
 
+	'git-untrack-ignored' => 'bin/git-untracked-ignored',
+
 	latex => '.latex',
 );
 
