@@ -6,7 +6,10 @@
 	move   = mv
 	ren    = mv
 	rename = mv
-	up = pull
+	up     = !git pull --rebase
+	update = !git pull --rebase
+	svnup     = !git stash && git svn rebase && git stash apply
+	svnupdate = !git stash && git svn rebase && git stash apply
 	stat = status
 	del    = rm
 	delete = rm
@@ -14,6 +17,9 @@
 	export = archive
 	ann    = blame
 	praise = blame
+	cat  = show
+	list = show
+	ls   = show
 [color]
 	diff = auto
 	status = auto
