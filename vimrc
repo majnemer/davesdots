@@ -281,13 +281,23 @@ endif
 " just continue
 nmap K K<cr>
 
+" stolen from auctex.vim
+function! EmacsKill()
+   if col(".") == strlen(getline(line(".")))+1
+      let @" = "\<CR>"
+      return "\<Del>"
+   else
+      return "\<C-O>D"
+   endif
+endfunction
+
 " some emacs-isms are OK
 map! <C-a> <Home>
 map <C-a> <Home>
 map! <C-e> <End>
 map <C-e> <End>
 map <C-k> d$
-imap <C-k> <Esc><Right>Di<Right>
+inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
 
 " Disable q and Q
 map q <Nop>
