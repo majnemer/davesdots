@@ -38,7 +38,7 @@ set wildignore=*.o,*~      " Ignore temp files in wildmenu
 set scrolloff=3            " Show 3 lines of context during scrolls
 set sidescrolloff=2        " Show 2 columns of context during scrolls
 set backspace=2            " Normal backspace behavior
-"set textwidth=80          " Break lines at 80 characters
+"set textwidth=80           " Break lines at 80 characters
 set hidden                 " Allow flipping of buffers without saving
 set noerrorbells           " Disable error bells
 set visualbell             " Turn visual bell on
@@ -138,9 +138,9 @@ if has('eval')
    endfun
 
    if has("gui_running")
-      call LoadColorScheme("wombat:desert")
+      call LoadColorScheme("wombat:twilight256:desert")
    elseif &t_Co == 256
-      call LoadColorScheme("wombat:inkpot")
+      call LoadColorScheme("wombat:twilight256:inkpot")
    elseif &t_Co == 88
       call LoadColorScheme("wombat:zellner")
    else
@@ -287,21 +287,7 @@ map <C-a> <Home>
 map! <C-e> <End>
 map <C-e> <End>
 map <C-k> d$
-imap <C-k> <Esc><Right>d$a
-
-" tabs
-map <C-S-Tab> :tabprevious<CR>
-imap <C-S-Tab> <Esc>:tabprevious<CR>i
-map <S-Left> :tabprevious<CR>
-imap <S-Left> <Esc>:tabprevious<CR>i
-
-map <C-Tab> :tabnext<CR>
-imap <C-Tab> <Esc>:tabnext<CR>i
-map <S-Right> :tabnext<CR>
-imap <S-Right> <Esc>:tabnext<CR>i
-
-nmap <C-t> :tabnew<CR>
-imap <C-t> <Esc>:tabnew<CR>i
+imap <C-k> <Esc><Right>Di<Right>
 
 " Disable q and Q
 map q <Nop>
@@ -363,3 +349,5 @@ if v:version >= 700
    " add current directory's generated tags file to available tags
    set tags+=./tags
 endif
+
+set t_RV=
