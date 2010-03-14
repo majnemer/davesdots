@@ -21,14 +21,15 @@ case $TERM in
 		bindkey '\e[1;5D' emacs-backward-word
 		bindkey '\e[5C' emacs-forward-word
 		bindkey '\e[5D' emacs-backward-word
-		bindkey '\e05C' emacs-forward-word
-		bindkey '\e05D' emacs-backward-word
+		bindkey '\eO5C' emacs-forward-word
+		bindkey '\eO5D' emacs-backward-word
 		bindkey '\eOC' emacs-forward-word
 		bindkey '\eOD' emacs-backward-word
 		bindkey '\eOc' emacs-forward-word
 		bindkey '\eOd' emacs-backward-word
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
+		bindkey '\M-B\M-^H' backward-kill-word
 	;;
 	mlterm|kterm)
 		bindkey '\e[H' beginning-of-line

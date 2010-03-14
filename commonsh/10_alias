@@ -85,6 +85,10 @@ case `uname -s` in
 	;;
 esac
 
+if ( command -v gobjdump >/dev/null 2>&1 ) ; then
+	alias objdump=gobjdump
+fi
+
 alias rm='rm -ir'
 
 alias df='df -h'

@@ -15,7 +15,7 @@ set guioptions-=a       " Share the copy buffer with visual mode
 " gtk tabs are ugly
 if has('gui_gtk')
     set guioptions-=e       " Kill off the GUI tabs
-    set guifont=Monospace\ 9
+    set guifont=monospace\ 9
 elseif exists('&antialias')
-    set guifont=Monospace:h12
+    set guifont=monospace:h12
 endif

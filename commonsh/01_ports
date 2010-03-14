@@ -5,3 +5,5 @@ concat_path "/opt/local/bin"
 concat_path "/opt/local/sbin"
 concat_path "/opt/local/libexec"
 
+concat_path "${HOME}/homebrew/bin"
+concat_manpath "${HOME}/homebrew/share/man"

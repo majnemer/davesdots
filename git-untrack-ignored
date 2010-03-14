@@ -1,0 +1,52 @@
+#!/usr/bin/perl -w
+# moderately tested script to untrack files that are listed in .gitignore
+
+use strict;
+use Getopt::Long;
+
+my $dry_run   = 0;
+my $help_me   = 0;
+GetOptions(
+	'dry-run!'    => \$dry_run,
+	'h|help|?'    => \$help_me,
+);
+
+if ($help_me) {
+	print "$0: runs 'git rm --cached' for all the files in your .gitignore\n";
+	print "(This makes them untracked but not deleted)\n";
+	print "Options: --dry-run: just print out which files we would remove\n";
+	exit;
+}
+
+open my $fh, '<', '.gitignore' or die "Couldn't find/open .gitignore: $!";
+my @patterns = <$fh>;
+close $fh;
+chomp @patterns;
+
+apply_patterns('.', @patterns);
+
+sub apply_patterns {
+	my $dir = shift;
+	#print "at $dir\n";
+	my @patterns = @_;
+
+	for my $pattern (@patterns) {
+		if ($pattern =~ /^\s*#/ || $pattern =~ /^\s*$/) {
+			next;
+		} elsif ($pattern =~ /^\s*!/) {
+			print "ignoring negating pattern\n";
+		}
+
+		my @files = glob($pattern);
+
+		for my $file (grep {-e $_} map {"$dir/$_"} @files) {
+			if ($dry_run) {
+				print "unstage $file\n";
+			} else {
+				system('git', 'rm', '-q', '--ignore-unmatch', '--cached', $file);
+			}
+		}
+	}
+
+	apply_patterns($_, @patterns) for grep {-d} glob($dir . '/*');
+}
