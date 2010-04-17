@@ -7,7 +7,7 @@ bindkey ' ' magic-space
 bindkey -M emacs '\ee' edit-command-line
 
 case $TERM in
-	screen|xterm*|putty*)
+	screen*|xterm*|putty*)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[F' end-of-line
 		bindkey '\eOH' beginning-of-line
