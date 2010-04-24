@@ -1,9 +1,13 @@
 import XMonad
 import qualified XMonad.StackSet as W
 
+import XMonad.Actions.CycleWS
+
 import XMonad.Layout.Grid
+import XMonad.Layout.Tabbed
 import XMonad.Layout.NoBorders(smartBorders)
 
+import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 
@@ -17,7 +21,12 @@ import XMonad.Prompt.Window
 
 import System.IO(hPutStrLn)
 
-myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
+-- Things that should always float
+myFloatHook = composeAll [
+	className =? "qemu" --> doFloat
+	]
+
+myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| simpleTabbed
 	where
 		-- default tiling algorithm partitions the screen into two panes
 		tiled   = Tall nmaster delta ratio
@@ -34,10 +43,11 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| Full
 main = do
 	xmproc <- spawnPipe "xmobar"
 	xmonad $ defaultConfig
-			{ manageHook = manageDocks <+> manageHook defaultConfig <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
-			, layoutHook = avoidStruts  $  smartBorders $ myLayoutHook
+			{ manageHook = manageDocks <+> myFloatHook <+> manageHook defaultConfig <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
+			, layoutHook = avoidStruts $ smartBorders $ myLayoutHook
 			, logHook    = dynamicLogWithPP $ xmobarPP
 				{ ppOutput = hPutStrLn xmproc
+				, ppUrgent = xmobarColor "#cc0000" "" . wrap "**" "**"
 				, ppTitle  = xmobarColor "#8AE234" ""
 				}
 			}
@@ -47,5 +57,16 @@ main = do
 			, ("M-a", windowPromptBring defaultXPConfig { position = Top })
 			, ("M-x", sendMessage ToggleStruts)
 			, ("M-S-l", spawn "~/bin/lock")
+			, ("M-<Left>", moveTo Prev HiddenNonEmptyWS)
+			, ("M-S-<Left>", shiftToPrev)
+			, ("M-<Right>", moveTo Next HiddenNonEmptyWS)
+			, ("M-S-<Right>", shiftToNext)
+			, ("M-<Up>", windows W.focusUp)
+			, ("M-S-<Up>", windows W.swapUp)
+			, ("M-<Down>", windows W.focusDown)
+			, ("M-S-<Down>", windows W.swapDown)
+			, ("M-`", toggleWS)
+			, ("M-s", moveTo Next EmptyWS)
+			, ("M-S-s", shiftTo Next EmptyWS)
 			, ("M-g", scratchpadSpawnAction defaultConfig)
 			]
