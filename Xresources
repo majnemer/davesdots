@@ -34,6 +34,8 @@ XTerm*color13: #AD7FA8
 XTerm*color14: #34E2E2
 XTerm*color15: #EEEEEC
 
+XTerm*toolBar: false
+
 /* UXTerm */
 UXTerm*faceSize: 9
 UXTerm*faceName: Monospace
@@ -63,6 +65,8 @@ UXTerm*color12: #729FCF
 UXTerm*color13: #AD7FA8
 UXTerm*color14: #34E2E2
 UXTerm*color15: #EEEEEC
+
+UXTerm*toolBar: false
 
 /* URxvt */
 URxvt*font: xft:Monospace-9

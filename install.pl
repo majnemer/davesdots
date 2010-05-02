@@ -81,6 +81,8 @@ my %links = (
 	'git-untrack-ignored' => 'bin/git-untracked-ignored',
 
 	latex => '.latex',
+
+	gdbinit => '.gdbinit',
 );
 
 my $i = 0; # Keep track of how many links we added
