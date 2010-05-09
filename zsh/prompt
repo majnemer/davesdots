@@ -1,11 +1,21 @@
 # prompt
 if [ "${TERM}" != "dumb" ] ; then
+	RESETCOLOR=$'%{\e[00;00m%}'
 	if [ -z "${SSH_TTY}" ] ; then
-		PROMPT=$'%{\e[00;00m%}%{\e[01;32m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+		HOSTCOLOR=$'%{\e[01;32m%}'
 	else
-		PROMPT=$'%{\e[00;00m%}%{\e[01;36m%}%n@%m %{\e[01;34m%}%~ %(?..%{\e[01;31m%})%(!.#.$) %{\e[00;00m%}'
+		HOSTCOLOR=$'%{\e[01;36m%}'
 	fi
-	RPROMPT=$'%{\e[00;00m%}%{\e[00;00m%}%1(j.%{\e[00;36m%}[%j].)%(?..%{\e[00;31m%}[%?])%{\e[01;33m%}%{\e[01;33m%}[%t]%{\e[00;00m%}'
+	PATHCOLOR=$'%{\e[01;34m%}'
+	ERRORCOLOR=$'%{\e[00;31m%}'
+	BOLDERRORCOLOR=$'%{\e[01;31m%}'
+	CLOCKCOLOR=$'%{\e[01;33m%}'
+	JOBCOLOR=$'%{\e[00;36m%}'
+	RPROMPT=${RESETCOLOR}$'%1(j.'${JOBCOLOR}$'[%j].)%(?..'${ERRORCOLOR}$'[%?])'${CLOCKCOLOR}$'[%t]'${RESETCOLOR}
 else
-	PROMPT=$'%n@%m %~ %(?..)%(!.#.$)'
+	RESETCOLOR=''
+	HOSTCOLOR=''
+	PATHCOLOR=''
+	BOLDERRORCOLOR=''
 fi
+PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@%m '${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}

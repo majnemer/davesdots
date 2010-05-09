@@ -2,7 +2,9 @@
 WORDCHARS=''
 
 # disable core dumps
-limit coredumpsize 0
+if ( limit coredumpsize >/dev/null 2>&1) ; then
+    limit coredumpsize 0
+fi
 
 # clear on exit
 trap clear 0

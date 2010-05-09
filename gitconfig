@@ -20,6 +20,8 @@
 	cat  = show
 	list = show
 	ls   = show
+
+	untrack-ignored = !git-untracked-ignored
 [color]
 	diff = auto
 	status = auto

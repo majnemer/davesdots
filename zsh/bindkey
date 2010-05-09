@@ -7,7 +7,7 @@ bindkey ' ' magic-space
 bindkey -M emacs '\ee' edit-command-line
 
 case $TERM in
-	screen|xterm*|putty*)
+	screen*|xterm*|putty*)
 		bindkey '\e[H' beginning-of-line
 		bindkey '\e[F' end-of-line
 		bindkey '\eOH' beginning-of-line
@@ -30,6 +30,7 @@ case $TERM in
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
 		bindkey '\M-B\M-^H' backward-kill-word
+		bindkey '\M-C\M-?' backward-kill-word
 	;;
 	mlterm|kterm)
 		bindkey '\e[H' beginning-of-line
@@ -72,6 +73,9 @@ case $TERM in
 	cygwin*)
 		bindkey '\e[1~' beginning-of-line
 		bindkey '\e[4~' end-of-line
+		bindkey '\e[1;5C' emacs-forward-word
+		bindkey '\e[1;5D' emacs-backward-word
+		bindkey '\e[3~' delete-char
 	;;
 esac
 

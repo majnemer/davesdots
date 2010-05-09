@@ -1,7 +1,8 @@
-#!/usr/bin/perl -w
+#! /usr/bin/env perl
 # moderately tested script to untrack files that are listed in .gitignore
 
 use strict;
+use warnings;
 use Getopt::Long;
 
 my $dry_run   = 0;

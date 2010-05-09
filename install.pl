@@ -38,6 +38,7 @@ unless(eval {symlink('', ''); 1;}) {
 
 my %links = (
 	screenrc   => '.screenrc',
+	ackrc      => '.ackrc',
 	toprc      => '.toprc',
 	dir_colors => '.dir_colors',
 	lessfilter => '.lessfilter',
@@ -80,6 +81,8 @@ my %links = (
 	'git-untrack-ignored' => 'bin/git-untracked-ignored',
 
 	latex => '.latex',
+
+	gdbinit => '.gdbinit',
 );
 
 my $i = 0; # Keep track of how many links we added
