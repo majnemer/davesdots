@@ -3,7 +3,7 @@
 # Trivial modifications: David Majnemer
 # vim:set nowrap:
 
-autoload compinit; compinit -d "${HOME}/.zsh/.zcompdump"
+autoload compinit; compinit -d "${HOME}/.zsh/.zcompdump-${HOST}"
 
 autoload age
 autoload zmv
