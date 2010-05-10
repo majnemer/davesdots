@@ -23,3 +23,6 @@ if [ $PAGER = less ] ; then
 	LESS='-R -M'
 	export LESS
 fi
+
+GIT_PAGER=''
+export GIT_PAGER
