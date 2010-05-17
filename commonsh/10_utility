@@ -42,7 +42,7 @@ extract ()
       *.tar.z)
          uncompress -c "${1}" | tar xf -
       ;;
-      *.tar.bz2|*.tbz2)
+      *.tar.bz2|*.tbz2|*.tbz)
          bzcat "${1}" | tar xf -
       ;;
       *.zip|*.jar)
