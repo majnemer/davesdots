@@ -22,6 +22,7 @@
 	ls   = show
 
 	untrack-ignored = !git-untracked-ignored
+	amend = commit --amend -C HEAD
 [color]
 	diff = auto
 	status = auto
