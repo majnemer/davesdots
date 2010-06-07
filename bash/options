@@ -6,6 +6,9 @@ export HISTSIZE=1000
 # ignore both duplicates and whitespace in history
 export HISTCONTROL=ignoreboth
 
+# save multiline history as one entry
+shopt -s cmdhist
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -14,3 +17,8 @@ shopt -s histappend
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# extended globing enabled
+shopt -s extglob
+
+ulimit -c 0

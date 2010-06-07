@@ -2,33 +2,37 @@
 WORDCHARS=''
 
 # disable core dumps
-if ( limit coredumpsize >/dev/null 2>&1) ; then
-    limit coredumpsize 0
+if ( ulimit -c >/dev/null 2>&1 ) ; then
+	ulimit -c 0
 fi
 
 # clear on exit
 trap clear 0
 
 # shell options
-setopt AUTO_CD             # directoy command does cd
-setopt CORRECT             # correct spelling of commands
-setopt AUTO_PUSHD          # cd uses directory stack
-setopt CHASE_DOTS          # resolve .. in cd
-setopt CHASE_LINKS         # resolve symbolic links in cd
-setopt CDABLE_VARS         # cd var works if $var is a directory
-setopt PUSHD_SILENT        # make pushd quiet
-setopt ALWAYS_TO_END       # goto end of word on completion
-setopt EXTENDED_GLOB       # use zsh globbing extensions
-setopt SH_WORD_SPLIT       # split non-array variables
-setopt BASH_AUTO_LIST      # list completions on second tab
-setopt LIST_ROWS_FIRST     # list completions across
-setopt COMPLETE_IN_WORD    # completion works inside words
-setopt MAGIC_EQUAL_SUBST   # special expansion after all =
-
-unsetopt BEEP              # stop beeping!
-unsetopt LIST_BEEP         # seriously, stop beeping!
+setopt ALWAYS_TO_END          # goto end of word on completion
+setopt AUTO_CD                # directoy command does cd
+setopt AUTO_PUSHD             # cd uses directory stack
+setopt BASH_AUTO_LIST         # list completions on second tab
+setopt CDABLE_VARS            # cd var works if $var is a directory
+setopt CHASE_DOTS             # resolve .. in cd
+setopt CHASE_LINKS            # resolve symbolic links in cd
+setopt COMPLETE_IN_WORD       # completion works inside words
+setopt CORRECT                # correct spelling of commands
+setopt EXTENDED_GLOB          # use zsh globbing extensions
+setopt INTERACTIVE_COMMENTS   # allow comments in interactive shells
+setopt LIST_ROWS_FIRST        # list completions across
+setopt MAGIC_EQUAL_SUBST      # special expansion after all =
+setopt PUSHD_SILENT           # make pushd quiet
+setopt PROMPT_SUBST           # allow substitutions in the prompt
+setopt SH_WORD_SPLIT          # split non-array variables
 
 unsetopt NO_MATCH          # dont error on no glob matches
+
+# (disable) beeping
+unsetopt BEEP              # stop beeping!
+unsetopt HIST_BEEP         # really, stop beeping!
+unsetopt LIST_BEEP         # seriously, stop beeping!
 
 # history
 export HISTSIZE=1000
