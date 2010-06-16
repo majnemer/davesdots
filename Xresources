@@ -4,6 +4,7 @@ Xft*antialias: true
 
 /* XTerm */
 XTerm*utf8: 1
+XTerm*class: UXTerm
 
 XTerm*faceSize: 9
 XTerm*faceName: Monospace
