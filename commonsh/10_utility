@@ -8,6 +8,16 @@ unkey_host ()
    sed -i -e "/$1/d" $HOME/.ssh/known_hosts
 }
 
+err ()
+{
+   if [ -e /usr/include/errno.h ] ; then
+      cpp -dM /usr/include/errno.h | grep -w "E.* $@"
+   fi
+   if ( command -v perl > /dev/null 2>&1 ) ; then
+      perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $@
+   fi
+}
+
 mkcd ()
 {
    if [ -d "$1" ] ; then
