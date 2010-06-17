@@ -11,7 +11,7 @@ unkey_host ()
 err ()
 {
    if ( command -v ruby > /dev/null 2>&1 ); then
-      ruby -e "Errno.constants.map{|errstr| errno = eval('Errno::' + errstr + '::Errno'); puts errstr if errno == $@}"
+      ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == $@ }"
    elif [ -e /usr/include/errno.h ] ; then
       cpp -dM /usr/include/errno.h | grep -w "E.* $@"
    fi
