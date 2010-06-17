@@ -10,11 +10,16 @@ unkey_host ()
 
 err ()
 {
-   if [ -e /usr/include/errno.h ] ; then
+   if ( command -v ruby > /dev/null 2>&1 ); then
+      ruby -e "Errno.constants.map{|errstr| errno = eval('Errno::' + errstr + '::Errno'); puts errstr if errno == $@}"
+   elif [ -e /usr/include/errno.h ] ; then
       cpp -dM /usr/include/errno.h | grep -w "E.* $@"
    fi
+
    if ( command -v perl > /dev/null 2>&1 ) ; then
       perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $@
+   elif ( command -v python > /dev/null 2>&1 ) ; then
+      python -c "import os;print(os.strerror($@))"
    fi
 }
 
