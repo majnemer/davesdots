@@ -8,6 +8,21 @@ unkey_host ()
    sed -i -e "/$1/d" $HOME/.ssh/known_hosts
 }
 
+err ()
+{
+   if ( command -v ruby > /dev/null 2>&1 ); then
+      ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == $@ }"
+   elif [ -e /usr/include/errno.h ] ; then
+      cpp -dM /usr/include/errno.h | grep -w "E.* $@"
+   fi
+
+   if ( command -v perl > /dev/null 2>&1 ) ; then
+      perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $@
+   elif ( command -v python > /dev/null 2>&1 ) ; then
+      python -c "import os;print(os.strerror($@))"
+   fi
+}
+
 mkcd ()
 {
    if [ -d "$1" ] ; then

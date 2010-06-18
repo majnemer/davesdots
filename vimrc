@@ -334,6 +334,10 @@ endif
 if (&term =~ "^xterm")
    map [H <Home>
    map [F <End>
+   map [5D <C-Left>
+   map! [5D <C-Left>
+   map [5C <C-Right>
+   map! [5C <C-Right>
 endif
 
 " Python specific stuff
