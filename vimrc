@@ -109,7 +109,6 @@ endif
 set laststatus=2
 set shortmess=atI
 if has('statusline')
-   set statusline=Editing:\ %r%t%m\ %=Location:\ Line\ %l/%L\ \ Col:\ %c\ (%p%%)
    set statusline=%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %c\ (%P)
 endif
 
@@ -145,7 +144,7 @@ if has('eval')
    elseif &t_Co == 88
       call LoadColorScheme("wombat:zellner")
    else
-      call LoadColorScheme("zellner")
+      call LoadColorScheme("darkblue:zellner")
    endif
 endif
 
@@ -242,13 +241,15 @@ endif
 
 " Append modeline after last line in buffer.
 " Use substitute() (not printf()) to handle '%%s' modeline in LaTeX files.
-function! AppendModeline()
-   let save_cursor = getpos('.')
-   let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.': '
-   $put =substitute(&commentstring, '%s', append, '')
-   call setpos('.', save_cursor)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+if has('eval')
+   fun! AppendModeline()
+      let save_cursor = getpos('.')
+      let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.': '
+      $put =substitute(&commentstring, '%s', append, '')
+      call setpos('.', save_cursor)
+   endfun
+   nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+endif
 
 " tab indents selection
 vmap <silent> <Tab> >gv
@@ -283,14 +284,14 @@ endif
 nmap K K<cr>
 
 " stolen from auctex.vim
-function! EmacsKill()
+fun! EmacsKill()
    if col(".") == strlen(getline(line(".")))+1
       let @" = "\<CR>"
       return "\<Del>"
    else
       return "\<C-O>D"
    endif
-endfunction
+endfun
 
 " some emacs-isms are OK
 map! <C-a> <Home>
