@@ -284,14 +284,16 @@ endif
 nmap K K<cr>
 
 " stolen from auctex.vim
-fun! EmacsKill()
-   if col(".") == strlen(getline(line(".")))+1
-      let @" = "\<CR>"
-      return "\<Del>"
-   else
-      return "\<C-O>D"
-   endif
-endfun
+if has('eval')
+   fun! EmacsKill()
+      if col(".") == strlen(getline(line(".")))+1
+         let @" = "\<CR>"
+         return "\<Del>"
+      else
+         return "\<C-O>D"
+      endif
+   endfun
+endif
 
 " some emacs-isms are OK
 map! <C-a> <Home>
@@ -299,7 +301,9 @@ map <C-a> <Home>
 map! <C-e> <End>
 map <C-e> <End>
 map <C-k> d$
-inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
+if has('eval')
+   inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
+endif
 
 " Disable q and Q
 map q <Nop>
