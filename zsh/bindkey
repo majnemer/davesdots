@@ -30,6 +30,7 @@ case $TERM in
 		bindkey '\e[c' emacs-forward-word
 		bindkey '\e[d' emacs-backward-word
 		bindkey '\M-B\M-^H' backward-kill-word
+		bindkey '\M-^H' backward-kill-word
 		bindkey '\M-C\M-?' backward-kill-word
 	;;
 	mlterm|kterm)
