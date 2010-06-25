@@ -3,6 +3,7 @@
 	st = status
 	co = checkout
 	di = diff --color-words
+	br = branch
 	move   = mv
 	ren    = mv
 	rename = mv
@@ -29,5 +30,6 @@
 	branch = auto
 [core]
 	pager =
+	excludesfile = ~/.gitignore
 [push]
 	default = matching
