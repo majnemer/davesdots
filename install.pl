@@ -74,6 +74,7 @@ my %links = (
 	'xmonad.hs' => '.xmonad/xmonad.hs',
 
 	gitconfig => '.gitconfig',
+	gitignore => '.gitignore',
 
 	caffeinate => 'bin/caffeinate',
 	lock       => 'bin/lock',

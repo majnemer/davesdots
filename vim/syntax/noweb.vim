@@ -71,9 +71,9 @@ syn region  nowebName   start="<<" end=">>" oneline contains=nowebTT
 " NOWEB code chunks are defined by <<chunk_name>>=
 " and ended by the next "@" (not a "@@"!) in the first column of a line.
 syntax region nowebCode start=/<<.>>=\|<<[^ ].*[^ ]>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedConf, nowebName containedin=tex.*Zone
-syntax region nowebCode start=/<<[^ ].*\.\(c\|h\)>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedC, nowebName containedin=tex.*Zone
+syntax region nowebCode start=/<<[^ ].*\.c>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedC, nowebName containedin=tex.*Zone
 syntax region nowebCode start=/<<[^ ].*\.\(ml\|mli\)>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedOcaml, nowebName containedin=tex.*Zone
-syntax region nowebCode start=/<<[^ ].*\.\(cc\|cpp\|C\)>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedCpp, nowebName containedin=tex.*Zone
+syntax region nowebCode start=/<<[^ ].*\.\(cc\|cpp\|C\|h\)>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedCpp, nowebName containedin=tex.*Zone
 syntax region nowebCode start=/<<Makefile>>=/ end=/^@ \|^@$/me=e-3 contains=@nowebIncludedMakefile, nowebName containedin=tex.*Zone
 
 " Here, we mark the beginning of a new text chunk.
