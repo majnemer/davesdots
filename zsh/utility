@@ -1,6 +1,6 @@
 # utility.sh
 # Miscellaneous Utility Functions
 
-zstyle ':completion:*:*:extract:*' file-patterns '*.(tar|tar.gz|tgz|tar.Z|tar.bz2|tbz2|zip|ZIP|jar|gz|Z|z|bz2|rar|RAR|LHa|LHA|lha|lzh|a|deb|tar.lzma|lzma|7z):Compressed\ Files *(-/):directories'
+zstyle ':completion:*:*:extract:*' file-patterns '*.(tar|tar.gz|tgz|tz|tar.Z|tar.z|taz|tar.bz2|tbz2|tbz|zip|ZIP|jar|gz|Z|z|bz2|bz|rar|RAR|rz|zoo|LHa|LHA|lha|lzh|a|deb|tar.lzma|lzma|tlz|7z|tar.7z|t7z|xz|txz|tar.xz|ace|arj|cpio|rpm):Compressed\ Files *(-/):directories'
 
 # vim: set ft=sh ts=3 sw=3 et:
