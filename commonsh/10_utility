@@ -51,41 +51,71 @@ extract ()
       *.tar)
          tar xf "${1}"
       ;;
-      *.tar.gz|*.tgz)
-         gunzip -c "${1}" | tar xf -
-      ;;
-      *.tar.z)
-         uncompress -c "${1}" | tar xf -
-      ;;
-      *.tar.bz2|*.tbz2|*.tbz)
-         bzcat "${1}" | tar xf -
-      ;;
-      *.zip|*.jar)
-         unzip -qo "${1}"
-      ;;
       *.gz|*.z)
          gzip -dc "${1}" > `basename "${1%.*}"`
       ;;
-      *.bz2)
+      *.tar.gz|*.tgz|*.tz)
+         gzip -dc "${1}" | tar xf -
+      ;;
+      *.Z)
+         uncompress -c "${1}" > `basename "${1%.*}"`
+      ;;
+      *.tar.z|*.tar.Z|*.taz)
+         uncompress -c "${1}" | tar xf -
+      ;;
+      *.bz2|*.bz)
          bzip2 -dc "${1}" > `basename "${1%.*}"`
       ;;
-      *.rar)
-         unrar x -idq "${1}"
+      *.tar.bz2|*.tbz2|*.tbz)
+         bzip2 -dc "${1}" | tar xf -
       ;;
-      *.lha|*.lzh)
-         lha xqf "${1}"
+      *.7z)
+         7zr x "${1}"
       ;;
-      *.a|*.deb)
-         ar x "${1}"
-      ;;
-      *.tar.lzma)
-         lzma -dc "${1}" | tar xf
+      *.tar.7z|*.t7z)
+         7zr x -so "${1}" | tar xf -
       ;;
       *.lzma)
          lzma -dc "${1}" > `basename "${1%.*}"`
       ;;
-      *.7z)
-         7zr x "${1}"
+      *.tar.lzma|*.tlz)
+         lzma -dc "${1}" | tar xf -
+      ;;
+      *.xz)
+         xz -dc "${1}" > `basename "${1%.*}"`
+      ;;
+      *.tar.xz|*.txz)
+         xz -dc "${1}" | tar xf -
+      ;;
+      *.a|*.deb)
+         ar x "${1}"
+      ;;
+      *.ace)
+         unace x "${1}"
+      ;;
+      *.arj)
+         arj x "${1}"
+      ;;
+      *.cpio)
+         cpio -id < "${1}"
+      ;;
+      *.rpm)
+         rpm2cpio "${1}" | cpio -id
+      ;;
+      *.lha|*.lzh)
+         lha xqf "${1}"
+      ;;
+      *.rar)
+         unrar x -idq "${1}"
+      ;;
+      *.rz)
+         rzip -d -f -k "${1}"
+      ;;
+      *.zip|*.jar)
+         unzip -qo "${1}"
+      ;;
+      *.zoo)
+         zoo x "${1}"
       ;;
       *)
          echo "Unable to extract '"$1"'"
