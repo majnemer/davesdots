@@ -297,13 +297,13 @@ endif
 
 " some emacs-isms are OK
 map! <C-a> <Home>
-map <C-a> <Home>
+map  <C-a> <Home>
 map! <C-e> <End>
-map <C-e> <End>
+map  <C-e> <End>
 imap <C-f> <Right>
 imap <C-b> <Left>
 map! <M-BS> <C-w>
-map <C-k> d$
+map  <C-k> d$
 if has('eval')
    inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
 endif
@@ -324,7 +324,7 @@ inoremap # X<BS>#
 " Both interix and cons use C-? as forward delete,
 " besides those two exceptions, always set it to backspace
 " Also let interix use ^[[U for end and ^[[H for home
-map <C-h> <BS>
+map  <C-h> <BS>
 map! <C-h> <BS>
 if (&term =~ "interix")
    map  <C-?> <DEL>
