@@ -109,7 +109,7 @@ endif
 set laststatus=2
 set shortmess=atI
 if has('statusline')
-   set statusline=%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %c\ (%P)
+   set statusline=%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %v\ (%P)
 endif
 
 " Enable modelines only on secure vim
