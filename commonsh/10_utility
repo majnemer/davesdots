@@ -24,11 +24,7 @@ err ()
             fi
 
             if [ "${errno}" ] ; then
-               errstr="$@ = $errno"
-            fi
-
-            if [ "${errstr}" ] ; then
-               echo $errstr
+               echo "$@ = $errno"
             else
                return 1
             fi
