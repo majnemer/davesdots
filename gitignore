@@ -12,3 +12,4 @@ tags
 *.aux
 *.log
 *.dvi
+*.mode*v*
