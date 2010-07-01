@@ -10,16 +10,55 @@ unkey_host ()
 
 err ()
 {
-   if ( command -v ruby > /dev/null 2>&1 ); then
-      ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == $@ }"
-   elif [ -e /usr/include/errno.h ] ; then
-      cpp -dM /usr/include/errno.h | grep -w "E.* $@"
-   fi
+      case $@ in
+         E*)
+            unset errno
+            if [ "${errno}" = "" ] && ( command -v python > /dev/null 2>&1 ); then
+               errno=`python -c "import errno;print(errno.$@)" 2>/dev/null`
+            fi
+            if [ "${errno}" = "" ] && ( command -v ruby > /dev/null 2>&1 ); then
+               errno=`ruby -e "puts Errno::$@::Errno if (Errno::$@)" 2>/dev/null`
+            fi
+            if [ "${errno}" = "" ] && [ -e /usr/include/errno.h ] ; then
+               errno=`cpp -dM /usr/include/errno.h | grep -w "$@" | grep -oE '[0-9]+' 2>/dev/null`
+            fi
+
+            if [ "${errno}" ] ; then
+               errstr="$@ = $errno"
+            fi
+
+            if [ "${errstr}" ] ; then
+               echo $errstr
+            else
+               return 1
+            fi
+         ;;
+         *)
+            unset errconst
+            if [ "${errconst}" = "" ] && ( command -v python > /dev/null 2>&1 ); then
+               errconst=`python -c "import errno;print(errno.errorcode[$@])" 2>/dev/null`
+            fi
+            if [ "${errconst}" = "" ] && ( command -v ruby > /dev/null 2>&1 ); then
+               errconst=`ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == $@ }"`
+            fi
+            if [ "${errconst}" = "" ] && [ -e /usr/include/errno.h ] ; then
+               errconst=`cpp -dM /usr/include/errno.h | grep -w "E.* $@"`
+            fi
+
+            if [ "${errconst}" ] ; then
+               echo $errconst
+            else
+               return 1
+            fi
+
+            errno=$@
+         ;;
+   esac
 
    if ( command -v perl > /dev/null 2>&1 ) ; then
-      perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $@
+      perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $errno
    elif ( command -v python > /dev/null 2>&1 ) ; then
-      python -c "import os;print(os.strerror($@))"
+      python -c "import os;print(os.strerror($errno))"
    fi
 }
 
