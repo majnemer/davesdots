@@ -100,6 +100,4 @@ alias du='du -h'
 
 alias ping='ping -c4'
 
-alias maketex="make -f ${HOME}/.latex/Makefile"
-
 ( command -v time >/dev/null 2>&1 ) && alias time='command time'
