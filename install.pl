@@ -81,8 +81,6 @@ my %links = (
 
 	'git-untrack-ignored' => 'bin/git-untracked-ignored',
 
-	latex => '.latex',
-
 	gdbinit => '.gdbinit',
 );
 
