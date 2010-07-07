@@ -37,10 +37,13 @@ err ()
             errno=$1
             unset errconst
             if [ "${errconst}" = "" ] && ( command -v ruby > /dev/null 2>&1 ); then
-               errconst=`ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == ${errno} }, ' = ${errno}'" 2>/dev/null`
+               errconst=`ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == ${errno} }" 2>/dev/null`
             fi
             if [ "${errconst}" = "" ] && ( command -v python > /dev/null 2>&1 ); then
-               errconst=`python -c "import errno;print(errno.errorcode[${errno}] + ' = ${errno}')" 2>/dev/null`
+               errconst=`python -c "import errno;print(errno.errorcode[${errno}])" 2>/dev/null`
+            fi
+            if [ "${errconst}" ] ; then
+               errconst="${errconst} = ${errno}"
             fi
             if [ "${errconst}" = "" ] && [ -e /usr/include/errno.h ] ; then
                errconst=`cpp -dM /usr/include/errno.h | grep -E "E[[:alnum:]]+[[:space:]]+${errno}$"`
