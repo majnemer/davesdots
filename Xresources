@@ -3,8 +3,8 @@ Xft*dpi: 96
 Xft*antialias: true
 
 /* XTerm */
-XTerm*utf8: 1
 XTerm*class: UXTerm
+XTerm*utf8: 1
 
 XTerm*faceSize: 9
 XTerm*faceName: Monospace
