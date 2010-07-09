@@ -228,10 +228,6 @@ if has('autocmd')
 
       autocmd FileType c,cpp :call <SID>cabbrev()
 
-      if filereadable(glob('~/.latex/Makefile')) && !filereadable(getcwd() . "/Makefile")
-         autocmd FileType tex set makeprg=make\ -f\ ~/.latex/Makefile
-      endif
-
       autocmd BufRead,BufNewFile *.mm set filetype=noweb
    endif
 
