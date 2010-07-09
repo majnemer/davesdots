@@ -90,7 +90,7 @@ my $contained = (substr $scriptdir, 0, length($home)) eq $home;
 my $prefix = undef;
 if ($contained) {
 	$prefix = substr $scriptdir, length($home);
-	($prefix) = $prefix =~ m{^\/? (.+)? [^/]+ $}x;
+	($prefix) = $prefix =~ m{^\/? (.+) [^/]+ $}x;
 }
 
 my $i = 0; # Keep track of how many links we added
