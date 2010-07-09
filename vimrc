@@ -109,7 +109,7 @@ endif
 set laststatus=2
 set shortmess=atI
 if has('statusline')
-   set statusline=%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %c\ (%P)
+   set statusline=%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %v\ (%P)
 endif
 
 " Enable modelines only on secure vim
@@ -297,10 +297,13 @@ endif
 
 " some emacs-isms are OK
 map! <C-a> <Home>
-map <C-a> <Home>
+map  <C-a> <Home>
 map! <C-e> <End>
-map <C-e> <End>
-map <C-k> d$
+map  <C-e> <End>
+imap <C-f> <Right>
+imap <C-b> <Left>
+map! <M-BS> <C-w>
+map  <C-k> d$
 if has('eval')
    inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
 endif
@@ -321,13 +324,13 @@ inoremap # X<BS>#
 " Both interix and cons use C-? as forward delete,
 " besides those two exceptions, always set it to backspace
 " Also let interix use ^[[U for end and ^[[H for home
-map <C-h> <BS>
+map  <C-h> <BS>
 map! <C-h> <BS>
 if (&term =~ "interix")
    map  <C-?> <DEL>
    map! <C-?> <DEL>
-   map [H <Home>
-   map [U <End>
+   map <C-[>[H <Home>
+   map <C-[>[U <End>
 elseif (&term =~ "^sun")
    map  <C-?> <DEL>
    map! <C-?> <DEL>
@@ -337,14 +340,14 @@ elseif (&term !~ "cons")
 endif
 
 if (&term =~ "^xterm")
-   map [H <Home>
-   map! [H <Home>
-   map [F <End>
-   map! [F <End>
-   map [5D <C-Left>
-   map! [5D <C-Left>
-   map [5C <C-Right>
-   map! [5C <C-Right>
+   map  <C-[>[H <Home>
+   map! <C-[>[H <Home>
+   map  <C-[>[F <End>
+   map! <C-[>[F <End>
+   map  <C-[>[5D <C-Left>
+   map! <C-[>[5D <C-Left>
+   map  <C-[>[5C <C-Right>
+   map! <C-[>[5C <C-Right>
 endif
 
 " Python specific stuff

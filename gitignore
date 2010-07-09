@@ -1,5 +1,6 @@
 *.o
 cscope.*
+ctags
 .DS_Store
 *~
 tags
@@ -11,3 +12,4 @@ tags
 *.aux
 *.log
 *.dvi
+*.mode*v*
