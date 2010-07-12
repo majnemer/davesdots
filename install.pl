@@ -76,6 +76,8 @@ my %links = (
 	gitconfig => '.gitconfig',
 	gitignore => '.gitignore',
 
+	tigrc     => '.tigrc',
+
 	caffeinate => 'bin/caffeinate',
 	lock       => 'bin/lock',
 
