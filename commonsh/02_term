@@ -1,15 +1,5 @@
 #! /bin/sh
 
-# fix locale stuff
-if [ -z "${LC_ALL}" ] ; then
-	if ( command -v locale >/dev/null 2>&1 ) ; then
-		LC_ALL="en_US.UTF-8"
-		export LC_ALL
-
-		eval `locale`
-	fi
-fi
-
 # terminal fallback stuff
 fix_term ()
 {
