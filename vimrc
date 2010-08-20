@@ -346,6 +346,11 @@ if (&term =~ "^xterm")
    map! <C-[>[5C <C-Right>
 endif
 
+" Terminal.app does not support back color erase
+if ($TERM_PROGRAM == "Apple_Terminal" && $TERM_PROGRAM_VERSION <= 273)
+   set t_ut=
+endif
+
 " Python specific stuff
 if has('eval')
    let python_highlight_all = 1
