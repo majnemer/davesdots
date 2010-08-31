@@ -41,7 +41,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| simpleTabbed
 		delta   = 3/100
 
 main = do
-	xmproc <- spawnPipe "xmobar"
+	xmproc <- spawnPipe "~/xmobar/bin/xmobar"
 	xmonad $ defaultConfig
 			{ manageHook = manageDocks <+> myFloatHook <+> manageHook defaultConfig <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 			, layoutHook = avoidStruts $ smartBorders $ myLayoutHook
@@ -50,12 +50,12 @@ main = do
 				, ppUrgent = xmobarColor "#cc0000" "" . wrap "**" "**"
 				, ppTitle  = xmobarColor "#8AE234" ""
 				}
+			, terminal   = "lxterm"
 			}
 			`additionalKeysP`
 			[ ("M-p", shellPrompt defaultXPConfig { position = Top })
 			, ("M-S-a", windowPromptGoto defaultXPConfig { position = Top })
 			, ("M-a", windowPromptBring defaultXPConfig { position = Top })
-			, ("M-x", sendMessage ToggleStruts)
 			, ("M-S-l", spawn "~/bin/lock")
 			, ("M-<Left>", moveTo Prev HiddenNonEmptyWS)
 			, ("M-S-<Left>", shiftToPrev)
@@ -68,5 +68,5 @@ main = do
 			, ("M-`", toggleWS)
 			, ("M-s", moveTo Next EmptyWS)
 			, ("M-S-s", shiftTo Next EmptyWS)
-			, ("M-g", scratchpadSpawnAction defaultConfig)
+			, ("M-g", scratchpadSpawnAction defaultConfig { terminal = "lxterm" })
 			]
