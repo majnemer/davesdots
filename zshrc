@@ -1,6 +1,6 @@
 # .zshrc
-# Original, Main author: Saleem Abdulrasool <compnerd@compnerd.org>
-# Trivial modifications: David Majnemer
+# Current author: David Majnemer
+# Original author: Saleem Abdulrasool <compnerd@compnerd.org>
 # vim:set nowrap:
 
 case `uname -s` in

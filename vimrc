@@ -1,6 +1,6 @@
 " vimrc
-" Main, Original author: Saleem Abdulrasool <compnerd@compnerd.org>
-" Trivial modifications: David Majnemer
+" Current author: David Majnemer
+" Original author: Saleem Abdulrasool <compnerd@compnerd.org>
 " vim: set ts=3 sw=3 et nowrap:
 
 if has ('multi_byte')      " Make sure we have unicode support
