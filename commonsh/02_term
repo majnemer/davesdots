@@ -4,7 +4,7 @@
 fix_term ()
 {
 	# we were requested to go on screen and we are on a mac
-	if ( infocmp $1 >/dev/null 2>&1 ) ; then
+	if infocmp $1 >/dev/null 2>&1 ; then
 		echo $1
 	else
 		case $1 in
@@ -21,7 +21,7 @@ fix_term ()
 				fix_term screen-256colors
 			;;
 			screen-256colors)
-				if ( infocmp xterm-256colors >/dev/null 2>&1 ) ; then
+				if infocmp xterm-256colors >/dev/null 2>&1 ; then
 					fix_term xterm-256colors
 				else
 					fix_term screen
@@ -52,7 +52,7 @@ fix_terminfo_db ()
 	fi
 }
 
-if ( command -v infocmp >/dev/null 2>&1 ) ; then
+if command -v infocmp >/dev/null 2>&1 ; then
 	# terminal surgery
 	case `uname -s` in
 		Interix)
@@ -70,7 +70,7 @@ if ( command -v infocmp >/dev/null 2>&1 ) ; then
 
 	# I am sorry to hear that you are running an
 	# xterm that has no colors (I am looking at you solaris)
-	if [ $TERM = xterm ] && ( command -v tput >/dev/null 2>&1 ) && [ `tput -T xterm colors` = -1 ] ; then
+	if [ $TERM = xterm ] && command -v tput >/dev/null 2>&1 && [ `tput -T xterm colors` = -1 ] ; then
 		# lets see what we can do about your terrible term
 		TERM=`fix_term xterm-color`
 	fi

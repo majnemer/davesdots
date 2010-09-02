@@ -21,7 +21,7 @@ case "${TERM}" in
 	dumb)
 	;;
 	*)
-		if ( command -v tput >/dev/null 2>&1 ) && [ `tput colors` != -1 ] ; then
+		if command -v tput >/dev/null 2>&1 && [ `tput colors` != -1 ] ; then
 			RESETCOLOR=$'%{\e[00;00m%}'
 			if [ -z "${SSH_TTY}" ] ; then
 				HOSTCOLOR=$'%{\e[01;32m%}'

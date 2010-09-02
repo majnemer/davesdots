@@ -1,7 +1,7 @@
 #! /bin/sh
 # colors
 for dircolors in gdircolors dircolors ; do
-	if ( command -v $dircolors >/dev/null 2>&1 ) ; then
+	if command -v $dircolors >/dev/null 2>&1 ; then
 		dircolor_text=''
 		if [ -f "${HOME}/.dir_colors" ] ; then
 			dircolor_text=`cat "${HOME}/.dir_colors"`
@@ -11,7 +11,7 @@ for dircolors in gdircolors dircolors ; do
 			eval `$dircolors -b /etc/DIR_COLORS`
 		fi
 
-		if ( $dircolors --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+		if $dircolors --version 2>/dev/null | grep GNU >/dev/null 2>&1 ; then
 			dircolor_text="${dircolor_text}\nSTICKY_OTHER_WRITABLE 01;04;34;40"
 			dircolor_text="${dircolor_text}\nOTHER_WRITABLE 01;34;40"
 		fi
@@ -23,7 +23,7 @@ done
 
 # gimmie an editor, make it a nice vi clone
 for EDITOR in vimx vim elvis vile nvi vi ; do
-	( command -v $EDITOR >/dev/null 2>&1 ) && break
+	command -v $EDITOR >/dev/null 2>&1 && break
 done
 export EDITOR
 
@@ -46,13 +46,13 @@ case `uname -s` in
 		alias grep='grep -d skip --color=auto'
 	;;
 	FreeBSD|Darwin|DragonFly)
-		if ( command -v top >/dev/null 2>&1 ) ; then
+		if command -v top >/dev/null 2>&1 ; then
 			alias top="top -o cpu"
 		fi
 
-		if ( command -v gls >/dev/null 2>&1 ) ; then
+		if command -v gls >/dev/null 2>&1 ; then
 			alias ls="gls -h --color=auto"
-		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+		elif ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ; then
 			alias ls="ls -h --color=auto"
 		else
 			LSCOLORS="ExGxFxDxCxDxDxHbaDEaEa"
@@ -65,31 +65,31 @@ case `uname -s` in
 		alias ls="ls --color"
 	;;
 	SunOS)
-		if ( command -v gls >/dev/null 2>&1 ) ; then
+		if command -v gls >/dev/null 2>&1 ; then
 			alias ls="gls -h --color=auto"
-		elif ( ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+		elif ls --version 2>/dev/null | grep GNU >/dev/null 2>&1 ; then
 			alias ls="ls -h --color=auto"
 		else
 			alias ls="ls -h"
 		fi
 
-		if ( command -v ggrep >/dev/null 2>&1 ) ; then
+		if command -v ggrep >/dev/null 2>&1 ; then
 			alias grep='ggrep -d skip --color=auto'
-		elif ( grep --version 2>/dev/null | grep GNU >/dev/null 2>&1 ) ; then
+		elif grep --version 2>/dev/null | grep GNU >/dev/null 2>&1 ; then
 			alias grep='grep -d skip --color=auto'
 		fi
 
 		for locate in glocate slocate ; do
-			( command -v $locate >/dev/null 2>&1 ) && alias locate=$locate
+			command -v $locate >/dev/null 2>&1 && alias locate=$locate
 		done
 	;;
 esac
 
-if ( command -v gobjdump >/dev/null 2>&1 ) ; then
+if command -v gobjdump >/dev/null 2>&1 ; then
 	alias objdump=gobjdump
 fi
 
-if ( command -v ack-grep >/dev/null 2>&1 ) ; then
+if command -v ack-grep >/dev/null 2>&1 ; then
 	alias ack=ack-grep
 fi
 
@@ -100,4 +100,4 @@ alias du='du -h'
 
 alias ping='ping -c4'
 
-( command -v time >/dev/null 2>&1 ) && alias time='command time'
+command -v time >/dev/null 2>&1 && alias time='command time'

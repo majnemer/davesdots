@@ -14,13 +14,13 @@ err ()
          E*)
             errconst=$1
             unset errno
-            if [ "${errno}" = "" ] && ( command -v python > /dev/null 2>&1 ); then
+            if [ "${errno}" = "" ] && command -v python > /dev/null 2>&1 ; then
                errno=`python -c "import errno;print(errno.${errconst})" 2>/dev/null`
             fi
-            if [ "${errno}" = "" ] && ( command -v perl > /dev/null 2>&1 ); then
+            if [ "${errno}" = "" ] && command -v perl > /dev/null 2>&1 ; then
                errno=`perl -MErrno -e "print &Errno::${errconst}.\"\n\";" 2>/dev/null`
             fi
-            if [ "${errno}" = "" ] && ( command -v ruby > /dev/null 2>&1 ); then
+            if [ "${errno}" = "" ] && command -v ruby > /dev/null 2>&1 ; then
                errno=`ruby -e "puts Errno::${errconst}::Errno" 2>/dev/null`
             fi
             if [ "${errno}" = "" ] && [ -e /usr/include/errno.h ] ; then
@@ -36,10 +36,10 @@ err ()
          *)
             errno=$1
             unset errconst
-            if [ "${errconst}" = "" ] && ( command -v ruby > /dev/null 2>&1 ); then
+            if [ "${errconst}" = "" ] && command -v ruby > /dev/null 2>&1 ; then
                errconst=`ruby -e "puts Errno.constants.find_all{|err| eval('Errno::' + err + '::Errno') == ${errno} }" 2>/dev/null`
             fi
-            if [ "${errconst}" = "" ] && ( command -v python > /dev/null 2>&1 ); then
+            if [ "${errconst}" = "" ] && command -v python > /dev/null 2>&1 ; then
                errconst=`python -c "import errno;print(errno.errorcode[${errno}])" 2>/dev/null`
             fi
             if [ "${errconst}" ] ; then
@@ -58,10 +58,10 @@ err ()
    esac
 
    unset errstr
-   if [ "${errstr}" = "" ] && ( command -v perl > /dev/null 2>&1 ) ; then
+   if [ "${errstr}" = "" ] && command -v perl > /dev/null 2>&1 ; then
       errstr=`perl -MPOSIX -e 'print strerror($ARGV[0])."\n";' $errno`
    fi
-   if [ "${errstr}" = "" ] && ( command -v python > /dev/null 2>&1 ) ; then
+   if [ "${errstr}" = "" ] && command -v python > /dev/null 2>&1 ; then
       errstr=`python -c "import os;print(os.strerror($errno))" 2>/dev/null`
    fi
 
@@ -89,7 +89,7 @@ extract ()
       return
    fi
 
-   if ( command -v aunpack > /dev/null 2>&1 ) ; then
+   if command -v aunpack > /dev/null 2>&1 ; then
       aunpack "${1}"
       return
    fi

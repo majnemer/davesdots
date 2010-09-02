@@ -45,7 +45,7 @@ if [ -z "${MANPATH}" ] ; then
 	case `uname -s` in
 			SunOS)
 				# some solaris systems have manpath
-				if ( command -v manpath >/dev/null 2>&1 ) ; then
+				if command -v manpath >/dev/null 2>&1 ; then
 					MANPATH=`manpath`
 					export MANPATH
 				else

@@ -2,7 +2,7 @@
 WORDCHARS=''
 
 # disable core dumps
-if ( ulimit -c >/dev/null 2>&1 ) ; then
+if ulimit -c >/dev/null 2>&1 ; then
 	ulimit -c 0
 fi
 
