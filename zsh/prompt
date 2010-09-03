@@ -3,6 +3,7 @@ RESETCOLOR=''
 HOSTCOLOR=''
 PATHCOLOR=''
 BOLDERRORCOLOR=''
+BLACKCOLOR=''
 
 case "${TERM}" in
 	*256color*)
