@@ -17,6 +17,7 @@ case "${TERM}" in
 		BOLDERRORCOLOR=$'%{\e[01;38;5;9m%}'
 		CLOCKCOLOR=$'%{\e[01;38;5;221m%}'
 		JOBCOLOR=$'%{\e[38;5;30m%}'
+		BLACKCOLOR=$'%{\e[00;30m%}'
 	;;
 	dumb)
 	;;
@@ -33,10 +34,11 @@ case "${TERM}" in
 			BOLDERRORCOLOR=$'%{\e[01;31m%}'
 			CLOCKCOLOR=$'%{\e[01;33m%}'
 			JOBCOLOR=$'%{\e[00;36m%}'
+			BLACKCOLOR=$'%{\e[00;30m%}'
 		fi
 		;;
 esac
 
-PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@%m '${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}
+PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@'${LHOSTNAME}${BLACKCOLOR}':'${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}
 
 RPROMPT=${RESETCOLOR}$'%1(j.'${JOBCOLOR}$'[%j].)%(?..'${ERRORCOLOR}$'[%?])'${CLOCKCOLOR}$'[%t]'${RESETCOLOR}
