@@ -208,9 +208,9 @@ if has('eval')
          exe "tag " . expand("<cword>")
       endif
    endfun
-endif
 
-nmap <C-]> :call GoDefinition()<CR>
+   nmap <C-]> :call GoDefinition()<CR>
+endif
 
 if has('autocmd')
    " Shortcuts
