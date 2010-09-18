@@ -304,6 +304,12 @@ if has('eval')
    inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
 endif
 
+" w!! for sudo w!
+cmap w!! w !sudo tee % >/dev/null
+
+" clear search
+nnoremap <esc> :noh<return><esc>
+
 " Disable q and Q
 map q <Nop>
 map Q <Nop>
