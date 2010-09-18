@@ -1,16 +1,11 @@
 #! /bin/sh
 # based on a script by Duane Johnson with some simplifications
 
-CDPATH=`git rev-parse --show-cdup`
+GIT_DIR=`git rev-parse --git-dir`
 
 # not a valid git repo? leave
 if [ $? -ne 0 ] ; then
   exit
-fi
-
-# switch to the directory holding .git
-if [ -n "${CDPATH}" ] ; then
-  cd "${CDPATH}"
 fi
 
 # Show various information about this git directory
@@ -25,7 +20,7 @@ git branch
 echo
 
 echo "== Configuration (.git/config)"
-cat .git/config
+cat "${GIT_DIR}/config"
 echo
 
 echo "== Most Recent Commit"
