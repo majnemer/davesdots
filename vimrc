@@ -208,9 +208,9 @@ if has('eval')
          exe "tag " . expand("<cword>")
       endif
    endfun
-endif
 
-nmap <C-]> :call GoDefinition()<CR>
+   nmap <C-]> :call GoDefinition()<CR>
+endif
 
 if has('autocmd')
    " Shortcuts
@@ -303,6 +303,12 @@ map  <C-k> d$
 if has('eval')
    inoremap <buffer> <C-K> <C-R>=EmacsKill()<CR>
 endif
+
+" w!! for sudo w!
+cmap w!! w !sudo tee % >/dev/null
+
+" clear search
+nnoremap <esc> :noh<return><esc>
 
 " Disable q and Q
 map q <Nop>
