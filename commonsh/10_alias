@@ -5,10 +5,8 @@ for dircolors in gdircolors dircolors ; do
 		dircolor_text=''
 		if [ -f "${HOME}/.dir_colors" ] ; then
 			dircolor_text=`cat "${HOME}/.dir_colors"`
-			eval `$dircolors -b "${HOME}/.dir_colors"`
 		elif [ -f /etc/DIR_COLORS ] ; then
 			dircolor_text=`cat /etc/DIR_COLORS`
-			eval `$dircolors -b /etc/DIR_COLORS`
 		fi
 
 		if $dircolors --version 2>/dev/null | grep GNU >/dev/null 2>&1 ; then

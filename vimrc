@@ -3,7 +3,7 @@
 " Original author: Saleem Abdulrasool <compnerd@compnerd.org>
 " vim: set ts=3 sw=3 et nowrap:
 
-if has ('multi_byte')      " Make sure we have unicode support
+if has('multi_byte')      " Make sure we have unicode support
    scriptencoding utf-8    " This file is in UTF-8
 
    " ---- Terminal Setup ----
