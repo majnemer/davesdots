@@ -9,7 +9,9 @@ if [ $? -ne 0 ] ; then
 fi
 
 # Show various information about this git directory
-echo "== Remote URL: `git remote -v`"
+echo "== Remote URL: "
+git remote -v
+echo
 
 echo "== Remote Branches: "
 git branch -r
