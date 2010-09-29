@@ -81,5 +81,24 @@ if command -v infocmp >/dev/null 2>&1 ; then
 		*256*)
 			alias screen="screen -T `fix_term xterm-256color`"
 		;;
+		linux)
+			# Tango palette for framebuffers
+			printf "\033]P02e3436" #black
+			printf "\033]P8555753" #darkgray
+			printf "\033]P1cc0000" #darkred
+			printf "\033]P9ef2929" #red
+			printf "\033]P24e9a06" #darkgreen
+			printf "\033]PA8ae234" #green
+			printf "\033]P3c4a000" #brown
+			printf "\033]PBfce94f" #yellow
+			printf "\033]P43465a4" #darkblue
+			printf "\033]PC729fcf" #blue
+			printf "\033]P575507b" #darkmagenta
+			printf "\033]PDad7fa8" #magenta
+			printf "\033]P606989a" #darkcyan
+			printf "\033]PE34e2e2" #cyan
+			printf "\033]P7ffffff" #lightgray
+			printf "\033]PFeeeeec" #white
+		;;
 	esac
 fi
