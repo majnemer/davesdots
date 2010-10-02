@@ -42,7 +42,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Grid ||| simpleTabbed
 
 main = do
 	xmproc <- spawnPipe "~/bin/xmobar"
-	xmonad $ defaultConfig
+	xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
 			{ manageHook = manageDocks <+> myFloatHook <+> manageHook defaultConfig <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 			, layoutHook = avoidStruts $ smartBorders $ myLayoutHook
 			, logHook    = dynamicLogWithPP $ xmobarPP
