@@ -229,6 +229,8 @@ if has('autocmd')
       autocmd FileType c,cpp :call <SID>cabbrev()
 
       autocmd BufRead,BufNewFile *.mm set filetype=noweb
+      autocmd BufRead,BufNewFile *.scala set filetype=scala
+      autocmd BufRead,BufNewFile *.proto setfiletype proto
    endif
 
    " make tab reindent in normal mode
