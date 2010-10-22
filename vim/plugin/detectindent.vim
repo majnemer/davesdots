@@ -1,7 +1,7 @@
 " Name:          detectindent (global plugin)
 " Version:       1.0
-" Author:        Ciaran McCreesh <ciaranm at gentoo.org>
-" Updates:       http://dev.gentoo.org/~ciaranm/vim/
+" Author:        Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
+" Updates:       http://github.com/ciaranm/detectindent
 " Purpose:       Detect file indent settings
 "
 " License:       You may redistribute this plugin under the same terms as Vim
@@ -19,9 +19,14 @@
 "
 " Requirements:  Untested on Vim versions below 6.2
 
+if exists("loaded_detectindent")
+    finish
+endif
+let loaded_detectindent = 1
+
 fun! <SID>IsCommentStart(line)
-    " &comments isn't reliable
-    if &ft == "c" || &ft == "cpp" || &ft == "java" || &ft == "scala"
+    " &comments aren't reliable
+    if &ft == "c" || &ft == "cpp" || &ft == "javascript" || &ft == "java" || &ft == "scala"
         return -1 != match(a:line, '/\*')
     elseif &ft == "ocaml" " ocaml comments
         return -1 != match(a:line, '(\*')
@@ -33,10 +38,10 @@ fun! <SID>IsCommentStart(line)
 endfun
 
 fun! <SID>IsCommentEnd(line)
-    if &ft == "c" || &ft == "cpp" || &ft == "java" || &ft == "scala"
+    if &ft == "c" || &ft == "cpp" || &ft == "javascript" || &ft == "java" || &ft == "scala"
         return -1 != match(a:line, '\*/')
     elseif &ft == "ocaml" " ocaml comments
-        return -1 != match(a:line, '\*(')
+        return -1 != match(a:line, '\*)')
     elseif &ft == "perl" " catch POD
         return -1 != match(a:line, '^=cut')
     else
@@ -49,6 +54,10 @@ fun! <SID>DetectIndent()
     let l:has_leading_spaces          = 0
     let l:shortest_leading_spaces_run = 0
     let l:longest_leading_spaces_run  = 0
+    let l:max_lines                   = 1024
+    if exists("g:detectindent_max_lines_to_analyse")
+      let l:max_lines = g:detectindent_max_lines_to_analyse
+    endif
 
     let l:idx_end = line("$")
     let l:idx = 1
@@ -59,9 +68,16 @@ fun! <SID>DetectIndent()
         " settings in c/c++ files especially
         if <SID>IsCommentStart(l:line)
             while l:idx <= l:idx_end && ! <SID>IsCommentEnd(l:line)
-                let l:line = getline(l:idx)
                 let l:idx = l:idx + 1
+                let l:line = getline(l:idx)
             endwhile
+            let l:idx = l:idx + 1
+            continue
+        endif
+
+        " Skip lines that are solely whitespace, since they're less likely to
+        " be properly constructed.
+        if l:line !~ '\S'
             let l:idx = l:idx + 1
             continue
         endif
@@ -89,47 +105,58 @@ fun! <SID>DetectIndent()
         endif
 
         let l:idx = l:idx + 1
+
+        let l:max_lines = l:max_lines - 1
+
+        if l:max_lines == 0
+            let l:idx = l:idx_end + 1
+        endif
+
     endwhile
 
     if l:has_leading_tabs && ! l:has_leading_spaces
         " tabs only, no spaces
-        set noexpandtab
-        if exists("g:detectindent_preferred_tabsize")
-            let &shiftwidth  = g:detectindent_preferred_indent
-            let &tabstop     = g:detectindent_preferred_indent
+        setl noexpandtab
+        if exists("g:detectindent_preferred_indent")
+            let &l:shiftwidth  = g:detectindent_preferred_indent
+            let &l:tabstop     = g:detectindent_preferred_indent
         endif
 
     elseif l:has_leading_spaces && ! l:has_leading_tabs
         " spaces only, no tabs
-        set expandtab
-        let &shiftwidth  = l:shortest_leading_spaces_run
-        let &softtabstop = l:shortest_leading_spaces_run
+        setl expandtab
+        let &l:shiftwidth  = l:shortest_leading_spaces_run
+        let &l:softtabstop = l:shortest_leading_spaces_run
 
     elseif l:has_leading_spaces && l:has_leading_tabs
         " spaces and tabs
-        set noexpandtab
-        let &shiftwidth = l:shortest_leading_spaces_run
+        setl noexpandtab
+        let &l:shiftwidth = l:shortest_leading_spaces_run
 
         " mmmm, time to guess how big tabs are
         if l:longest_leading_spaces_run < 2
-            let &tabstop = 2
+            let &l:tabstop = 2
         elseif l:longest_leading_spaces_run < 4
-            let &tabstop = 4
+            let &l:tabstop = 4
         else
-            let &tabstop = 8
+            let &l:tabstop = 8
         endif
 
     else
         " no spaces, no tabs
-        if exists("g:detectindent_preferred_tabsize")
-            let &shiftwidth  = g:detectindent_preferred_indent
-            let &tabstop     = g:detectindent_preferred_indent
-        endif
-        if exists("g:detectindent_preferred_expandtab")
-            set expandtab
-            if exists("g:detectindent_preferred_tabsize")
-                let &softtabstop = l:shortest_leading_spaces_run
-            endif
+        if exists("g:detectindent_preferred_indent") &&
+                    \ exists("g:detectindent_preferred_expandtab")
+            setl expandtab
+            let &l:shiftwidth  = g:detectindent_preferred_indent
+            let &l:softtabstop = g:detectindent_preferred_indent
+        elseif exists("g:detectindent_preferred_indent")
+            setl noexpandtab
+            let &l:shiftwidth  = g:detectindent_preferred_indent
+            let &l:tabstop     = g:detectindent_preferred_indent
+        elseif exists("g:detectindent_preferred_expandtab")
+            setl expandtab
+        else
+            setl noexpandtab
         endif
 
     endif
