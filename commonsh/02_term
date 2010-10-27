@@ -66,8 +66,15 @@ if command -v infocmp >/dev/null 2>&1 ; then
 		;;
 	esac
 
-	if [ "${COLORTERM}" = "gnome-terminal" ]; then
-		TERM="xterm-256color"
+	if [ -n "${COLORTERM}" -o -n "${XTERM_VERSION}" -o -n "${TERM_PROGRAM}" ]; then
+		if [ "${COLORTERM}" = "gnome-terminal" ] ; then
+			TERM="xterm-256color"
+		fi
+	else
+		if command -v answerback >/dev/null 2>&1 ; then
+			ANSWERBACK=`answerback`
+			export ANSWERBACK
+		fi
 	fi
 
 	TERM=`fix_term $TERM`

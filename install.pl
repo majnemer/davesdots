@@ -84,6 +84,8 @@ my %links = (
 	'git-info'            => 'bin/git-info',
 	'git-untrack-ignored' => 'bin/git-untracked-ignored',
 
+	answerback => 'bin/answerback',
+
 	gdbinit => '.gdbinit',
 );
 
@@ -93,6 +95,9 @@ if ($contained) {
 	$prefix = substr $scriptdir, length($home);
 	($prefix) = $prefix =~ m{^\/? (.+) [^/]+ $}x;
 }
+
+`make answerback`;
+warn "Could not compile answerback.\n" if ($? != 0);
 
 my $i = 0; # Keep track of how many links we added
 for my $file (keys %links) {
