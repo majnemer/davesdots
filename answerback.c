@@ -64,7 +64,7 @@ int main()
 	struct termios new_term = old_term;
 	new_term.c_lflag &= ~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
 	new_term.c_cc[VMIN] = 0;
-	new_term.c_cc[VTIME] = 10;
+	new_term.c_cc[VTIME] = 1;
 
 	if (tcsetattr(fd, TCSAFLUSH, &new_term) == -1)
 	{
