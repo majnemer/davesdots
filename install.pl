@@ -84,8 +84,6 @@ my %links = (
 	'git-info'            => 'bin/git-info',
 	'git-untrack-ignored' => 'bin/git-untracked-ignored',
 
-	answerback => 'bin/answerback',
-
 	gdbinit => '.gdbinit',
 );
 
@@ -96,8 +94,14 @@ if ($contained) {
 	($prefix) = $prefix =~ m{^\/? (.+) [^/]+ $}x;
 }
 
-`make answerback`;
-warn "Could not compile answerback.\n" if ($? != 0);
+chomp(my $uname = `uname -s`);
+`cc answerback.c -o answerback.$uname`;
+if ($? != 0) {
+	warn "Could not compile answerback.\n";
+} else {
+	$links{"answerback.$uname"} = "bin/answerback.$uname";
+}
+
 
 my $i = 0; # Keep track of how many links we added
 for my $file (keys %links) {
