@@ -1,13 +1,31 @@
 #define _POSIX_C_SOURCE 200112L
 
-#include <signal.h> /* for signal handling */
-#include <stdio.h> /* fopen(), et al. */
-#include <unistd.h> /* for ssize_t, read, write */
-#include <stdlib.h> /* for EXIT_SUCCESS, EXIT_FAILURE */
+#include <signal.h>  /* for signal handling */
+#include <stdio.h>   /* fopen(), et al. */
+#include <fcntl.h>   /* for open */
+#include <unistd.h>  /* for ssize_t, read, write */
+#include <stdlib.h>  /* for EXIT_SUCCESS, EXIT_FAILURE */
 #include <termios.h> /* ctermid, et al. */
 
 #define ANSWERBACK_LEN 16
 #define ANSWERBACK_CODE 5
+
+static struct termios old_term;
+static int fd;
+
+static void
+tty_reset(void)
+{
+	if (tcsetattr(fd, TCSAFLUSH, &old_term) == -1)
+	{
+		perror("tcsetattr");
+	}
+
+	if (close(fd) == -1)
+	{
+		perror("close");
+	}
+}
 
 int main()
 {
@@ -19,68 +37,32 @@ int main()
 		return EXIT_FAILURE;
 	}
 
-	FILE *fp;
-	if ((fp = fopen(cterm, "r+b")) == NULL)
+	if ((fd = open(cterm, O_RDWR)) == -1)
 	{
 		perror("open");
 		return EXIT_FAILURE;
 	}
 
-	if (setvbuf(fp, NULL, _IONBF, ANSWERBACK_LEN))
-	{
-		perror("setvbuf");
-		return EXIT_FAILURE;
-	}
-
-	int fd = fileno(fp);
-	if (fd == -1)
-	{
-		perror("fileno");
-		return EXIT_FAILURE;
-	}
-
-	sigset_t new_sig;
-	if (sigemptyset(&new_sig) == -1)
-	{
-		perror("sigemptyset");
-		return EXIT_FAILURE;
-	}
-	if (sigaddset(&new_sig, SIGINT) == -1)
-	{
-		perror("sigaddset");
-		return EXIT_FAILURE;
-	}
-	if (sigaddset(&new_sig, SIGTSTP) == -1)
-	{
-		perror("sigaddset");
-		return EXIT_FAILURE;
-	}
-	sigset_t old_sig;
-	if (sigprocmask(SIG_BLOCK, &new_sig, &old_sig) == -1)
-	{
-		perror("sigprocmask");
-		return EXIT_FAILURE;
-	}
-
-	struct termios old_term;
 	if (tcgetattr(fd, &old_term) == -1)
 	{
 		perror("tcgetattr");
 		return EXIT_FAILURE;
 	}
 
+	if (atexit(tty_reset) != 0)
+	{
+		fputs("Cannot set the exit function", stderr);
+		return EXIT_FAILURE;
+	}
+
 	struct termios new_term = old_term;
-	new_term.c_lflag &= ~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
+	new_term.c_lflag &= ~(ECHO | ECHOE | ECHOK | ECHONL | ICANON | ISIG | IEXTEN);
 	new_term.c_cc[VMIN] = 0;
 	new_term.c_cc[VTIME] = 1;
 
 	if (tcsetattr(fd, TCSAFLUSH, &new_term) == -1)
 	{
 		perror("tcsetattr");
-		if (tcsetattr(fd, TCSAFLUSH, &old_term) == -1)
-		{
-			perror("tcsetattr");
-		}
 		return EXIT_FAILURE;
 	}
 
@@ -91,7 +73,6 @@ int main()
 		if (ret == -1)
 		{
 			perror("write");
-			tcsetattr(fd, TCSAFLUSH, &old_term);
 			return EXIT_FAILURE;
 		}
 		else if (ret > 0)
@@ -105,28 +86,10 @@ int main()
 	if (ret == -1)
 	{
 		perror("read");
-		tcsetattr(fd, TCSAFLUSH, &old_term);
 		return EXIT_FAILURE;
 	}
+
 	buffer[ret] = '\0';
-
-	if (tcsetattr(fd, TCSAFLUSH, &old_term) == -1)
-	{
-		perror("tcsetattr");
-		return EXIT_FAILURE;
-	}
-
-	if (sigprocmask(SIG_SETMASK, &old_sig, NULL) == -1)
-	{
-		perror("sigprocmask");
-		return EXIT_FAILURE;
-	}
-
-	if (fclose(fp) == EOF)
-	{
-		perror("fclose");
-		return EXIT_FAILURE;
-	}
 
 	if (ret == 0)
 	{
