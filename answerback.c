@@ -6,6 +6,9 @@
 #include <stdlib.h> /* for EXIT_SUCCESS, EXIT_FAILURE */
 #include <termios.h> /* ctermid, et al. */
 
+#define ANSWERBACK_LEN 16
+#define ANSWERBACK_CODE 5
+
 int main()
 {
 	const char *cterm = ctermid(NULL);
@@ -13,13 +16,20 @@ int main()
 	if (cterm == NULL)
 	{
 		fputs("Cannot get the path to the console", stderr);
+		return EXIT_FAILURE;
 	}
 
 	FILE *fp;
-	if((fp = fopen(cterm, "r+b")) == NULL)
+	if ((fp = fopen(cterm, "r+b")) == NULL)
 	{
 		perror("open");
-		return EXIT_SUCCESS;
+		return EXIT_FAILURE;
+	}
+
+	if (setvbuf(fp, NULL, _IONBF, ANSWERBACK_LEN))
+	{
+		perror("setvbuf");
+		return EXIT_FAILURE;
 	}
 
 	int fd = fileno(fp);
@@ -28,8 +38,6 @@ int main()
 		perror("fileno");
 		return EXIT_FAILURE;
 	}
-
-	setbuf(fp, NULL);
 
 	sigset_t new_sig;
 	if (sigemptyset(&new_sig) == -1)
@@ -76,10 +84,10 @@ int main()
 		return EXIT_FAILURE;
 	}
 
-	char code[1] = { 5 };
+	char code = ANSWERBACK_CODE;
 	for (;;)
 	{
-		ssize_t ret = write(fd, code, sizeof(code));
+		ssize_t ret = write(fd, &code, sizeof(code));
 		if (ret == -1)
 		{
 			perror("write");
@@ -92,7 +100,7 @@ int main()
 		}
 	}
 
-	char buffer[16] =  { 0 };
+	char buffer[ANSWERBACK_LEN] = { 0 };
 	ssize_t ret = read(fd, buffer, sizeof(buffer) - 1);
 	if (ret == -1)
 	{
@@ -120,11 +128,11 @@ int main()
 		return EXIT_FAILURE;
 	}
 
-	if (ret > 0)
+	if (ret == 0)
 	{
-		puts(buffer);
-		return EXIT_SUCCESS;
+		return EXIT_FAILURE;
 	}
 
-	return EXIT_FAILURE;
+	puts(buffer);
+	return EXIT_SUCCESS;
 }
