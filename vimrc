@@ -233,6 +233,8 @@ if has('autocmd')
       autocmd BufRead,BufNewFile *.mm set filetype=noweb
       autocmd BufRead,BufNewFile *.scala set filetype=scala
       autocmd BufRead,BufNewFile *.proto setfiletype proto
+      autocmd BufNewFile,BufRead *.atomo set ft=atomo
+      autocmd BufNewFile,BufRead *.atomo setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 commentstring=--\ %s
    endif
 
    " make tab reindent in normal mode
