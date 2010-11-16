@@ -6,13 +6,13 @@
 # common shell utils
 if [ -d "${HOME}/.commonsh" ] ; then
 	for file in "${HOME}"/.commonsh/* ; do
-		. $file
+		. "${file}"
 	done
 fi
 
 # extras
 if [ -d "${HOME}/.bash" ] ; then
 	for file in "${HOME}"/.bash/* ; do
-		. $file
+		. "${file}"
 	done
 fi
