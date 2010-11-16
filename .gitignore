@@ -1,4 +1,5 @@
 *.swp
 .DS_Store
 .nfs.*
-answerback
+answerback.Linux
+answerback.Darwin

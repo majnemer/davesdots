@@ -146,7 +146,7 @@ if has('eval')
    elseif &t_Co == 88
       call LoadColorScheme("wombat:zellner")
    else
-      call LoadColorScheme("darkblue:zellner")
+      call LoadColorScheme("desert:darkblue:zellner")
    endif
 endif
 
@@ -309,10 +309,10 @@ if has('eval')
 endif
 
 " w!! for sudo w!
-cmap w!! w !sudo tee % >/dev/null
+"cmap w!! w !sudo tee % >/dev/null
 
 " clear search
-nnoremap <esc> :noh<return><esc>
+"nnoremap <esc> :noh<return><esc>
 
 " Disable q and Q
 map q <Nop>
