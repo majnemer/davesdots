@@ -15,64 +15,76 @@ if [ -d "/opt/intel/Compiler" ] ; then
 		esac
 	fi
 elif [ -d "/opt/intel" ] ; then
-	if [ -d "/opt/intel/cc" ] || [ -d "/opt/intel/cce" ] ; then
-		iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
-		if [ -r $iccvars_path ] ; then
-			. $iccvars_path
+	if [ -e "/opt/intel/bin/compilervars.sh" ] ; then
+		iccvars_path="/opt/intel/bin/compilervars.sh"
+		case `uname -m` in
+			x86_64)
+				. $iccvars_path intel64
+			;;
+			i*86)
+				. $iccvars_path ia32
+			;;
+		esac
+	else
+		if [ -d "/opt/intel/cc" ] || [ -d "/opt/intel/cce" ] ; then
+			iccvars_path=$(echo /opt/intel/cc*/(10|9).*/bin/iccvars.sh(On[1]))
+			if [ -r $iccvars_path ] ; then
+				. $iccvars_path
+			fi
 		fi
-	fi
-	if [ -d "/opt/intel/idb" ] || [ -d "/opt/intel/idbe" ] ; then
-		idbvars_path=$(echo /opt/intel/idb*/(10|9).*/bin/idbvars.sh(On[1]))
-		if [ -r $idbvars_path ] ; then
-			. $idbvars_path
+		if [ -d "/opt/intel/idb" ] || [ -d "/opt/intel/idbe" ] ; then
+			idbvars_path=$(echo /opt/intel/idb*/(10|9).*/bin/idbvars.sh(On[1]))
+			if [ -r $idbvars_path ] ; then
+				. $idbvars_path
+			fi
 		fi
-	fi
-	if [ -d "/opt/intel/mkl" ] ; then
-		local mklvars_path;
-		for mkl_path in /opt/intel/mkl/* ; do
-			case `uname -m` in
-				ia64)
-					if [ -f "${mkl_paths}/tools/environment/mklvars64.sh" ] ; then
-						mklvars_path="${mkl_paths}/tools/environment/mklvars64.sh"
-					fi
-				;;
-				i*86|x86_64)
-					if [ `uname -m` = "x86_64" ] && [ -f "${mkl_path}/tools/environment/mklvarsem64t.sh" ] ; then
-						mklvars_path="${mkl_path}/tools/environment/mklvarsem64t.sh"
-					elif [ -f "${mkl_path}/tools/environment/mklvars32.sh" ] ; then
-						mklvars_path="${mkl_path}/tools/environment/mklvars32.sh"
-					fi
-				;;
-			esac
-		done
-		if [ -n "${mklvars_path}" ] ; then
-			. $mklvars_path
+		if [ -d "/opt/intel/mkl" ] ; then
+			local mklvars_path;
+			for mkl_path in /opt/intel/mkl/* ; do
+				case `uname -m` in
+					ia64)
+						if [ -f "${mkl_paths}/tools/environment/mklvars64.sh" ] ; then
+							mklvars_path="${mkl_paths}/tools/environment/mklvars64.sh"
+						fi
+					;;
+					i*86|x86_64)
+						if [ `uname -m` = "x86_64" ] && [ -f "${mkl_path}/tools/environment/mklvarsem64t.sh" ] ; then
+							mklvars_path="${mkl_path}/tools/environment/mklvarsem64t.sh"
+						elif [ -f "${mkl_path}/tools/environment/mklvars32.sh" ] ; then
+							mklvars_path="${mkl_path}/tools/environment/mklvars32.sh"
+						fi
+					;;
+				esac
+			done
+			if [ -n "${mklvars_path}" ] ; then
+				. $mklvars_path
+			fi
 		fi
-	fi
-	if [ -d "/opt/intel/ipp" ] ; then
-		local ippvars_path;
-		for ipp_paths in /opt/intel/ipp/* ; do
-			case `uname -m` in
-				ia64)
-					if [ -d "${ipp_paths}/ia64" ] ; then
-						ippvars_path="${ipp_paths}/ia64/tools/env/ippvarsia64.sh"
-					fi
-				;;
-				i*86|x86_64)
-					if [ `uname -m` = "x86_64" ] && [ -d "${ipp_paths}/em64t" ] ; then
-						ippvars_path="${ipp_paths}/em64t/tools/env/ippvarsem64t.sh"
-					elif [ -d "${ipp_paths}/ia32" ] ; then
-						ippvars_path="${ipp_paths}/ia32/tools/env/ippvarsia32.sh"
-					fi
-				;;
-			esac
-		done
-		if [ -n "${ippvars_path}" ] ; then
-			. $ippvars_path
+		if [ -d "/opt/intel/ipp" ] ; then
+			local ippvars_path;
+			for ipp_paths in /opt/intel/ipp/* ; do
+				case `uname -m` in
+					ia64)
+						if [ -d "${ipp_paths}/ia64" ] ; then
+							ippvars_path="${ipp_paths}/ia64/tools/env/ippvarsia64.sh"
+						fi
+					;;
+					i*86|x86_64)
+						if [ `uname -m` = "x86_64" ] && [ -d "${ipp_paths}/em64t" ] ; then
+							ippvars_path="${ipp_paths}/em64t/tools/env/ippvarsem64t.sh"
+						elif [ -d "${ipp_paths}/ia32" ] ; then
+							ippvars_path="${ipp_paths}/ia32/tools/env/ippvarsia32.sh"
+						fi
+					;;
+				esac
+			done
+			if [ -e "${ippvars_path}" ] ; then
+				. $ippvars_path
+			fi
 		fi
-	fi
-fi
 
-if [ -f "/opt/intel/vtune/bin/vtunevars.sh" ] ; then
-	. /opt/intel/vtune/bin/vtunevars.sh
+		if [ -f "/opt/intel/vtune/bin/vtunevars.sh" ] ; then
+			. /opt/intel/vtune/bin/vtunevars.sh
+		fi
+	fi
 fi
