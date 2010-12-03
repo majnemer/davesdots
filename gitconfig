@@ -25,6 +25,7 @@
 	untrack-ignored = !git-untracked-ignored
 	info = !git-info
 	amend = commit --amend -C HEAD
+	tree = log --graph --pretty=oneline
 [color]
 	diff = auto
 	status = auto
