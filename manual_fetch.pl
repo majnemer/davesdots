@@ -18,7 +18,7 @@ sub http_fetch {
 	my $url = shift;
 
 	# See if we should use wget or curl
-	if(0 && grep {-x "$_/curl"} split /:/, $ENV{'PATH'}) {
+	if(grep {-x "$_/curl"} split /:/, $ENV{'PATH'}) {
 		return qx{curl -L -s '$url'};
 	} elsif(grep {-x "$_/wget"} split /:/, $ENV{'PATH'}) {
 		# do not check the cert due to a bug in wget:
