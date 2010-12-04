@@ -7,26 +7,23 @@ use strict;
 # a small Perl script to fetch the latest snapshot of a git repo from gitweb
 # using minimal requirements (perl, tar, gzip, and (curl or wget))
 
-# URL of this repo in gitweb
-my $URL = 'http://majnematic.com/cgi-bin/gitweb.cgi?p=davesdots.git';
-
-my $html  = http_fetch($URL);
-my($hash) = $html =~ m{
-	gitweb\.cgi\?p=davesdots\.git;a=snapshot;h=([0-9a-fA-F]+);sf=tgz "> snapshot
-}xi;
-
-print "fetching: $URL;a=snapshot;h=$hash;sf=tgz\n";
-my $tgz = http_fetch("$URL;a=snapshot;h=$hash;sf=tgz");
+# URL of the download link on github
+my $URL = 'https://github.com/majnemer/davesdots/tarball/master';
+my $tgz = http_fetch($URL);
 extract_tgz($tgz);
+
+rename(glob('majnemer-davesdots-*'), 'davesdots');
 
 sub http_fetch {
 	my $url = shift;
 
 	# See if we should use wget or curl
-	if(grep {-x "$_/curl"} split /:/, $ENV{'PATH'}) {
-		return qx{curl -s '$url'};
+	if(0 && grep {-x "$_/curl"} split /:/, $ENV{'PATH'}) {
+		return qx{curl -L -s '$url'};
 	} elsif(grep {-x "$_/wget"} split /:/, $ENV{'PATH'}) {
-		return qx{wget -O - '$url'};
+		# do not check the cert due to a bug in wget:
+		# http://support.github.com/discussions/site/2230
+		return qx{wget --no-check-certificate -O - '$url'};
 	} else {
 		die "Could not find curl or wget, aborting!";
 	}
