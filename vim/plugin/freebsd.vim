@@ -63,4 +63,7 @@ function! FreeBSD_Style()
     setlocal shiftwidth=8
     setlocal tabstop=8
     setlocal textwidth=80
+    if (v:version >= 703)
+        set colorcolumn=80
+    endif
 endfun
