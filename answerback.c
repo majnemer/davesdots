@@ -2,10 +2,10 @@
 
 #include <signal.h>  /* for signal handling */
 #include <stdio.h>   /* fopen(), et al. */
-#include <fcntl.h>   /* for open */
-#include <unistd.h>  /* for ssize_t, read, write */
+#include <fcntl.h>   /* for open() */
+#include <unistd.h>  /* for ssize_t, read(), write() */
 #include <stdlib.h>  /* for EXIT_SUCCESS, EXIT_FAILURE */
-#include <termios.h> /* ctermid, et al. */
+#include <termios.h> /* ctermid(), et al. */
 
 #define ANSWERBACK_LEN 16
 #define ANSWERBACK_CODE 5
@@ -33,7 +33,7 @@ int main()
 
 	if (cterm == NULL)
 	{
-		fputs("Cannot get the path to the console", stderr);
+		(void)fputs("Cannot get the path to the console", stderr);
 		return EXIT_FAILURE;
 	}
 
@@ -51,7 +51,7 @@ int main()
 
 	if (atexit(tty_reset) != 0)
 	{
-		fputs("Cannot set the exit function", stderr);
+		(void)fputs("Cannot set the exit function", stderr);
 		return EXIT_FAILURE;
 	}
 
