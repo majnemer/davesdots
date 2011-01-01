@@ -29,9 +29,10 @@ tty_reset(void)
 
 int main()
 {
-	const char *cterm = ctermid(NULL);
+	char term[L_ctermid];
+	const char *cterm = ctermid(term);
 
-	if (cterm == NULL)
+	if (cterm[0] == '\0')
 	{
 		(void)fputs("Cannot get the path to the console", stderr);
 		return EXIT_FAILURE;
