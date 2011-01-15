@@ -28,7 +28,7 @@
 	info = !git-info
 	amend = commit --amend -C HEAD
 	tree = log --graph --pretty=oneline
-	hist = log --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %C(magenta)[%an]%Creset %Cgreen(%ad)%Creset' --abbrev-commit --date=relative
+	hist = log --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %C(magenta)[%an]%Creset %Cgreen(%ad)%Creset' --date=relative
 
 	vimdiff = difftool -y -t vimdiff
 [color]
