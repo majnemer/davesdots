@@ -33,5 +33,6 @@
 [core]
 	pager =
 	excludesfile = ~/.gitignore
+	safecrlf = true
 [push]
 	default = matching
