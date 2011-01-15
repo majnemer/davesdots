@@ -1,16 +1,16 @@
 [alias]
 	ci = commit
-	st = status
 	co = checkout
 	di = diff --color-words
 	br = branch
 	move   = mv
 	ren    = mv
 	rename = mv
-	up     = !git pull --rebase
-	update = !git pull --rebase
+	up     = pull --rebase
+	update = pull --rebase
 	svnup     = !git stash && git svn rebase && git stash apply
 	svnupdate = !git stash && git svn rebase && git stash apply
+	st   = status
 	stat = status
 	del    = rm
 	delete = rm
@@ -26,6 +26,7 @@
 	info = !git-info
 	amend = commit --amend -C HEAD
 	tree = log --graph --pretty=oneline
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [color]
 	diff = auto
 	status = auto
