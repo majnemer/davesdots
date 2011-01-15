@@ -21,6 +21,8 @@
 	cat  = show
 	list = show
 	ls   = show
+	type = cat-file -t
+	dump = cat-file -p
 
 	untrack-ignored = !git-untracked-ignored
 	info = !git-info
