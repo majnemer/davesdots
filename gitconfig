@@ -29,6 +29,8 @@
 	amend = commit --amend -C HEAD
 	tree = log --graph --pretty=oneline
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+	vimdiff = difftool -y -t vimdiff
 [color]
 	diff = auto
 	status = auto
