@@ -1,16 +1,16 @@
 [alias]
 	ci = commit
-	st = status
 	co = checkout
 	di = diff --color-words
 	br = branch
 	move   = mv
 	ren    = mv
 	rename = mv
-	up     = !git pull --rebase
-	update = !git pull --rebase
+	up     = pull --rebase
+	update = pull --rebase
 	svnup     = !git stash && git svn rebase && git stash apply
 	svnupdate = !git stash && git svn rebase && git stash apply
+	st   = status
 	stat = status
 	del    = rm
 	delete = rm
@@ -21,11 +21,16 @@
 	cat  = show
 	list = show
 	ls   = show
+	type = cat-file -t
+	dump = cat-file -p
 
 	untrack-ignored = !git-untracked-ignored
 	info = !git-info
 	amend = commit --amend -C HEAD
 	tree = log --graph --pretty=oneline
+	hist = log --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %C(magenta)[%an]%Creset %Cgreen(%ad)%Creset' --date=relative
+
+	vimdiff = difftool -y -t vimdiff
 [color]
 	diff = auto
 	status = auto
@@ -33,5 +38,6 @@
 [core]
 	pager =
 	excludesfile = ~/.gitignore
+	safecrlf = true
 [push]
 	default = matching

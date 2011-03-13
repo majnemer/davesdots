@@ -74,6 +74,9 @@ my %links = (
 	xmobarrc    => '.xmobarrc',
 	'xmonad.hs' => '.xmonad/xmonad.hs',
 
+	'Wombat.xccolortheme'  => 'Library/Application Support/Xcode/Color Themes/Wombat.xccolortheme',
+#	'Wombat.dvtcolortheme' => 'Library/Developer/Xcode/UserData/FontAndColorThemes/Wombat.dvtcolortheme',
+
 	gitconfig => '.gitconfig',
 	gitignore => '.gitignore',
 
@@ -131,7 +134,8 @@ for my $file (keys %links) {
 		$dest = "$links{$file}";
 		$src = "$prefix$file";
 		if ($path) {
-			$src = "../$src";
+			my $nesting = split(/\//, $dest) - 1;
+			$src = "../"x $nesting . "$src";
 		}
 	}
 
