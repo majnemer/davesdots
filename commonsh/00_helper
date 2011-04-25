@@ -3,8 +3,8 @@
 concat_path ()
 {
 	if [ -z "$1" ] ; then
-		echo "Please give me a value to concatinate to the variable!"
-		exit
+		echo "Please give me a value to concatinate to the PATH!"
+		return
 	fi
 
 	addition=$1
@@ -23,8 +23,8 @@ concat_path ()
 concat_manpath ()
 {
 	if [ -z "$1" ] ; then
-		echo "Please give me a value to concatinate to the variable!"
-		exit
+		echo "Please give me a value to concatinate to the MANPATH!"
+		return
 	fi
 
 	addition=$1
