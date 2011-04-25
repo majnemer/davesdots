@@ -16,6 +16,6 @@ set guioptions-=a       " Share the copy buffer with visual mode
 if has('gui_gtk')
     set guioptions-=e       " Kill off the GUI tabs
     set guifont=monospace\ 9
-elseif exists('&antialias')
-    set guifont=monospace:h12
+elseif has('gui_macvim')
+    set guifont=menlo:h11
 endif
