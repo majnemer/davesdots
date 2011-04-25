@@ -18,11 +18,7 @@ case "${TERM}" in
 		BOLDERRORCOLOR=$'%{\e[01;38;5;9m%}'
 		CLOCKCOLOR=$'%{\e[01;38;5;221m%}'
 		JOBCOLOR=$'%{\e[38;5;30m%}'
-		if [ "${TERM_PROGRAM}" = "Apple_Terminal" ] ; then
-			BLACKCOLOR=$'%{\e[00;30m%}'
-		else
-			BLACKCOLOR=$'%{\e[38;5;232m%}'
-		fi
+		BLACKCOLOR=$'%{\e[38;5;232m%}'
 	;;
 	dumb)
 	;;
