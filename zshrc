@@ -3,16 +3,7 @@
 # Original author: Saleem Abdulrasool <compnerd@compnerd.org>
 # vim:set nowrap:
 
-case `uname -s` in
-	Darwin)
-		export LHOSTNAME=`scutil --get LocalHostName`
-	;;
-	*)
-		export LHOSTNAME=${HOST}
-	;;
-esac
-
-autoload compinit; compinit -d "${HOME}/.zsh/.zcompdump-${LHOSTNAME}"
+autoload compinit; compinit -d "${HOME}/.zsh/.zcompdump-${HOST}"
 
 autoload age
 autoload zmv
