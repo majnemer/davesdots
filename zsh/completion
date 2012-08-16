@@ -26,7 +26,7 @@ zstyle -e ':completion:*' users "reply=( root '${USERNAME}' )"
 
 # caching good
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "${HOME}/.zsh/.zcompcache-${LHOSTNAME}"
+zstyle ':completion:*' cache-path "${HOME}/.zsh/.zcompcache-${HOST}"
 
 # descriptions
 zstyle ':completion:*:messages' format $'%{\e[01;35m%} -- %d -- %{\e[00;00m%}'

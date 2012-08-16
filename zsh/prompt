@@ -6,20 +6,6 @@ BOLDERRORCOLOR=''
 BLACKCOLOR=''
 
 case "${TERM}" in
-	*256color*)
-		RESETCOLOR=$'%{\e[00;00m%}'
-		if [ -z "${SSH_TTY}" ] ; then
-			HOSTCOLOR=$'%{\e[01;38;5;113m%}'
-		else
-			HOSTCOLOR=$'%{\e[01;38;5;80m%}'
-		fi
-		PATHCOLOR=$'%{\e[38;5;74m%}'
-		ERRORCOLOR=$'%{\e[38;5;1m%}'
-		BOLDERRORCOLOR=$'%{\e[01;38;5;9m%}'
-		CLOCKCOLOR=$'%{\e[01;38;5;221m%}'
-		JOBCOLOR=$'%{\e[38;5;30m%}'
-		BLACKCOLOR=$'%{\e[38;5;232m%}'
-	;;
 	dumb)
 	;;
 	*)
@@ -40,6 +26,6 @@ case "${TERM}" in
 		;;
 esac
 
-PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@'${LHOSTNAME}${BLACKCOLOR}':'${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}
+PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@%m'${BLACKCOLOR}':'${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}
 
 RPROMPT=${RESETCOLOR}$'%1(j.'${JOBCOLOR}$'[%j].)%(?..'${ERRORCOLOR}$'[%?])'${CLOCKCOLOR}$'[%t]'${RESETCOLOR}
