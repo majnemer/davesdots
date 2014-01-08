@@ -5,6 +5,11 @@ precmd()
 
 	termtitle=`print -P "%n@${HOST}[%l]"`
 	title zsh "$termtitle"
+
+	if [ "$TERM_PROGRAM" == "Apple_Terminal" ] && [ -z "$INSIDE_EMACS" ]; then
+		echo "file://localhost${PWD// /%20}"
+		printf '\e]7;%s\a' "file://localhost${PWD// /%20}"
+	fi
 }
 
 preexec()
@@ -49,10 +54,6 @@ preexec()
 			title $cmd[1]:t "$termtitle $cmd[*]"    # Starting a new job.
 		;;
 	esac
-
-	if [ "$TERM_PROGRAM" == "Apple_Terminal" ] && [ -z "$INSIDE_EMACS" ]; then
-		printf '\e]7;%s\a' "file://localhost${PWD// /%20}"
-	fi
 }
 
 function title
