@@ -7,7 +7,9 @@ precmd()
 	title zsh "$termtitle"
 
 	if [ "$TERM_PROGRAM" == "Apple_Terminal" ] && [ -z "$INSIDE_EMACS" ]; then
-		printf '\e]7;%s\a' "file://localhost${PWD// /%20}"
+		local escape_percent="${PWD//\%/%25}"
+		local escape_space="${escape_percent// /%20}"
+		printf '\e]7;%s\a' "file://${escape_space}"
 	fi
 }
 
