@@ -235,6 +235,8 @@ if has('autocmd')
       autocmd BufNewFile,BufRead *.proto set filetype=proto
       autocmd BufNewFile,BufRead *.atomo set filetype=atomo
       autocmd BufNewFile,BufRead *.atomo setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 commentstring=--\ %s
+      autocmd! BufNewFile,BufRead *.ll set filetype=llvm
+      autocmd! BufRead,BufNewFile *.td set filetype=tablegen
    endif
 
    " make tab reindent in normal mode
